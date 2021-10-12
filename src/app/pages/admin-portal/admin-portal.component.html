@@ -1,0 +1,55 @@
+<mat-sidenav-container autosize *ngIf="!loading">
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list style="padding-top: 0">
+      <mat-toolbar style="background: #26184ab8">
+        <img
+          src="../../../assets/images/iCertify-logo.png"
+          class="img"
+          alt=""
+        />
+        <div *ngIf="isExpanded" class="text">
+          <h3>iCertify, Inc.</h3>
+          <p>THE DIGITAL NOTARY</p>
+        </div>
+      </mat-toolbar>
+      <ng-container *ngFor="let item of adminNav">
+        <mat-list-item
+          style="height: 2.8rem"
+          [routerLink]="item.route"
+          (click)="changeRoute(item)"
+          routerLinkActive="router-active-link"
+        >
+          <mat-icon
+            class="light"
+            fontSet="material-icons-outlined"
+            style="font-size: 21px; margin-right: 0.3rem"
+            mat-list-icon
+            >{{ item.icon }}</mat-icon
+          ><span *ngIf="isExpanded" class="light">{{ item.label }}</span>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar style="border-bottom: 1px solid #56565634; position: fixed">
+    <mat-icon
+      class="chevron-button"
+      (click)="isExpanded = !isExpanded"
+      [ngClass]="{ rotated: isExpanded }"
+      matTooltip="Expand sidebar"
+      matTooltipPosition="right"
+      >chevron_right</mat-icon
+    >
+    <div class="flex-stretch"></div>
+  </mat-toolbar>
+  <mat-toolbar style="height: 3rem; border-bottom: 0; margin-top: 4.1rem">
+    <small style="font-size: 13px; letter-spacing: 0.1rem">{{
+      routeLabel
+    }}</small>
+    <div class="flex-stretch"></div>
+  </mat-toolbar>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
+<app-loading *ngIf="loading"></app-loading>

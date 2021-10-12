@@ -1,0 +1,118 @@
+@import "https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap";
+@import "../../../assets/styles/fonts.scss";
+.flex-stretch {
+  flex: 1 0 auto;
+}
+.content {
+  background: red;
+}
+.light {
+  color: #5f5f5f;
+  font-weight: 500;
+  font-size: 13.5px;
+}
+.dark {
+  color: #aaaaaf;
+
+  font-weight: 500;
+  font-size: 13.5px;
+}
+.dark-main-toolbar {
+  background: #2a2b36;
+  border-bottom: 1px solid #5f5f5f;
+  box-shadow: -4px 7px 12px -6px rgba(0, 0, 0, 0.1);
+}
+.light-main-toolbar {
+  background: #fff;
+  border-bottom: 1px solid #dfdfdf;
+  box-shadow: -4px 7px 12px -6px rgba(0, 0, 0, 0.1);
+}
+.dark-toolbar-logo {
+  background: #22222f;
+}
+.light-toolbar-logo {
+  background: #3c52ce;
+}
+.sidenav-dark {
+  background: #2a2b36;
+}
+.sidenav-light {
+  background: #fff;
+}
+.light-icon {
+  color: #3c52ce;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.dark-icon {
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.dark-text {
+  color: #aaaaaf;
+}
+.light-text {
+  color: #fff;
+}
+.container-fluid {
+  width: 95%;
+  margin: auto;
+  margin-top: 0.7rem;
+}
+mat-sidenav-container {
+  height: 100%;
+
+  mat-sidenav {
+    overflow-x: hidden;
+    border: none;
+    box-shadow: -4px 7px 26px 3px rgba(0, 0, 0, 0.1);
+  }
+  .chevron-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+    left: 0;
+    float: left;
+    position: absolute;
+    z-index: 999;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .chevron-button:hover {
+    background: rgba(78, 110, 155, 0.579);
+  }
+
+  .chevron-button.rotated {
+    transform: rotate(180deg);
+  }
+}
+.img {
+  width: auto;
+  height: 75%;
+  //   margin-left: 0.3rem;
+}
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0rem 1.1rem;
+  p {
+    font-size: 9px;
+    margin: 0;
+    letter-spacing: 0.1rem;
+    line-height: 0.6rem;
+    margin-top: 0.6rem;
+    color: #fff;
+  }
+  h3 {
+    margin: 0;
+    font-family: "Tomatoes" !important;
+    line-height: 1.3rem;
+    color: #fff;
+  }
+}
+// .router-active-link {
+//   background: #26184a;
+//   color: #fff;
+// }

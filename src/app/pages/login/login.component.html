@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="container-fluid">
+    <div class="login-container">
+      <div class="form-wrapper">
+        <h2>LOGIN</h2>
+        <form [formGroup]="credential">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email" />
+            <mat-icon matSuffix>mail</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Password</mat-label>
+            <input
+              [type]="hide ? 'password' : 'text'"
+              matInput
+              formControlName="password"
+            />
+            <mat-icon
+              style="cursor: pointer"
+              matTooltip="Visibility"
+              matSuffix
+              (click)="hide = !hide"
+            >
+              {{ hide ? "visibility" : "visibility_off" }}
+            </mat-icon>
+          </mat-form-field>
+        </form>
+        <button
+          [disabled]="!credential.valid || isLoggingIn"
+          mat-flat-button
+          color="primary"
+          (click)="login()"
+        >
+          <mat-spinner
+            style="margin-left: 40%"
+            color="primary"
+            *ngIf="isLoggingIn"
+            [diameter]="30"
+          ></mat-spinner>
+          <span *ngIf="!isLoggingIn">
+            Login&nbsp;<mat-icon style="float: right; padding-top: 0.3rem"
+              >fast_forward</mat-icon
+            ></span
+          >
+        </button>
+      </div>
+      <div class="desc-wrapper">
+        <h2>
+          NOT A <br />
+          MEMBER?
+        </h2>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit
+          quaerat doloremque suscipit sint ut molestias qui ab, autem quis
+          facere.
+        </p>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi,
+          asperiores!
+        </p>
+        <button mat-flat-button (click)="register()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
