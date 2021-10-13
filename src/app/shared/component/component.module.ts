@@ -8,6 +8,7 @@ import { ColumnSelectorComponent } from './table/column-selector/column-selector
 import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     TableComponent,
     ColumnSelectorComponent,
     LoadingComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

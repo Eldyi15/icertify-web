@@ -22,7 +22,7 @@ describe('AdminLoginComponent', () => {
       declarations: [AdminLoginComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MaterialModule, RouterTestingModule.withRoutes([
         {
-          path: 'admin-portal/dashboard',
+          path: 'admin-portal/admin-dashboard',
           component: DashboardComponent
         }
 
@@ -70,6 +70,6 @@ describe('AdminLoginComponent', () => {
     tick(200);
     fixture.detectChanges();
     const location = TestBed.inject(Location)
-    expect(location.path()).toBe('/admin-portal/dashboard')
+    expect(location.path()).toBe('/admin-portal/admin-dashboard')
   }));
 });

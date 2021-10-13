@@ -8,7 +8,7 @@ import { URL } from 'src/app/config/url';
 })
 export class AuthService {
   url = URL;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   setHeaders() {
     let csurf_token = localStorage.getItem('SESSION_CSURF_TOKEN')!;
@@ -44,5 +44,9 @@ export class AuthService {
   register(body: any) {
     console.log(body);
     return this.http.post(this.url + '/user/user', body);
+  }
+
+  changePassword(body: any) {
+    return this.http.post(this.url + '/user/updatePasswordAdmin', body);
   }
 }

@@ -9,7 +9,7 @@ import { ApiService } from '../../../../services/api/api.service';
 import { AddMerchantComponent } from './add-merchant.component';
 import { of } from 'rxjs';
 
-fdescribe('AddMerchantComponent', () => {
+describe('AddMerchantComponent', () => {
   let component: AddMerchantComponent;
   let fixture: ComponentFixture<AddMerchantComponent>;
   let authService: AuthService;
