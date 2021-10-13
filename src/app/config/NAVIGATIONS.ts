@@ -10,3 +10,11 @@ export const ADMIN_NAVS = [
     route: 'merchant',
   },
 ];
+
+export const MERCHANT_NAV = [
+  {
+    label: 'dashboard',
+    icon: 'dashboard',
+    route: 'merchant-dashboard',
+  },
+];

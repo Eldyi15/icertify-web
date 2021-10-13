@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 import { ColumnSelectorComponent } from './table/column-selector/column-selector.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     TableComponent,
     ColumnSelectorComponent,
     LoadingComponent,
+    ChangePasswordComponent,
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule],
   exports: [

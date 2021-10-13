@@ -1,3 +1,4 @@
+import { ComponentModule } from 'src/app/shared/component/component.module';
 import { MaterialModule } from './../../shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentModule,
   ],
 })
 export class MerchantPortalModule {}

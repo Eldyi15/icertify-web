@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { ADMIN_NAVS } from './ADMIN-NAV';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ApiService } from './../../services/api/api.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
@@ -8,6 +7,7 @@ import {
   NavigationEnd,
   Event as NavigationEvent,
 } from '@angular/router';
+import { ADMIN_NAVS } from 'src/app/config/NAVIGATIONS';
 
 @Component({
   selector: 'app-admin-portal',
