@@ -1,6 +1,11 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './../../material.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChangePasswordComponent } from './change-password.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('ChangePasswordComponent', () => {
   let component: ChangePasswordComponent;
@@ -8,7 +13,9 @@ describe('ChangePasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChangePasswordComponent ]
+      declarations: [ ChangePasswordComponent],
+      imports:[MaterialModule,ReactiveFormsModule,HttpClientTestingModule,BrowserAnimationsModule],
+         providers: [{ provide: MatDialogRef, useValue: {} }]
     })
     .compileComponents();
   });

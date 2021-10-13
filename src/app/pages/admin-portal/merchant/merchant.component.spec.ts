@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialModule } from './../../../shared/material.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -11,7 +12,7 @@ describe('MerchantComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MerchantComponent ],
-      imports:[MaterialModule]
+      imports:[MaterialModule,HttpClientTestingModule]
     })
     .compileComponents();
   });

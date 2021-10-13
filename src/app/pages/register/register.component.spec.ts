@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../../shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +17,7 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule]
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule,RouterTestingModule]
     }).compileComponents();
   });
 

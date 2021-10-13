@@ -28,7 +28,7 @@ export class ChangePasswordComponent implements OnInit {
       passwordConfirm: new FormControl('', [Validators.required]),
     },
     {
-      validator: this.matchPassword('newPassword', 'confirmPassword'),
+      validator: this.matchPassword('newPassword', 'passwordConfirm'),
     }
   );
 

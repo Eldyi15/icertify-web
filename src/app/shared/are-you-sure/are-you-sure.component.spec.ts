@@ -1,3 +1,4 @@
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AreYouSureComponent } from './are-you-sure.component';
@@ -8,7 +9,8 @@ describe('AreYouSureComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AreYouSureComponent ]
+      declarations: [ AreYouSureComponent ],
+      providers:[{ provide: MAT_DIALOG_DATA, useValue: {} },{ provide: MatDialogRef, useValue: {} }]
     })
     .compileComponents();
   });
