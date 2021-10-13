@@ -31,7 +31,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-toolbar style="border-bottom: 1px solid #56565634; position: fixed">
+  <mat-toolbar>
     <mat-icon
       class="chevron-button"
       (click)="isExpanded = !isExpanded"
@@ -41,8 +41,48 @@
       >chevron_right</mat-icon
     >
     <div class="flex-stretch"></div>
+    <!-- *ngIf="me" -->
+    <ngx-avatar
+      name="{{ me ? me.firstName + ' ' + me.lastName : '' }}"
+      value="def"
+      bgColor="#26184a"
+      fgColor="#fff"
+      size="40"
+      [round]="true"
+      class="my-avatar"
+      [matMenuTriggerFor]="menu"
+    ></ngx-avatar>
+
+    <mat-menu style="padding-top: 0" #menu="matMenu">
+      <mat-card
+        style="
+          background: rgb(255, 255, 255);
+          border: none;
+          box-shadow: none;
+          padding-top: 0px;
+        "
+      >
+        <div class="flex-wrapper">
+          <ngx-avatar
+            src="{{ me ? '' : './../../../assets/images/guest.png' }}"
+            value="noPic"
+            bgColor="#26184a"
+            fgColor="#fff"
+            size="80"
+            [round]="true"
+          ></ngx-avatar>
+        </div>
+        <div class="flex-wrapper">
+          <mat-card-header>
+            <mat-card-title>
+              {{ me ? me.firstName + " " + me.lastName : " test aydtasdd" }}
+            </mat-card-title>
+          </mat-card-header>
+        </div>
+      </mat-card>
+    </mat-menu>
   </mat-toolbar>
-  <mat-toolbar style="height: 3rem; border-bottom: 0; margin-top: 4.1rem">
+  <mat-toolbar style="height: 3rem; border-bottom: 0">
     <small style="font-size: 13px; letter-spacing: 0.1rem">{{
       routeLabel
     }}</small>

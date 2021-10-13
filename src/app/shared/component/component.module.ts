@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 import { ColumnSelectorComponent } from './table/column-selector/column-selector.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,16 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     ColumnSelectorComponent,
     LoadingComponent,
   ],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxSkeletonLoaderModule,
+  ],
   exports: [
     MaterialModule,
+    NgxSkeletonLoaderModule,
     ReactiveFormsModule,
     FormsModule,
     TableComponent,

@@ -116,3 +116,16 @@ mat-sidenav-container {
 //   background: #26184a;
 //   color: #fff;
 // }
+.my-avatar {
+  padding-top: 0.5rem;
+  font-size: 20px;
+  font-weight: bolder;
+  cursor: pointer;
+  height: 100%;
+  margin: 0;
+}
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

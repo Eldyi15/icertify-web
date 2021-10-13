@@ -164,7 +164,7 @@ export class TableComponent implements OnInit {
   openColumnSelector() {
     this.dialog
       .open(ColumnSelectorComponent, {
-        width: '40rem',
+        width: '30rem',
         height: 'auto',
         data: {
           columns: [...this.columns],

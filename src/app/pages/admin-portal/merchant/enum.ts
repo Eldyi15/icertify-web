@@ -29,4 +29,11 @@ export const MERCHANT_COLUMNS: Array<Column> = [
     type: 'text',
     selected: true,
   },
+  {
+    title: 'Status',
+    path: 'status',
+    breakpoint: 'xs',
+    type: 'text',
+    selected: true,
+  },
 ];

@@ -8,7 +8,7 @@ import {
   NavigationEnd,
   Event as NavigationEvent,
 } from '@angular/router';
-
+import { User } from 'src/app/models/user.interface';
 @Component({
   selector: 'app-admin-portal',
   templateUrl: './admin-portal.component.html',
@@ -17,6 +17,7 @@ import {
 export class AdminPortalComponent implements OnInit {
   isExpanded: boolean = true;
   adminNav = ADMIN_NAVS;
+  me!: User;
   navs: any;
   loading: boolean = false;
   changeLabel = new EventEmitter<boolean>();
@@ -38,7 +39,9 @@ export class AdminPortalComponent implements OnInit {
   ngOnInit(): void {
     this.auth.me().subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
+        this.me = res.env.user;
+        console.log('current user(me): ', this.me);
         let routerSplit = this.router.url.split('/').pop();
         console.log(routerSplit);
         let temp: Array<string> = [];
