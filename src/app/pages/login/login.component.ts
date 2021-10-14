@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DropboxService } from 'src/app/services/dropbox/dropbox.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private api: ApiService,
     private sb: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private dbx: DropboxService
   ) {}
 
   ngOnInit(): void {}

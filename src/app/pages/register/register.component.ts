@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RegisterForm } from 'src/app/models/register.interface';
+import { RegisterFormUser } from 'src/app/models/register.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UtilService } from 'src/app/services/util/util.service';
 
@@ -65,16 +65,20 @@ export class RegisterComponent implements OnInit {
   register() {
     this.loading = true;
     // set body
-    let body: RegisterForm = {
+    let body: RegisterFormUser = {
       firstName: this.registerForm.getRawValue().firstName,
       lastName: this.registerForm.getRawValue().lastName,
       email: this.registerForm.getRawValue().email,
       password: this.registerForm.getRawValue().password,
       passwordConfirm: this.registerForm.getRawValue().passwordConfirm,
       mobileNumber: '+63' + this.registerForm.getRawValue().mobileNumber,
+      status: 'Pending',
     };
 
-    if (!this.registerForm.getRawValue().mobileNumber.startsWith('9')) {
+    if (
+      !this.registerForm.getRawValue().mobileNumber.startsWith('9') ||
+      this.registerForm.getRawValue().mobileNumber.length !== 10
+    ) {
       this.loading = false;
       this.sb.open('Invalid mobile number!', 'Okay!', {
         duration: 5000,
