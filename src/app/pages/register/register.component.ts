@@ -30,6 +30,8 @@ export class RegisterComponent implements OnInit {
     passwordConfirm: new FormControl(''),
     mobileNumber: new FormControl('', [Validators.required]),
   });
+
+  mobileNumber = this.registerForm.getRawValue().mobileNumber;
   constructor(
     private sb: MatSnackBar,
     private fb: FormBuilder,
@@ -69,16 +71,24 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.getRawValue().email,
       password: this.registerForm.getRawValue().password,
       passwordConfirm: this.registerForm.getRawValue().passwordConfirm,
-      mobileNumber: this.registerForm.getRawValue().mobileNumber,
+      mobileNumber: '+63' + this.registerForm.getRawValue().mobileNumber,
     };
 
-    // check both passwords
+    if (!this.registerForm.getRawValue().mobileNumber.startsWith('9')) {
+      this.loading = false;
+      this.sb.open('Invalid mobile number!', 'Okay!', {
+        duration: 5000,
+        panelClass: ['failed'],
+      });
+      return;
+    }
     if (
       !(
         this.registerForm.getRawValue().password ===
         this.registerForm.getRawValue().passwordConfirm
       )
     ) {
+      // check both passwords
       this.loading = false;
       this.sb.open('Password did not match!', 'Okay!', {
         duration: 5000,

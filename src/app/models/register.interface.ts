@@ -4,5 +4,5 @@ export interface RegisterForm {
   email: string;
   password: string;
   passwordConfirm: string;
-  mobileNumber: number;
+  mobileNumber: string;
 }

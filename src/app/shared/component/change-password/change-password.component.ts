@@ -109,8 +109,9 @@ export class ChangePasswordComponent implements OnInit {
     this.saving = true;
     let dataCredential = {
       newPassword: this.passwordForm.getRawValue().newPassword,
-      passwordConfirm: this.passwordForm.getRawValue().confirmPassword,
+      passwordConfirm: this.passwordForm.getRawValue().passwordConfirm,
     };
+    console.log(dataCredential);
     this.isSaving = true;
     this.auth.changePassword(dataCredential).subscribe(
       (res: any) => {

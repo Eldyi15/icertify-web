@@ -47,6 +47,10 @@ export class AuthService {
   }
 
   changePassword(body: any) {
-    return this.http.post(this.url + '/user/updatePasswordAdmin', body);
+    return this.http.post(
+      this.url + '/user/updatePasswordAdmin',
+      body,
+      this.getHeaders()
+    );
   }
 }
