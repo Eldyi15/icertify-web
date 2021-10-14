@@ -20,7 +20,11 @@ export class UpdateViewComponent implements OnInit {
   }
   formListener(event: any) {
 
-    event.mobileNumber = `+63${event.mobileNumber}`
+    event.mobileNumber = `${event.mobileNumber}`
+    console.log(event)
+    this.toUpdateData = event
+  }
+  imageEmitter(event: any) {
     console.log(event)
     this.toUpdateData = event
   }
@@ -28,6 +32,7 @@ export class UpdateViewComponent implements OnInit {
     this.dialogRef.close()
   }
   onSave() {
+    console.log(this.toUpdateData)
     this.dialog.open(AreYouSureComponent, {
       data: { header: "Update Details", msg: "update" }
     }).afterClosed().subscribe((res: any) => {

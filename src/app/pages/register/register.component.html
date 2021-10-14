@@ -75,7 +75,11 @@
           >Show Password</mat-checkbox
         >
         <div style="margin-bottom: 1rem"></div>
-        <mat-form-field appearance="fill" style="color: #2b547e; width: 100%">
+        <mat-form-field
+          appearance="fill"
+          style="color: #2b547e; width: 100%"
+          floatLabel="always"
+        >
           <mat-label
             >Mobile Number
             <small>*</small>
@@ -85,7 +89,10 @@
             type="text"
             formControlName="mobileNumber"
             (keypress)="numberInputOnly($event)"
+            [minLength]="10"
+            [maxLength]="10"
           />
+          <span matPrefix>+63</span>
         </mat-form-field>
       </form>
       <div class="btn-container">
@@ -93,7 +100,7 @@
           mat-flat-button
           color="primary"
           class="btn"
-          (click)="register()"
+          (click)="sendOtp()"
           [disabled]="!registerForm.valid || loading"
         >
           Register

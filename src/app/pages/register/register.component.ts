@@ -1,8 +1,14 @@
+import { OtpComponent } from './../../shared/component/otp/otp.component';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RegisterForm } from 'src/app/models/register.interface';
+import { RegisterFormUser } from 'src/app/models/register.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UtilService } from 'src/app/services/util/util.service';
 
@@ -24,12 +30,15 @@ export class RegisterComponent implements OnInit {
     passwordConfirm: new FormControl(''),
     mobileNumber: new FormControl('', [Validators.required]),
   });
+
+  mobileNumber = this.registerForm.getRawValue().mobileNumber;
   constructor(
     private sb: MatSnackBar,
     private fb: FormBuilder,
     private auth: AuthService,
     private util: UtilService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -37,25 +46,53 @@ export class RegisterComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  sendOtp() {
+    let config: MatDialogConfig = {
+      panelClass: 'dialog-responsive',
+      disableClose: true,
+      data: {
+        mobileNumber: this.registerForm.getRawValue().mobileNumber,
+      },
+    };
+    this.dialog
+      .open(OtpComponent, config)
+      .afterClosed()
+      .subscribe((res: any) => {
+        if (res) this.register();
+      });
+  }
+
   register() {
     this.loading = true;
     // set body
-    let body: RegisterForm = {
+    let body: RegisterFormUser = {
       firstName: this.registerForm.getRawValue().firstName,
       lastName: this.registerForm.getRawValue().lastName,
       email: this.registerForm.getRawValue().email,
       password: this.registerForm.getRawValue().password,
       passwordConfirm: this.registerForm.getRawValue().passwordConfirm,
-      mobileNumber: this.registerForm.getRawValue().mobileNumber,
+      mobileNumber: '+63' + this.registerForm.getRawValue().mobileNumber,
+      status: 'Pending',
     };
 
-    // check both passwords
+    if (
+      !this.registerForm.getRawValue().mobileNumber.startsWith('9') ||
+      this.registerForm.getRawValue().mobileNumber.length !== 10
+    ) {
+      this.loading = false;
+      this.sb.open('Invalid mobile number!', 'Okay!', {
+        duration: 5000,
+        panelClass: ['failed'],
+      });
+      return;
+    }
     if (
       !(
         this.registerForm.getRawValue().password ===
         this.registerForm.getRawValue().passwordConfirm
       )
     ) {
+      // check both passwords
       this.loading = false;
       this.sb.open('Password did not match!', 'Okay!', {
         duration: 5000,

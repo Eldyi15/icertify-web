@@ -7,10 +7,14 @@ import { TableComponent } from './table/table.component';
 import { ColumnSelectorComponent } from './table/column-selector/column-selector.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { UpdateViewComponent } from './update-view/update-view.component';
 import { ImageFormComponent } from './image-form/image-form.component';
+import { OtpComponent } from './otp/otp.component';
+import { UploadComponent } from './upload/upload.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -18,17 +22,34 @@ import { ImageFormComponent } from './image-form/image-form.component';
     TableComponent,
     ColumnSelectorComponent,
     LoadingComponent,
-    ChangePasswordComponent,BottomSheetComponent, UpdateViewComponent, ImageFormComponent
+    ChangePasswordComponent,
+    BottomSheetComponent,
+    UpdateViewComponent,
+    ImageFormComponent,
+    OtpComponent,
+    UploadComponent,
   ],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxSkeletonLoaderModule,
+    NgxFileDropModule
+  ],
   exports: [
     MaterialModule,
+    NgxSkeletonLoaderModule,
     ReactiveFormsModule,
     FormsModule,
     TableComponent,
     FormComponent,
-    LoadingComponent
+    LoadingComponent,
+    OtpComponent,
+    ChangePasswordComponent,
+    ImageFormComponent,
+    NgxFileDropModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ComponentModule {}
+export class ComponentModule { }

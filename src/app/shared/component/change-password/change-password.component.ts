@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     private auth: AuthService,
     private sb: MatSnackBar,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     console.log(this.passwordForm);
@@ -94,7 +94,7 @@ export class ChangePasswordComponent implements OnInit {
         height: 'auto',
         data: {
           header: 'Before you proceed...',
-          msg: `save this Password`,
+          msg: `set this as your new password`,
         },
       })
       .afterClosed()
@@ -109,8 +109,9 @@ export class ChangePasswordComponent implements OnInit {
     this.saving = true;
     let dataCredential = {
       newPassword: this.passwordForm.getRawValue().newPassword,
-      passwordConfirm: this.passwordForm.getRawValue().confirmPassword,
+      passwordConfirm: this.passwordForm.getRawValue().passwordConfirm,
     };
+    console.log(dataCredential);
     this.isSaving = true;
     this.auth.changePassword(dataCredential).subscribe(
       (res: any) => {

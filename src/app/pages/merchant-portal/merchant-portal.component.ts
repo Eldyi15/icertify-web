@@ -48,8 +48,7 @@ export class MerchantPortalComponent implements OnInit {
         this.loading = false;
         if (res && res.env.user.status === 'Pending') {
           this.dialog.open(ChangePasswordComponent, {
-            width: 'auto',
-            height: 'auto',
+            panelClass: 'dialog-change',
             disableClose: true,
           });
         } else {
