@@ -41,6 +41,9 @@ export class AuthService {
     );
   }
 
+  logout() {
+    return this.http.get(this.url + '/auth/logout/', this.getHeaders());
+  }
   register(body: any) {
     console.log(body);
     return this.http.post(this.url + '/user/user', body);

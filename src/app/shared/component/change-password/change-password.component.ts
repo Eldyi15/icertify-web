@@ -9,6 +9,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AreYouSureComponent } from '../../are-you-sure/are-you-sure.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -38,7 +39,8 @@ export class ChangePasswordComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private sb: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -115,11 +117,14 @@ export class ChangePasswordComponent implements OnInit {
     this.isSaving = true;
     this.auth.changePassword(dataCredential).subscribe(
       (res: any) => {
+        localStorage.setItem('SESSION_CSURF_TOKEN', '');
+        localStorage.setItem('SESSION_AUTH', '');
         this.sb.open('Password Successfully Saved', undefined, {
           panelClass: ['success'],
           duration: 1500,
         });
         this.dialogRef.close(true);
+        this.router.navigate(['/']);
       },
       (err: any) => {
         console.log(err);
