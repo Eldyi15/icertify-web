@@ -93,7 +93,7 @@ export class ChangePasswordComponent implements OnInit {
         height: 'auto',
         data: {
           header: 'Before you proceed...',
-          msg: `save this Password`,
+          msg: `set this as your new password`,
         },
       })
       .afterClosed()

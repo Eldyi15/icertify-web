@@ -1,6 +1,11 @@
+import { AreYouSureComponent } from './../../../../shared/are-you-sure/are-you-sure.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialog,
+} from '@angular/material/dialog';
 import { addMerchantForm } from './MERCHANT-FORM';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ApiService } from 'src/app/services/api/api.service';
@@ -14,13 +19,14 @@ export class AddMerchantComponent implements OnInit {
   addMerchant = addMerchantForm;
   merchantForm = this.fb.group({});
   saving: boolean = false;
-  isAdded: boolean = false
+  isAdded: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<AddMerchantComponent>,
     private fb: FormBuilder,
-    private api: ApiService
-  ) { }
+    private api: ApiService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.initiateForm();
@@ -40,13 +46,35 @@ export class AddMerchantComponent implements OnInit {
 
   onSave() {
     this.saving = true;
-    this.api.insertMerchant(this.merchantForm.value).subscribe((res: any) => {
-      console.log(res);
-      this.isAdded = true
-    }, (err: any) => {
-      console.log(err)
+    this.api.insertMerchant(this.merchantForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.isAdded = true;
+        this.dialogRef.close(true);
+      },
+      (err: any) => {
+        console.log(err);
 
-      this.isAdded = false
-    });
+        this.isAdded = false;
+      }
+    );
+  }
+
+  submit() {
+    this.dialog
+      .open(AreYouSureComponent, {
+        height: 'auto',
+        width: 'auto',
+        disableClose: true,
+        data: {
+          msg: 'you want to create this merchant',
+        },
+      })
+      .afterClosed()
+      .subscribe((res: any) => {
+        if (res) {
+          this.onSave();
+        }
+      });
   }
 }
