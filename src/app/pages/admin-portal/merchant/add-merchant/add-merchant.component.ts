@@ -1,4 +1,4 @@
-import { AreYouSureComponent } from './../../../../shared/are-you-sure/are-you-sure.component';
+import { AreYouSureComponent } from '../../../../shared/dialogs/are-you-sure/are-you-sure.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import {

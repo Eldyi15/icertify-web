@@ -8,7 +8,7 @@ import {
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AreYouSureComponent } from '../../are-you-sure/are-you-sure.component';
+import { AreYouSureComponent } from '../../dialogs/are-you-sure/are-you-sure.component';
 
 @Component({
   selector: 'app-change-password',
@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     private auth: AuthService,
     private sb: MatSnackBar,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     console.log(this.passwordForm);

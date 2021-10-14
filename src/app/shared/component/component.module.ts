@@ -10,6 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { OtpComponent } from './otp/otp.component';
+import { AreYouSureComponent } from '../dialogs/are-you-sure/are-you-sure.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { OtpComponent } from './otp/otp.component';
     LoadingComponent,
     ChangePasswordComponent,
     OtpComponent,
+    AreYouSureComponent,
   ],
   imports: [
     CommonModule,
