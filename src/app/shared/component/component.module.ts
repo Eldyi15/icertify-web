@@ -1,3 +1,4 @@
+import { ActionResultComponent } from './../dialogs/action-result/action-result.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from './form/form.component';
@@ -21,6 +22,7 @@ import { AreYouSureComponent } from '../dialogs/are-you-sure/are-you-sure.compon
     ChangePasswordComponent,
     OtpComponent,
     AreYouSureComponent,
+    ActionResultComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { AreYouSureComponent } from '../dialogs/are-you-sure/are-you-sure.compon
     LoadingComponent,
     OtpComponent,
     ChangePasswordComponent,
+    ActionResultComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
