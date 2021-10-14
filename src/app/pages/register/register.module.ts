@@ -12,10 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RegisterRoutingModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
     ComponentModule,
   ],
 })
-export class RegisterModule {}
+export class RegisterModule { }

@@ -52,6 +52,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatBottomSheetModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatListModule,
   ],
   exports: [
     MatDialogModule,
@@ -78,6 +79,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatExpansionModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatListModule,
   ],
 })
 export class MaterialModule {}

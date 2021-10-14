@@ -1,3 +1,5 @@
+import { ApiService } from 'src/app/services/api/api.service';
+import { UpdateViewComponent } from './../update-view/update-view.component';
 import {
   Component,
   OnInit,
@@ -11,6 +13,9 @@ import { Column } from 'src/app/models/column.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ColumnSelectorComponent } from './column-selector/column-selector.component';
 import { TableOutput } from 'src/app/models/tableemit.interface';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
+import { AreYouSureComponent } from '../../dialogs/are-you-sure/are-you-sure.component';
 
 @Component({
   selector: 'app-table',
@@ -27,15 +32,21 @@ export class TableComponent implements OnInit {
   @Input() str: any;
   @Input() columns!: Array<Column>;
   duplicateColumns!: Array<Column>;
-  @Output() onRowClick = new EventEmitter<any>();
   @Output() pageChange = new EventEmitter<any>();
   @Input() dataLength: any;
   @Input() pagination: any;
   @Input() show: boolean = true;
+  @Input() pageTitle: string = '';
+  @Input() bottomSheetConf?: Array<any>;
   sort: any;
   curPageIndex: number = 1;
 
-  constructor(public util: UtilService, private dialog: MatDialog) {}
+  constructor(
+    private api: ApiService,
+    public util: UtilService,
+    private dialog: MatDialog,
+    private _bottomSheet: MatBottomSheet
+  ) {}
 
   ngOnInit(): void {
     // console.log(this.pagination);
@@ -175,6 +186,59 @@ export class TableComponent implements OnInit {
         if (res) {
           this.duplicateColumns = res;
           this.updateBreakpoint();
+        }
+      });
+  }
+  onRowClick(data: any, index: number) {
+    console.log(data, index, this.bottomSheetConf);
+    this._bottomSheet
+      .open(BottomSheetComponent, {
+        data: {
+          data,
+          index,
+          bottomSheetConf: this.bottomSheetConf,
+        },
+      })
+      .afterDismissed()
+      .subscribe((res: any) => {
+        console.log(res);
+        if (res) {
+          if (res === 'Delete') {
+            data.status = 'Deleted';
+          }
+          if (res === 'Suspend') {
+            data.status = 'Suspended';
+          }
+          if (res === 'Activate') {
+            data.status = 'Active';
+          }
+          console.log(data);
+          switch (res) {
+            case 'View':
+            case 'Update':
+              this.dialog.open(UpdateViewComponent, {
+                width: '70%',
+                data: { data, action: res },
+              });
+              break;
+
+            default:
+              this.dialog
+                .open(AreYouSureComponent, {
+                  width: '70%',
+                  data: { header: res, msg: res },
+                })
+                .afterClosed()
+                .subscribe((res) => {
+                  if (res) {
+                    this.api.updateUser(data).subscribe((response: any) => {
+                      console.log(response);
+                      console.log(res);
+                    });
+                  }
+                });
+              break;
+          }
         }
       });
   }

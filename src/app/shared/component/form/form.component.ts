@@ -20,6 +20,8 @@ export class FormComponent implements OnInit {
   @Output() formListener = new EventEmitter<any>();
   @Output() onCancel = new EventEmitter<any>();
   @Output() onClick = new EventEmitter<any>();
+  @Input() action?: string
+  @Input() object?: any
 
   // replacers =
   form = this.fb.group({});
@@ -28,14 +30,16 @@ export class FormComponent implements OnInit {
   gridCss: Array<ColumnSizes> = ['sm', 'md', 'lg', 'xl'];
   css: any = {};
 
-  constructor(public util: UtilService, private fb: FormBuilder) {}
+  constructor(public util: UtilService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    console.log(this.formFields)
     this.initForm();
   }
 
   // form initializer
   initForm() {
+    // console.log(this.object)
     let temp: any = {};
     let result: any = {};
 
@@ -132,8 +136,9 @@ export class FormComponent implements OnInit {
     if (fieldTypes.includes(field.type)) {
       temp.field = new FormControl(
         {
-          value: defaultValue,
-          disabled: field.isDisabled ? field.isDisabled : false,
+          value: this.object ? this.object[field.fcName] : defaultValue,
+          disabled: field.isDisabled ? field.isDisabled : this.action === "Update" ? false : true,
+
         },
         {
           updateOn: 'blur',

@@ -2,7 +2,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { AddMerchantComponent } from './add-merchant/add-merchant.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MERCHANT_COLUMNS } from './enum';
+import { MERCHANT_COLUMNS, MAT_BOTTOM_SHEET_CONF } from './enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QueryParams } from 'src/app/models/queryparams.iterface';
 import { TableOutput } from 'src/app/models/tableemit.interface';
@@ -17,6 +17,7 @@ import { Column } from 'src/app/models/column.interface';
 })
 export class MerchantComponent implements OnInit {
   title: string = 'Merchant';
+  bottomSheetCon = MAT_BOTTOM_SHEET_CONF
   columns = MERCHANT_COLUMNS;
   dataSource: Array<any> = [];
   dataLength = 0;
@@ -32,7 +33,7 @@ export class MerchantComponent implements OnInit {
     private util: UtilService,
     private sb: MatSnackBar,
     private auth: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.auth.me().subscribe(
