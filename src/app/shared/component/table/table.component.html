@@ -15,7 +15,7 @@
   </div>
 </div> -->
 <div class="search-bar" *ngIf="show">
-  <!-- <ngx-skeleton-loader
+  <ngx-skeleton-loader
     *ngIf="loading"
     count="1"
     animation="progress-dark"
@@ -25,7 +25,7 @@
       border: '1px solid # 	',
       'animation-duration': '1s'
     }"
-  ></ngx-skeleton-loader> -->
+  ></ngx-skeleton-loader>
   <input
     *ngIf="!loading"
     class="full-width search-input"
@@ -129,7 +129,7 @@
   <div *ngIf="loading" class="loading">
     <!-- <app-loading></app-loading> -->
 
-    <!-- <ngx-skeleton-loader
+    <ngx-skeleton-loader
       count="8"
       animation="progress-dark"
       [theme]="{
@@ -138,6 +138,6 @@
         border: '1px solid # 	',
         'animation-duration': '1s'
       }"
-    ></ngx-skeleton-loader> -->
+    ></ngx-skeleton-loader>
   </div>
 </div>

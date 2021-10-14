@@ -17,7 +17,7 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule,RouterTestingModule]
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule, RouterTestingModule]
     }).compileComponents();
   });
 
@@ -47,7 +47,7 @@ describe('RegisterComponent', () => {
     expect(
       component.registerForm.getRawValue().password ===
       component.registerForm.getRawValue().passwordConfirm
-    ).toBe(false);
+    ).toBeFalse;
   });
 
   it('should be password match', () => {
@@ -73,7 +73,7 @@ describe('RegisterComponent', () => {
     expect(email.hasError('email')).toBeFalse();
   });
 
-  it('wont enable register button if one of the field is empty or more', fakeAsync(() => {
+  it('won\'t enable register button if one of the field is empty or more', fakeAsync(() => {
     component.registerForm.setValue({
       firstName: 'Michael',
       lastName: 'Reeves',

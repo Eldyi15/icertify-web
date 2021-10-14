@@ -1,5 +1,7 @@
 import { ComponentModule } from './../../shared/component/component.module';
 import { MaterialModule } from './../../shared/material.module';
+import { AvatarModule } from 'ngx-avatar';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +15,7 @@ import { AdminPortalComponent } from './admin-portal.component';
     AdminPortalRoutingModule,
     MaterialModule,
     ComponentModule,
+    AvatarModule,
   ],
 })
 export class AdminPortalModule {}

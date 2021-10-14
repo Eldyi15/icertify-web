@@ -20,6 +20,7 @@ export class ChangePasswordComponent implements OnInit {
   hideCurrent: boolean = true;
   hideNewPassword: boolean = true;
   hideConfirmPassword: boolean = true;
+  isSaving = false;
   saving = false;
   loading = false;
   passwordForm = this.fb.group(
@@ -38,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     private auth: AuthService,
     private sb: MatSnackBar,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.passwordForm);
@@ -110,7 +111,7 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: this.passwordForm.getRawValue().newPassword,
       passwordConfirm: this.passwordForm.getRawValue().confirmPassword,
     };
-
+    this.isSaving = true;
     this.auth.changePassword(dataCredential).subscribe(
       (res: any) => {
         this.sb.open('Password Successfully Saved', undefined, {

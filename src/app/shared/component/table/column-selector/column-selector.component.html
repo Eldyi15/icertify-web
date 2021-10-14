@@ -1,24 +1,24 @@
 <div mat-dialog-title>
-  <h1>Select Column to Show</h1>
+  <h3>Select Column to Show</h3>
 
   <button mat-icon-button color="warn" class="close-btn" (click)="onClose()">
     <mat-icon>close</mat-icon>
   </button>
 </div>
-
+<mat-divider></mat-divider>
 <div mat-dialog-content style="text-align: center">
   <button
     mat-raised-button
     *ngFor="let column of columns; let i = index"
     [color]="column.selected && 'primary'"
-    style="margin-right: 20px; margin-bottom: 20px; border-radius: 100px"
+    class="column-btn"
     (click)="filterColumn(i)"
   >
     {{ column.title }}
   </button>
 </div>
-
+<mat-divider></mat-divider>
 <div mat-dialog-actions>
-  <button mat-raised-button color="warn" (click)="onClose()">close</button>
-  <button mat-raised-button (click)="onApply()">apply</button>
+  <!-- <button mat-raised-button color="warn" (click)="onClose()">close</button> -->
+  <button mat-raised-button (click)="onApply()" class="btn">Apply</button>
 </div>

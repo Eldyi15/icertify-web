@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 import { ColumnSelectorComponent } from './table/column-selector/column-selector.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { OtpComponent } from './otp/otp.component';
 
@@ -19,15 +20,23 @@ import { OtpComponent } from './otp/otp.component';
     ChangePasswordComponent,
     OtpComponent,
   ],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxSkeletonLoaderModule,
+  ],
   exports: [
     MaterialModule,
+    NgxSkeletonLoaderModule,
     ReactiveFormsModule,
     FormsModule,
     TableComponent,
     FormComponent,
     LoadingComponent,
     OtpComponent,
+    ChangePasswordComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
