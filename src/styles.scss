@@ -89,3 +89,8 @@ $icertify-theme: mat-light-theme(
   bottom: 20px;
   right: 20px;
 }
+.mat-list-item:hover{
+  cursor: pointer;
+  background-color:#8460df;
+  color:#ffff
+}

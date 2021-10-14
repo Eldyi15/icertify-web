@@ -1,0 +1,5 @@
+<mat-list>
+    <ng-container *ngFor="let conf of data.bottomSheetConf">
+        <mat-list-item *ngIf="conf.show" (click)="onDismiss(conf.label)">{{conf.label}}</mat-list-item>
+    </ng-container>
+</mat-list>

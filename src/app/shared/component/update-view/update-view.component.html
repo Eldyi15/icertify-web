@@ -1,0 +1,11 @@
+<div class="p-grid">
+    <div class="col-6">
+        <app-form [formFields]="formFields" (formListener)="formListener($event)" [action]="action"
+            [object]="data.data">
+        </app-form>
+    </div>
+</div>
+<mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onSave()">Save</button>
+</mat-dialog-actions>

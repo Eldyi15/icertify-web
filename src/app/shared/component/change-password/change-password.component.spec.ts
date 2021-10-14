@@ -9,7 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { of } from 'rxjs';
 
-fdescribe('ChangePasswordComponent', () => {
+describe('ChangePasswordComponent', () => {
   let component: ChangePasswordComponent;
   let fixture: ComponentFixture<ChangePasswordComponent>;
   let authService: AuthService

@@ -1,3 +1,4 @@
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatRadioModule } from '@angular/material/radio';
@@ -55,7 +56,8 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
     MatExpansionModule,
     MatBottomSheetModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatListModule
   ],
   exports: [
     MatDialogModule,
@@ -81,7 +83,8 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
     MatBottomSheetModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatListModule
   ],
 })
-export class MaterialModule {}
+export class MaterialModule { }

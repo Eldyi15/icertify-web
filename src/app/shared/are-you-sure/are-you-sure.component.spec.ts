@@ -9,10 +9,10 @@ describe('AreYouSureComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AreYouSureComponent ],
-      providers:[{ provide: MAT_DIALOG_DATA, useValue: {} },{ provide: MatDialogRef, useValue: {} }]
+      declarations: [AreYouSureComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

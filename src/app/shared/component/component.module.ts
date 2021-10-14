@@ -8,6 +8,9 @@ import { ColumnSelectorComponent } from './table/column-selector/column-selector
 import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { UpdateViewComponent } from './update-view/update-view.component';
+import { ImageFormComponent } from './image-form/image-form.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     TableComponent,
     ColumnSelectorComponent,
     LoadingComponent,
-    ChangePasswordComponent,
+    ChangePasswordComponent,BottomSheetComponent, UpdateViewComponent, ImageFormComponent
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule],
   exports: [
@@ -24,7 +27,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     FormsModule,
     TableComponent,
     FormComponent,
-    LoadingComponent,
+    LoadingComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
