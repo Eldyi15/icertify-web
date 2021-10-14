@@ -1,3 +1,9 @@
+import { OtpComponent } from './../../shared/component/otp/otp.component';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -31,12 +37,29 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private util: UtilService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
   toggleShowPassword(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  sendOtp() {
+    let config: MatDialogConfig = {
+      panelClass: 'dialog-responsive',
+      disableClose: true,
+      data: {
+        mobileNumber: this.registerForm.getRawValue().mobileNumber,
+      },
+    };
+    this.dialog
+      .open(OtpComponent, config)
+      .afterClosed()
+      .subscribe((res: any) => {
+        if (res) this.register();
+      });
   }
 
   register() {

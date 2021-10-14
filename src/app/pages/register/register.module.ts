@@ -1,3 +1,4 @@
+import { ComponentModule } from 'src/app/shared/component/component.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    ComponentModule,
   ],
 })
 export class RegisterModule {}

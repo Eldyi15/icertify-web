@@ -9,6 +9,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { OtpComponent } from './otp/otp.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ColumnSelectorComponent,
     LoadingComponent,
     ChangePasswordComponent,
+    OtpComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     TableComponent,
     FormComponent,
     LoadingComponent,
+    OtpComponent,
+    ChangePasswordComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
