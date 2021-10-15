@@ -82,7 +82,9 @@ export class UpdateViewComponent implements OnInit {
                 success: false,
                 button: 'Got it',
               },
-            })
+            }
+
+            )
 
 
           });

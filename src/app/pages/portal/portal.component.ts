@@ -1,3 +1,4 @@
+import { UpdateViewComponent } from './../../shared/component/update-view/update-view.component';
 import { ActionResultComponent } from './../../shared/dialogs/action-result/action-result.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -54,10 +55,32 @@ export class PortalComponent implements OnInit {
         this.me = res.env.user;
         let routerSplit = this.router.url.split('/').pop();
         let temp: Array<string> = [];
-
         this.userNav.forEach((i: any) => {
           temp.push(i);
         });
+        if (res.env.user.type === "User") {
+          if (res.env.user.status === "Pending") {
+            this.dialog
+              .open(ActionResultComponent, {
+                disableClose: true,
+                width: 'auto',
+                height: 'auto',
+                data: {
+                  msg: 'User is still in pending! Activate account',
+                  button: 'Activate',
+                  success: false,
+                },
+              })
+              .afterClosed()
+              .subscribe((res: any) => {
+                this.dialog.open(UpdateViewComponent, {
+                  width: '70%',
+                  disableClose: true,
+                  data: { data: this.me, action: 'Activate' },
+                })
+              });
+          }
+        }
 
         this.page = this.userNav.find((o: any) => o.route === routerSplit);
       },

@@ -16,7 +16,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class UploadComponent implements OnInit {
   uploading: boolean = false
-  accepted: string = "'.png,.jpeg,.jpg'"
+  accepted: string = ".png, .jpeg, .jpg"
   fileTypes: any = FILETYPES;
   uploadedFile: string = ''
   filename: string = ''
@@ -29,6 +29,7 @@ export class UploadComponent implements OnInit {
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
+
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -37,10 +38,11 @@ export class UploadComponent implements OnInit {
         fileEntry.file((file: File) => {
           var flag = false;
           this.accepted.split(',').forEach((a) => {
-            if (file.type == this.fileTypes[a.trim()]) flag = true;
+            console.log(a)
+
+            if (file.type === this.fileTypes[a.trim()]) flag = true;
           });
           if (flag) {
-            console.log(file)
             this.save(file);
           } else {
             console.log("error")
