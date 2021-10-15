@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.getRawValue().email,
       password: this.registerForm.getRawValue().password,
       passwordConfirm: this.registerForm.getRawValue().passwordConfirm,
-      mobileNumber: '+63' + this.registerForm.getRawValue().mobileNumber,
+      mobileNumber: this.registerForm.getRawValue().mobileNumber,
       status: 'Pending',
     };
 
