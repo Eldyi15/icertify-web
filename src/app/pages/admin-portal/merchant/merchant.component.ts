@@ -51,7 +51,7 @@ export class MerchantComponent implements OnInit {
     this.dialog
       .open(AddMerchantComponent, {
         height: 'auto',
-        width: '35vw',
+        width: '70%',
         disableClose: true,
       })
       .afterClosed()
