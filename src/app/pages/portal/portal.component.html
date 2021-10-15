@@ -1,1 +1,47 @@
-<p>portal works!</p>
+<div
+  *ngIf="!loading"
+  class="example-container"
+  [class.example-is-mobile]="mobileQuery.matches"
+>
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- <h1 class="example-app-name">Responsive App</h1> -->
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [style]="mobileQuery.matches ? 'width: 75%' : 'width:16%'"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      style="border: none"
+    >
+      <mat-nav-list>
+        <ng-container *ngFor="let nav of userNav">
+          <mat-list-item [routerLink]="nav.route" style="height: 2.8rem">
+            <mat-icon
+              class="light"
+              fontSet="material-icons-outlined"
+              style="font-size: 21px; margin-right: 0.3rem"
+              mat-list-icon
+              >{{ nav.icon }}</mat-icon
+            ><span>{{ nav.label }}</span>
+          </mat-list-item>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<app-loading *ngIf="loading"></app-loading>
