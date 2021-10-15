@@ -1,7 +1,12 @@
-<div class="grid">
-    <div class="col-6" *ngFor="let image of images">
-        <h4>{{image.label}}</h4>
-        <img [ngClass]="{'imgUnclickable':action==='View'}" (click)="onClick(image.fcName)" class="mat-elevation-z8"
-            [src]="image.imgLink">
+<div *ngIf="!gettingImages" class="grid">
+    <div *ngFor="let image of images">
+        <div class="col-6">
+            <ng-container *ngIf="image.isVisible">
+                <h4>{{image.label}}</h4>
+                <img [ngClass]="{'imgUnclickable':action==='View'}" (click)="onClick(image.fcName)"
+                    class="mat-elevation-z8" [src]="image.imgLink">
+
+            </ng-container>
+        </div>
     </div>
 </div>

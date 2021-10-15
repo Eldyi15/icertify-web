@@ -245,7 +245,7 @@ export class TableComponent implements OnInit {
                     if (action === 'Activate') {
                       data.status = 'Active';
                     }
-                    this.api.updateUser(data).subscribe((response: any) => {
+                    this.api.updateUser(data, 'admin').subscribe((response: any) => {
                       console.log(response);
                       console.log(res);
                       this.dialog
@@ -259,9 +259,17 @@ export class TableComponent implements OnInit {
                             button: 'Got it',
                           },
                         })
+                      var toEmit: TableOutput = {
+                        pageIndex: 0,
+                        pageSize: 10,
+                        // sort: 'desc',
+                      };
+                      this.pageChange.emit(toEmit)
                     });
+
                   }
                 });
+
               break;
           }
         }

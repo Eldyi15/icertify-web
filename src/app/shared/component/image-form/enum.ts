@@ -16,6 +16,12 @@ export const ImageFields: Array<Section> = [
             colspan: { xs: 12, md: 12, lg: 12, xl: 12, sm: 12 },
             isVisible: true,
             fcName: 'ibp_id'
+        }, {
+            label: 'Valid ID',
+            type: "text",
+            colspan: { xs: 12, md: 12, lg: 12, xl: 12, sm: 12 },
+            isVisible: true,
+            fcName: 'valid_id'
         },
         ]
     },

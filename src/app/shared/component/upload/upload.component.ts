@@ -45,7 +45,7 @@ export class UploadComponent implements OnInit {
           if (flag) {
             this.save(file);
           } else {
-            console.log("error")
+            console.log(file)
             this.sb.open('Incorrect Format!', 'Okay', {
               duration: 3000,
               verticalPosition: 'bottom',
