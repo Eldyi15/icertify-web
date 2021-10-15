@@ -11,6 +11,7 @@ import {
 } from '@angular/router';
 import { User } from 'src/app/models/user.interface';
 import { ADMIN_NAVS } from 'src/app/config/NAVIGATIONS';
+import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
 
 @Component({
   selector: 'app-admin-portal',
@@ -62,17 +63,27 @@ export class AdminPortalComponent implements OnInit {
         this.page = this.adminNav.find((o: any) => o.route === routerSplit);
         if (this.page) this.routeLabel = this.page.label;
       },
-      (err) => {
-        console.log(err);
-      }
-    );
+      (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
   }
+
   logout() {
     this.auth.logout().subscribe((res) => {
       console.log(res);
       localStorage.removeItem('SESSION_CSURF_TOKEN');
       localStorage.removeItem('SESSION_AUTH');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin-login']);
     });
   }
 

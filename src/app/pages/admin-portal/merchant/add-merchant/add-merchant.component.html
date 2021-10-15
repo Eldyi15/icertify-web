@@ -32,7 +32,8 @@
       </form>
     </div>
     <div class="col-12" *ngIf="step ===2">
-      <app-image-form (imageEmitter)="imageEmitter($event)" [obj]="merchantForm.getRawValue()"></app-image-form>
+      <app-image-form (imageEmitter)="imageEmitter($event)"
+        [obj]="this.toAddData? this.toAddData:merchantForm.getRawValue()"></app-image-form>
     </div>
   </div>
 </div>

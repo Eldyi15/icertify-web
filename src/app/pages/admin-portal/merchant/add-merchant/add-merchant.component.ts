@@ -71,11 +71,21 @@ export class AddMerchantComponent implements OnInit {
         this.isAdded = true;
         this.dialogRef.close(true);
       },
-      (err: any) => {
-        console.log(err);
+      (error: any) => {
         this.isAdded = false;
-      }
-    );
+        this.saving = false;
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
   }
 
   submit() {
@@ -93,6 +103,18 @@ export class AddMerchantComponent implements OnInit {
         if (res) {
           this.onSave();
         }
+      }, (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
       });
   }
 }

@@ -22,7 +22,7 @@ export const MERCHANT_NAV = [
 export const USER_NAV = [
   {
     label: 'Home',
-    icon: 'homew',
-    route: 'dashboard',
+    icon: 'home',
+    route: 'user-dashboard',
   },
 ];

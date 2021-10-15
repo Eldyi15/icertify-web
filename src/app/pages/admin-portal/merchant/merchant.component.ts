@@ -42,10 +42,19 @@ export class MerchantComponent implements OnInit {
       (res: any) => {
         console.log(res);
       },
-      (err) => {
-        console.log(err);
-      }
-    );
+      (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
     this.fetchData({ pageSize: this.page.pageSize, pageIndex: 1 });
   }
 
@@ -76,12 +85,11 @@ export class MerchantComponent implements OnInit {
       },
         (error: any) => {
           this.dialog.open(ActionResultComponent, {
-
             width: 'auto',
             height: 'auto',
             disableClose: true,
             data: {
-              msg: error.err.msg,
+              msg: error.error.message,
               success: false,
               button: 'Got it',
             },
@@ -110,10 +118,18 @@ export class MerchantComponent implements OnInit {
         this.dataLength = res.total;
 
       },
-      (err: any) => {
-        console.log(err.message);
-        this.loading = false;
-      }
-    );
+      (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
   }
 }
