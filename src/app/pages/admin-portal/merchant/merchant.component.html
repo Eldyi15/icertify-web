@@ -1,23 +1,11 @@
-<app-table
-  [columns]="columns"
-  [dataSource]="dataSource"
-  [loading]="loading"
-  [dataLength]="dataLength"
-  [pagination]="page"
-  (pageChange)="fetchData($event)"
->
+<app-table [columns]="columns" [dataSource]="dataSource" [loading]="loading" [dataLength]="dataLength"
+  [pagination]="page" (pageChange)="fetchData($event)" [title]="title" [bottomSheetConf]="bottomSheetCon">
 </app-table>
 
 <div class="p-grid">
   <div class="p-col-12">
-    <button
-      mat-fab
-      color="primary"
-      class="btn-float-bottom"
-      matTooltip="Add Merchant"
-      matTooltipPosition="left"
-      (click)="openAdd()"
-    >
+    <button mat-fab color="primary" class="btn-float-bottom" matTooltip="Add Merchant" matTooltipPosition="left"
+      (click)="openAdd()">
       <mat-icon>add</mat-icon>
     </button>
   </div>

@@ -25,11 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
 @NgModule({
-  declarations: [
-    AreYouSureComponent
-  ],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -55,7 +51,8 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
     MatExpansionModule,
     MatBottomSheetModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatListModule,
   ],
   exports: [
     MatDialogModule,
@@ -81,7 +78,8 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
     MatBottomSheetModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatListModule,
   ],
 })
 export class MaterialModule {}

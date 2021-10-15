@@ -11,7 +11,7 @@ type Collection = 'test_collections' | 'test_collections_2';
 })
 export class ApiService {
   // env
-  constructor(@Inject(HttpService) public http: HttpService) {}
+  constructor(@Inject(HttpService) public http: HttpService) { }
 
   // fn
 
@@ -30,5 +30,8 @@ export class ApiService {
   }
   getMerchants(QueryParams?: QueryParams) {
     return this.http.start('get', '/user/admin', {}, QueryParams);
+  }
+  updateUser(body: any) {
+    return this.http.start('patch', `/user/admin/${body._id}`, body)
   }
 }

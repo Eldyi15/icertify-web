@@ -37,3 +37,32 @@ export const MERCHANT_COLUMNS: Array<Column> = [
     selected: true,
   },
 ];
+
+
+
+export const MAT_BOTTOM_SHEET_CONF = [
+  {
+    label: 'View',
+    show: true
+  },
+  {
+    label: 'Update',
+
+    show: true
+  },
+  {
+    label: 'Suspend',
+    show: true
+
+  },
+  {
+    label: 'Activate',
+    show: true
+
+  },
+  {
+    label: 'Delete',
+    show: true
+
+  },
+]

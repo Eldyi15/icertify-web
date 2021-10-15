@@ -1,6 +1,5 @@
 <form [formGroup]="form">
-  Value: {{ form.value | json }} <br />
-  <hr />
+  <h2>{{action}}</h2>
   <div class="container">
     <div *ngFor="let formField of formFields">
       <div class="header-section" *ngIf="formField.name">
@@ -11,19 +10,17 @@
         <div *ngFor="let field of formField.fields">
           <div *ngIf="field.isVisible" class="{{ css[field.fcName] }}">
             <!-- Text -->
-            <ng-template #test>
-              <mat-form-field class="full-width" *ngIf="field.type == 'text'">
-                <mat-label>
-                  {{ field.label }}
-                  <small *ngIf="!field.isOptional">*</small>
-                </mat-label>
-                <input
-                  matInput
-                  [formControlName]="field.fcName"
-                  [type]="field.type"
-                />
-              </mat-form-field>
-            </ng-template>
+            <mat-form-field class="full-width" *ngIf="field.type == 'text'"
+              [floatLabel]="field.fcName==='mobileNumber'?'always':'never'">
+              <mat-label>
+                {{ field.label }}
+                <small *ngIf="!field.isOptional">*</small>
+              </mat-label>
+              <input matInput [formControlName]="field.fcName" [type]="field.type"
+                [minlength]="field.fcName==='mobileNumber' ? 10 : 299"
+                [maxlength]="field.fcName==='mobileNumber' ? 10 : 299" />
+              <span matPrefix style="color: rgb(165, 165, 165);" *ngIf="field.fcName==='mobileNumber'  ">+63</span>
+            </mat-form-field>
 
             <!-- Number -->
             <mat-formfield class="full-width" *ngIf="field.type == 'number'">
@@ -31,86 +28,59 @@
                 {{ field.label }}
                 <small *ngIf="!field.isOptional">*</small>
               </mat-label>
-              <input
-                matInput
-                type="text"
-                [formControlName]="field.fcName"
-                (keypress)="numberInputOnly($event)"
+              <input matInput type="text" [formControlName]="field.fcName" (keypress)="numberInputOnly($event)"
                 [minLength]="field.minLength ? field.minLength : 0"
-                [maxLength]="field.maxLength ? field.maxLength : 0"
-              />
+                [maxLength]="field.maxLength ? field.maxLength : 0" />
             </mat-formfield>
 
             <!-- Percentage -->
-            <mat-form-field
-              class="full-width"
-              *ngIf="field.type == 'percentage'"
-            >
+            <mat-form-field class="full-width" *ngIf="field.type == 'percentage'">
               <mat-label>
                 {{ field.label }}
                 <small *ngIf="!field.isOptional">*</small>
               </mat-label>
-              <input
-                matInput
-                type="text"
-                [formControlName]="field.fcName"
-                minlength="1"
-                maxlenght="4"
-                (keypress)="numberInputOnly($event)"
-              />
+              <input matInput type="text" [formControlName]="field.fcName" minlength="1" maxlenght="4"
+                (keypress)="numberInputOnly($event)" />
               <span matSuffix>%</span>
             </mat-form-field>
 
             <!-- Text Area -->
             <mat-form-field class="full-width" *ngIf="field.type == 'textarea'">
               <mat-label> {{ field.label }}</mat-label>
-              <textarea
-                matInput
-                [formControlName]="field.fcName"
-                [rows]="field.rowSpan"
-              ></textarea>
+              <textarea matInput [formControlName]="field.fcName" [rows]="field.rowSpan"></textarea>
             </mat-form-field>
 
             <!-- Select -->
             <mat-form-field class="full-width" *ngIf="field.type == 'select'">
               <mat-label> {{ field.label }}</mat-label>
               <mat-select [formControlName]="field.fcName">
-                <mat-option
-                  *ngFor="let item of field.choices"
-                  [value]="
+                <mat-option *ngFor="let item of field.choices" [value]="
                     field.choiceValue
                       ? util.deepFind(item, field.choiceValue)
                       : item
-                  "
-                >
+                  ">
                   {{
-                    field.choiceLabel
-                      ? util.deepFind(item, field.choiceLabel)
-                      : item
+                  field.choiceLabel
+                  ? util.deepFind(item, field.choiceLabel)
+                  : item
                   }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
             <!-- Select w/ Checkbox -->
-            <mat-form-field
-              class="full-width"
-              *ngIf="field.type == 'select_with_checkbox'"
-            >
+            <mat-form-field class="full-width" *ngIf="field.type == 'select_with_checkbox'">
               <mat-label>{{ field.label }}</mat-label>
               <mat-select [formControlName]="field.fcName" multiple>
-                <mat-option
-                  *ngFor="let item of field.choices"
-                  [value]="
+                <mat-option *ngFor="let item of field.choices" [value]="
                     field.choiceValue
                       ? util.deepFind(item, field.choiceValue)
                       : item
-                  "
-                >
+                  ">
                   {{
-                    field.choiceLabel
-                      ? util.deepFind(item, field.choiceLabel)
-                      : item
+                  field.choiceLabel
+                  ? util.deepFind(item, field.choiceLabel)
+                  : item
                   }}
                 </mat-option>
               </mat-select>
@@ -119,12 +89,7 @@
             <!-- Date -->
             <mat-form-field class="full-width" *ngIf="field.type == 'date'">
               <mat-label>{{ field.label }}</mat-label>
-              <input
-                matInput
-                [matDatepicker]="dp3"
-                [formControlName]="field.fcName"
-                [disabled]="true"
-              />
+              <input matInput [matDatepicker]="dp3" [formControlName]="field.fcName" [disabled]="true" />
               <mat-datepicker-toggle matSuffix [for]="dp3">
               </mat-datepicker-toggle>
               <mat-datepicker #dp3 [disabled]="false" [touchUi]="true">
@@ -132,13 +97,8 @@
             </mat-form-field>
 
             <!-- CheckBox -->
-            <mat-checkbox
-              *ngIf="field.type == 'checkbox'"
-              [formControlName]="field.fcName"
-              color="primary"
-            >
-              {{ field.label }}</mat-checkbox
-            >
+            <mat-checkbox *ngIf="field.type == 'checkbox'" [formControlName]="field.fcName" color="primary">
+              {{ field.label }}</mat-checkbox>
 
             <!-- FORM ARRAY TBA(di ko alam pano gagawin) -->
           </div>
@@ -147,12 +107,12 @@
     </div>
   </div>
 </form>
-<!-- <mat-form-field>
+<!-- <mat-form-field> 
       <mat-label>First Name</mat-label>
       <input matInput placeholder="First name" formControlName="firstName" />
     </mat-form-field>
   
-    <mat-form-field>
+    <mat-form-field> 
       <mat-label>Last Name</mat-label>
       <input matInput placeholder="Last name" formControlName="lastName" />
     </mat-form-field> -->

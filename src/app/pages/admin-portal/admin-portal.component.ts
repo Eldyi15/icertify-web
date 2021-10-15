@@ -24,6 +24,7 @@ export class AdminPortalComponent implements OnInit {
   changeLabel = new EventEmitter<boolean>();
   routeLabel: string = '';
   page: any;
+  initialLoading: boolean = true;
   constructor(private auth: AuthService, private router: Router) {
     this.loading = true;
     this.router.events.subscribe((event: NavigationEvent) => {
