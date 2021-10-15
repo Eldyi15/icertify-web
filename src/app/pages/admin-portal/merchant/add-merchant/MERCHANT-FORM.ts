@@ -1,3 +1,5 @@
+import { Validators } from '@angular/forms';
+
 export const addMerchantForm = [
   {
     label: 'First Name',
@@ -40,8 +42,10 @@ export const addMerchantForm = [
     type: 'number',
     fcname: 'mobileNumber',
     show: true,
+    prefix: '+63',
+    maxLength: 10,
     default: '',
     required: true,
-    validator: [],
+    validator: [Validators.minLength(10), Validators.maxLength(10)],
   },
 ];

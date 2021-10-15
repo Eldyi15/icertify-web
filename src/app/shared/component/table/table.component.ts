@@ -229,7 +229,7 @@ export class TableComponent implements OnInit {
             default:
               this.dialog
                 .open(AreYouSureComponent, {
-                  width: '70%',
+                  width: 'auto',
                   data: { header: res, msg: res },
                 })
                 .afterClosed()

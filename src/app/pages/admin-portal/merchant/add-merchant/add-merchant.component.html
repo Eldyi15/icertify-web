@@ -18,7 +18,8 @@
             </mat-form-field>
             <mat-form-field class="full-width" *ngIf="form.type === 'number'" appearance="standard">
               <mat-label>{{ form.label }}</mat-label>
-              <input matInput [formControlName]="form.fcname" />
+              <input matInput [formControlName]="form.fcname" [maxLength]="form.maxLength ? form.maxLength : ''" />
+              <span matPrefix *ngIf="form.prefix">{{ form.prefix }}</span>
               <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''">{{ form.label }} is required.</mat-error>
             </mat-form-field>
           </div>

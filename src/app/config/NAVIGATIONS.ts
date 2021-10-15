@@ -18,3 +18,11 @@ export const MERCHANT_NAV = [
     route: 'merchant-dashboard',
   },
 ];
+
+export const USER_NAV = [
+  {
+    label: 'Home',
+    icon: 'homew',
+    route: 'dashboard',
+  },
+];
