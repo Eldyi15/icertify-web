@@ -1,3 +1,4 @@
+import { ActionResultComponent } from './../../dialogs/action-result/action-result.component';
 import { ApiService } from 'src/app/services/api/api.service';
 import { UpdateViewComponent } from './../update-view/update-view.component';
 import {
@@ -46,7 +47,7 @@ export class TableComponent implements OnInit {
     public util: UtilService,
     private dialog: MatDialog,
     private _bottomSheet: MatBottomSheet
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // console.log(this.pagination);
@@ -219,6 +220,13 @@ export class TableComponent implements OnInit {
               this.dialog.open(UpdateViewComponent, {
                 width: '70%',
                 data: { data, action: res },
+              }).afterClosed().subscribe((res: any) => {
+                var toEmit: TableOutput = {
+                  pageIndex: 0,
+                  pageSize: 10,
+                  // sort: 'desc',
+                };
+                this.pageChange.emit(toEmit)
               });
               break;
 

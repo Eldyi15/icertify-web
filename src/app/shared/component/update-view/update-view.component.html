@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" *ngIf="!loading">
     <div class="col-4">
         <app-form [formFields]="formFields" (formListener)="formListener($event)" [action]="action"
             [object]="data.data">
@@ -9,7 +9,13 @@
     </div>
 </div>
 
-<mat-dialog-actions>
+<mat-dialog-actions *ngIf="!loading">
     <button mat-button (click)="onCancel()">Cancel</button>
     <button mat-button (click)="onSave()" *ngIf="action==='Update'">Save</button>
 </mat-dialog-actions>
+<div style="display: flex;justify-content: center; align-items: center;" *ngIf="loading">
+    <p>
+        <mat-spinner></mat-spinner>
+    </p>
+    <p>Saving Data...</p>
+</div>
