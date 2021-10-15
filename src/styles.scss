@@ -89,10 +89,10 @@ $icertify-theme: mat-light-theme(
   bottom: 20px;
   right: 20px;
 }
-.mat-list-item:hover{
+.mat-list-item:hover {
   cursor: pointer;
-  background-color:#8460df;
-  color:#ffff
+  background-color: #8460df;
+  color: #ffff;
 }
 .dialog-responsive {
   width: 35%;
@@ -115,4 +115,10 @@ $icertify-theme: mat-light-theme(
   font-weight: bolder;
   cursor: pointer;
   height: 100%;
+}
+
+@media only screen and (max-width: 760px) {
+  .dialog-change {
+    min-width: 100vw;
+  }
 }
