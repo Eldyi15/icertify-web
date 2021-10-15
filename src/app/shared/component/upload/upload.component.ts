@@ -37,13 +37,14 @@ export class UploadComponent implements OnInit {
         fileEntry.file((file: File) => {
           var flag = false;
           this.accepted.split(',').forEach((a) => {
+            console.log(this.fileTypes[a.trim()])
             if (file.type == this.fileTypes[a.trim()]) flag = true;
           });
           if (flag) {
             console.log(file)
             this.save(file);
           } else {
-            console.log("error")
+            console.log(file)
             this.sb.open('Incorrect Format!', 'Okay', {
               duration: 3000,
               verticalPosition: 'bottom',

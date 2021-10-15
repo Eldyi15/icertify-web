@@ -25,6 +25,11 @@ export class AddMerchantComponent implements OnInit {
   merchantForm = this.fb.group({});
   saving: boolean = false;
   isAdded: boolean = false;
+  toAddData: any = {}
+
+  imageFormValid: boolean = false
+
+  step = 1
 
   constructor(
     public dialogRef: MatDialogRef<AddMerchantComponent>,
@@ -34,10 +39,15 @@ export class AddMerchantComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.initiateForm();
 
   }
-
+  imageEmitter(event: any) {
+    console.log(event)
+    this.toAddData = { ...this.merchantForm.getRawValue(), ...event.obj }
+    this.imageFormValid = event.formValid
+  }
   initiateForm() {
     let tempForm: any = {};
     this.addMerchant.forEach((form: any) => {
@@ -51,8 +61,11 @@ export class AddMerchantComponent implements OnInit {
   }
 
   onSave() {
+    // this.toAddData = this.merchantForm.getRawValue()
+
+    console.log(this.toAddData)
     this.saving = true;
-    this.api.insertMerchant(this.merchantForm.value).subscribe(
+    this.api.insertMerchant(this.toAddData).subscribe(
       (res: any) => {
         console.log(res);
         this.isAdded = true;

@@ -36,7 +36,7 @@ export class UpdateViewComponent implements OnInit {
   }
   imageEmitter(event: any) {
     console.log(event);
-    this.toUpdateData = event;
+    this.toUpdateData = event.obj;
   }
   onCancel() {
     this.dialogRef.close();

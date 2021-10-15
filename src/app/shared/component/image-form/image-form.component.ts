@@ -1,3 +1,5 @@
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AuthService } from './../../../services/auth/auth.service';
 import { DropboxService } from './../../../services/dropbox/dropbox.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,21 +17,46 @@ export class ImageFormComponent implements OnInit {
   @Input() obj: any
   @Input() action: string = ''
   images: any = []
-  constructor(public dialog: MatDialog, public dbx: DropboxService) { }
+  me: any = {}
+  imageForm = this.fb.group({})
+  gettingImages: boolean = true
+  constructor(public dialog: MatDialog, public dbx: DropboxService, public auth: AuthService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
 
-    this.getImage()
+    const res: any = await this.auth.me().toPromise()
+    this.me = res.env.user
+    console.log(this.me)
+    await this.getImage()
+
   }
   getImage() {
+    this.gettingImages = true
+    let temp: any = {}
     this.imageFields.forEach((img) => {
-      console.log(this.obj)
       img.fields.forEach(async (f: any) => {
-        this.images.unshift({ fcName: f.fcName, label: f.label, imgLink: this.obj[f.fcName] ? await this.getTempLink(this.obj[f.fcName]['path_display']) : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' })
+
+        if (this.me.type === 'Superadmin' && f.fcName === 'valid_id') {
+          f.isVisible = false
+        }
+
+
+        if (this.me.type === 'User' && f.fcName === 'ibp_id') {
+          f.isVisible = false
+
+        }
+        if (f.isVisible) {
+          temp[f.fcName] = new FormControl(this.obj && this.obj[f.fcName] ? this.obj[f.fcName] : '', [Validators.required])
+        }
+        this.images.push({ isVisible: f.isVisible, fcName: f.fcName, label: f.label, imgLink: this.obj && this.obj[f.fcName] ? await this.getTempLink(this.obj[f.fcName]['path_display']) : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' })
+
 
       })
+      console.log(temp)
+      this.imageForm = this.fb.group(temp)
 
     })
+    this.gettingImages = false
   }
 
   onClick(fcname: string) {
@@ -42,7 +69,11 @@ export class ImageFormComponent implements OnInit {
           }
         })
         this.obj[fcname] = res.result
-        this.imageEmitter.emit(this.obj)
+
+
+        this.imageForm.get(fcname)?.setValue(res.result)
+        console.log(this.imageForm.get(fcname))
+        this.imageEmitter.emit({ obj: this.imageForm.getRawValue(), formValid: this.imageForm.valid })
       }
     })
   }
