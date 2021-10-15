@@ -8,6 +8,63 @@
       <mat-icon>menu</mat-icon>
     </button>
     <!-- <h1 class="example-app-name">Responsive App</h1> -->
+    <div class="flex-stretch"></div>
+
+    <ngx-avatar
+      *ngIf="me"
+      name="{{ me ? me.firstName + ' ' + me.lastName : '' }}"
+      value="def"
+      bgColor="#fff"
+      fgColor="#26184a"
+      size="40"
+      [round]="true"
+      class="my-avatar"
+      [matMenuTriggerFor]="menu"
+    ></ngx-avatar>
+
+    <mat-menu style="padding-top: 0; padding-bottom: 0px" #menu="matMenu">
+      <mat-card
+        mat-ele
+        style="
+          background: rgb(255, 255, 255);
+          border: none;
+          box-shadow: none;
+          padding-top: 0px;
+          padding-bottom: 0px;
+        "
+      >
+        <div class="flex-wrapper-row">
+          <ngx-avatar
+            src="{{ me ? '' : './../../../assets/images/guest.png' }}"
+            value="noPic"
+            bgColor="#26184a"
+            fgColor="#fff"
+            size="80"
+            [round]="true"
+          ></ngx-avatar>
+          <mat-card-header>
+            <mat-card-title>
+              {{ me ? me.firstName + " " + me.lastName : " test aydtasdd" }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{ me ? me.email : "" }}
+            </mat-card-subtitle>
+          </mat-card-header>
+        </div>
+      </mat-card>
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item (click)="changePassword()">
+        <mat-icon>key</mat-icon>
+        <span>Change Password</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
 
   <mat-sidenav-container

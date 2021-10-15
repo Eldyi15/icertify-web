@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ApiService } from './../../services/api/api.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { ChangePasswordComponent } from 'src/app/shared/component/change-password/change-password.component';
+import { MatDialog } from '@angular/material/dialog';
 import {
   NavigationStart,
   NavigationEnd,
@@ -25,7 +27,12 @@ export class AdminPortalComponent implements OnInit {
   routeLabel: string = '';
   page: any;
   initialLoading: boolean = true;
-  constructor(private auth: AuthService, private router: Router) {
+
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
     this.loading = true;
     this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
@@ -59,6 +66,14 @@ export class AdminPortalComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  logout() {
+    this.auth.logout().subscribe((res) => {
+      console.log(res);
+      localStorage.removeItem('SESSION_CSURF_TOKEN');
+      localStorage.removeItem('SESSION_AUTH');
+      this.router.navigate(['/login']);
+    });
   }
 
   changeRoute(nav: any) {
