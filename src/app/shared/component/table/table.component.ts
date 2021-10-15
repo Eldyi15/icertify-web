@@ -46,6 +46,7 @@ export class TableComponent implements OnInit {
     private api: ApiService,
     public util: UtilService,
     private dialog: MatDialog,
+
     private _bottomSheet: MatBottomSheet
   ) { }
 
@@ -202,17 +203,10 @@ export class TableComponent implements OnInit {
       })
       .afterDismissed()
       .subscribe((res: any) => {
+        let action = res
         console.log(res);
         if (res) {
-          if (res === 'Delete') {
-            data.status = 'Deleted';
-          }
-          if (res === 'Suspend') {
-            data.status = 'Suspended';
-          }
-          if (res === 'Activate') {
-            data.status = 'Active';
-          }
+
           console.log(data);
           switch (res) {
             case 'View':
@@ -221,12 +215,14 @@ export class TableComponent implements OnInit {
                 width: '70%',
                 data: { data, action: res },
               }).afterClosed().subscribe((res: any) => {
-                var toEmit: TableOutput = {
-                  pageIndex: 0,
-                  pageSize: 10,
-                  // sort: 'desc',
-                };
-                this.pageChange.emit(toEmit)
+                if (res) {
+                  var toEmit: TableOutput = {
+                    pageIndex: 0,
+                    pageSize: 10,
+                    // sort: 'desc',
+                  };
+                  this.pageChange.emit(toEmit)
+                }
               });
               break;
 
@@ -238,10 +234,31 @@ export class TableComponent implements OnInit {
                 })
                 .afterClosed()
                 .subscribe((res) => {
+
                   if (res) {
+                    if (action === 'Delete') {
+                      data.status = 'Deleted';
+                    }
+                    if (action === 'Suspend') {
+                      data.status = 'Suspended';
+                    }
+                    if (action === 'Activate') {
+                      data.status = 'Active';
+                    }
                     this.api.updateUser(data).subscribe((response: any) => {
                       console.log(response);
                       console.log(res);
+                      this.dialog
+                        .open(ActionResultComponent, {
+                          width: 'auto',
+                          height: 'auto',
+                          disableClose: true,
+                          data: {
+                            msg: [action + ' Merchant successful!'],
+                            success: true,
+                            button: 'Got it',
+                          },
+                        })
                     });
                   }
                 });

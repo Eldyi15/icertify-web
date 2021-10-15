@@ -1,6 +1,7 @@
+import { ActionResultComponent } from './../../../../shared/dialogs/action-result/action-result.component';
 import { AreYouSureComponent } from '../../../../shared/dialogs/are-you-sure/are-you-sure.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
@@ -10,12 +11,15 @@ import { addMerchantForm } from './MERCHANT-FORM';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ApiService } from 'src/app/services/api/api.service';
 
+
+
 @Component({
   selector: 'app-add-merchant',
   templateUrl: './add-merchant.component.html',
   styleUrls: ['./add-merchant.component.scss'],
 })
 export class AddMerchantComponent implements OnInit {
+
   addMerchant = addMerchantForm;
   merchantForm = this.fb.group({});
   saving: boolean = false;
@@ -26,10 +30,11 @@ export class AddMerchantComponent implements OnInit {
     private fb: FormBuilder,
     private api: ApiService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initiateForm();
+
   }
 
   initiateForm() {
@@ -54,7 +59,6 @@ export class AddMerchantComponent implements OnInit {
       },
       (err: any) => {
         console.log(err);
-
         this.isAdded = false;
       }
     );
