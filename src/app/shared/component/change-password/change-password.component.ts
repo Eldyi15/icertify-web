@@ -10,6 +10,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AreYouSureComponent } from '../../dialogs/are-you-sure/are-you-sure.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -39,7 +40,8 @@ export class ChangePasswordComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private sb: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -131,6 +133,13 @@ export class ChangePasswordComponent implements OnInit {
           .subscribe((res: any) => {
             if (res) {
               // Insert logout here!!!!!
+              this.auth.logout().subscribe((res) => {
+                console.log(res);
+                localStorage.removeItem('SESSION_CSURF_TOKEN');
+                localStorage.removeItem('SESSION_AUTH');
+                this.dialogRef.close();
+                this.router.navigate(['/login']);
+              });
             }
           });
       },

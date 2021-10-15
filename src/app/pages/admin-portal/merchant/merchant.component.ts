@@ -56,7 +56,7 @@ export class MerchantComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res: any) => {
-        console.log(res);
+
       });
   }
 
