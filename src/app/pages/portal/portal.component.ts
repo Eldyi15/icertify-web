@@ -6,6 +6,7 @@ import { User } from './../../models/user.interface';
 import { USER_NAV } from './../../config/NAVIGATIONS';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangePasswordComponent } from 'src/app/shared/component/change-password/change-password.component';
 import {
   NavigationStart,
   NavigationEnd,
@@ -102,6 +103,21 @@ export class PortalComponent implements OnInit {
           });
       }
     );
+  }
+
+  logout() {
+    this.auth.logout().subscribe((res) => {
+      console.log(res);
+      localStorage.removeItem('SESSION_CSURF_TOKEN');
+      localStorage.removeItem('SESSION_AUTH');
+      this.router.navigate(['/login']);
+    });
+  }
+  changePassword() {
+    this.dialog.open(ChangePasswordComponent, {
+      panelClass: 'dialog-change',
+      disableClose: false,
+    });
   }
 
   ngOnDestroy(): void {
