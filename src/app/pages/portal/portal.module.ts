@@ -1,17 +1,13 @@
+import { ComponentModule } from 'src/app/shared/component/component.module';
+import { MaterialModule } from 'src/app/shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PortalRoutingModule } from './portal-routing.module';
 import { PortalComponent } from './portal.component';
 
-
 @NgModule({
-  declarations: [
-    PortalComponent
-  ],
-  imports: [
-    CommonModule,
-    PortalRoutingModule
-  ]
+  declarations: [PortalComponent],
+  imports: [CommonModule, PortalRoutingModule, MaterialModule, ComponentModule],
 })
-export class PortalModule { }
+export class PortalModule {}
