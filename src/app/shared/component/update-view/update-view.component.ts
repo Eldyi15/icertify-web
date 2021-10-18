@@ -18,7 +18,10 @@ export class UpdateViewComponent implements OnInit {
   formFields = FormFields;
   action = this.data.action;
   toUpdateData: any;
-  loading: boolean = false
+  imageData: any = {}
+  formData: any
+  loading: boolean = false;
+  imageFormValid: boolean = false;
   constructor(
     public api: ApiService,
     public dialog: MatDialog,
@@ -32,27 +35,41 @@ export class UpdateViewComponent implements OnInit {
   formListener(event: any) {
     event.mobileNumber = `${event.mobileNumber}`;
     console.log(event);
-    this.toUpdateData = event;
+    this.formData = event;
   }
   imageEmitter(event: any) {
     console.log(event);
-    this.toUpdateData = event;
+    this.imageData = event.obj;
+    this.imageFormValid = event.formValid
   }
   onCancel() {
     this.dialogRef.close();
   }
   onSave() {
-    console.log(this.toUpdateData);
+    let formData = this.formData ? this.formData : this.data.data
+    this.toUpdateData = { ...this.imageData, ...formData }
     this.dialog
       .open(AreYouSureComponent, {
-        data: { header: 'Update Details', msg: 'update' },
+        data: { header: 'Update Details', msg: this.data && this.data.action ? this.data.action : 'update' },
       })
       .afterClosed()
       .subscribe((res: any) => {
+        let type = ''
+        if (this.data.data.type === 'User') {
+          type = 'user'
+        }
+        else {
+          type = 'admin'
+        }
         this.loading = true
+        if (this.data.action === "Activate") {
+          this.toUpdateData.status = "Active"
+        }
         if (res) {
           this.toUpdateData['_id'] = this.data.data._id;
-          this.api.updateUser(this.toUpdateData).subscribe((res: any) => {
+          console.log(type)
+          console.log(this.toUpdateData, "Before")
+          this.api.updateUser(this.toUpdateData, type).subscribe((res: any) => {
             console.log(res);
             if (res) {
               this.loading = false
@@ -72,17 +89,20 @@ export class UpdateViewComponent implements OnInit {
                 })
             }
           }, (error: any) => {
+            console.log(error)
             this.dialog.open(ActionResultComponent, {
 
               width: 'auto',
               height: 'auto',
               disableClose: true,
               data: {
-                msg: error.err.msg,
+                msg: error.error.message,
                 success: false,
                 button: 'Got it',
               },
-            })
+            }
+
+            )
 
 
           });

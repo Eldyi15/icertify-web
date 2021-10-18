@@ -115,12 +115,25 @@ $icertify-theme: mat-light-theme(
   }
 }
 .my-avatar {
+  padding-top: 0.5rem;
   font-size: 20px;
   font-weight: bolder;
   cursor: pointer;
   height: 100%;
+  margin: 0;
+}
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.flex-wrapper-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 @media only screen and (max-width: 760px) {
   .dialog-change {
     min-width: 100vw;

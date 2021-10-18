@@ -1,3 +1,4 @@
+import { UpdateViewComponent } from './../../shared/component/update-view/update-view.component';
 import { ActionResultComponent } from './../../shared/dialogs/action-result/action-result.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { User } from './../../models/user.interface';
 import { USER_NAV } from './../../config/NAVIGATIONS';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangePasswordComponent } from 'src/app/shared/component/change-password/change-password.component';
 import {
   NavigationStart,
   NavigationEnd,
@@ -54,10 +56,32 @@ export class PortalComponent implements OnInit {
         this.me = res.env.user;
         let routerSplit = this.router.url.split('/').pop();
         let temp: Array<string> = [];
-
         this.userNav.forEach((i: any) => {
           temp.push(i);
         });
+        if (res.env.user.type === "User") {
+          if (res.env.user.status === "Pending") {
+            this.dialog
+              .open(ActionResultComponent, {
+                disableClose: true,
+                width: 'auto',
+                height: 'auto',
+                data: {
+                  msg: 'User is still in pending! Activate account',
+                  button: 'Activate',
+                  success: false,
+                },
+              })
+              .afterClosed()
+              .subscribe((res: any) => {
+                this.dialog.open(UpdateViewComponent, {
+                  width: '70%',
+                  disableClose: true,
+                  data: { data: this.me, action: 'Activate' },
+                })
+              });
+          }
+        }
 
         this.page = this.userNav.find((o: any) => o.route === routerSplit);
       },
@@ -79,6 +103,21 @@ export class PortalComponent implements OnInit {
           });
       }
     );
+  }
+
+  logout() {
+    this.auth.logout().subscribe((res) => {
+      console.log(res);
+      localStorage.removeItem('SESSION_CSURF_TOKEN');
+      localStorage.removeItem('SESSION_AUTH');
+      this.router.navigate(['/login']);
+    });
+  }
+  changePassword() {
+    this.dialog.open(ChangePasswordComponent, {
+      panelClass: 'dialog-change',
+      disableClose: false,
+    });
   }
 
   ngOnDestroy(): void {

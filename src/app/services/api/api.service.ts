@@ -31,7 +31,7 @@ export class ApiService {
   getMerchants(QueryParams?: QueryParams) {
     return this.http.start('get', '/user/admin', {}, QueryParams);
   }
-  updateUser(body: any) {
-    return this.http.start('patch', `/user/admin/${body._id}`, body)
+  updateUser(body: any, type: string) {
+    return this.http.start('patch', `/user/${type}/${body._id}`, body)
   }
 }

@@ -18,7 +18,10 @@ export class LoginComponent implements OnInit {
   isLoggingIn: boolean = false;
   isLoggedIn: boolean = false;
   credential = this.fb.group({
-    email: new FormControl('testuser@gmail.com', [Validators.required]),
+    email: new FormControl('testuser@gmail.com', [
+      Validators.required,
+      Validators.email,
+    ]),
     password: new FormControl('123qweasdzxc123', [Validators.required]),
   });
 

@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '../../material.module';
 
@@ -9,10 +10,10 @@ xdescribe('TableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableComponent ],
-         imports:[MaterialModule]
+      declarations: [TableComponent],
+      imports: [MaterialModule, HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

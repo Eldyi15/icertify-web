@@ -10,8 +10,9 @@
 </div>
 
 <mat-dialog-actions *ngIf="!loading">
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button (click)="onSave()" *ngIf="action==='Update'">Save</button>
+    <button mat-button (click)="onCancel()" *ngIf="action!=='Activate'">Cancel</button>
+    <button mat-button (click)="onSave()" [disabled]='!imageFormValid' color='primary'
+        *ngIf="action==='Update'|| action==='Activate'">{{action==='Update'?'Save':'Activate'}}</button>
 </mat-dialog-actions>
 <div style="display: flex;justify-content: center; align-items: center;" *ngIf="loading">
     <p>

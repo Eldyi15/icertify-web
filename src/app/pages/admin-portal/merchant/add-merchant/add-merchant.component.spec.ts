@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../../../../shared/material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -19,7 +20,7 @@ describe('AddMerchantComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [AddMerchantComponent],
-      imports: [ReactiveFormsModule, HttpClientTestingModule],
+      imports: [ReactiveFormsModule, HttpClientTestingModule, MaterialModule, BrowserAnimationsModule],
       providers: [{ provide: MatDialogRef, useValue: {} }]
     })
       .compileComponents();
@@ -42,7 +43,7 @@ describe('AddMerchantComponent', () => {
       middleName: 'Verge',
       lastName: 'Reeves',
       email: 'mreeves@gmail.com',
-      mobileNumber: '09123456789',
+      mobileNumber: '9123456789',
     });
 
     spyOn(apiService, 'insertMerchant').and.returnValue(
@@ -65,7 +66,7 @@ describe('AddMerchantComponent', () => {
       middleName: 'Verge',
       lastName: 'Reeves',
       email: 'mreeves@gmail.com',
-      mobileNumber: '09123456789',
+      mobileNumber: '9123456789',
     });
 
     spyOn(apiService, 'insertMerchant').and.returnValue(

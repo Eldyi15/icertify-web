@@ -15,6 +15,7 @@ import { AdminPortalComponent } from './admin-portal.component';
     AdminPortalRoutingModule,
     ComponentModule,
     AvatarModule,
+    MaterialModule,
   ],
 })
-export class AdminPortalModule { }
+export class AdminPortalModule {}

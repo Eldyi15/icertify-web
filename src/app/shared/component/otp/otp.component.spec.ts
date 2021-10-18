@@ -1,6 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OtpComponent } from './otp.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('OtpComponent', () => {
   let component: OtpComponent;
@@ -8,9 +11,11 @@ describe('OtpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OtpComponent ]
+      declarations: [OtpComponent],
+      imports: [ReactiveFormsModule, HttpClientTestingModule],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -9,6 +9,7 @@ import { TableOutput } from 'src/app/models/tableemit.interface';
 import { UtilService } from 'src/app/services/util/util.service';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Column } from 'src/app/models/column.interface';
+import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
 
 @Component({
   selector: 'app-merchant',
@@ -21,6 +22,7 @@ export class MerchantComponent implements OnInit {
   columns = MERCHANT_COLUMNS;
   dataSource: Array<any> = [];
   dataLength = 0;
+
   page = {
     pageSize: 10,
     currentPage: 1,
@@ -40,10 +42,19 @@ export class MerchantComponent implements OnInit {
       (res: any) => {
         console.log(res);
       },
-      (err) => {
-        console.log(err);
-      }
-    );
+      (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
     this.fetchData({ pageSize: this.page.pageSize, pageIndex: 1 });
   }
 
@@ -51,14 +62,41 @@ export class MerchantComponent implements OnInit {
     this.dialog
       .open(AddMerchantComponent, {
         height: 'auto',
-        width: '35vw',
+        width: '70%',
         disableClose: true,
       })
-      .afterClosed()
-      .subscribe((res: any) => {
+      .afterClosed().subscribe((res: any) => {
+        if (res) {
+          this.dialog
+            .open(ActionResultComponent, {
+              width: 'auto',
+              height: 'auto',
+              disableClose: true,
+              data: {
+                msg: 'Adding new Merchant successful!',
+                success: true,
+                button: 'Got it',
+              },
+            }).afterClosed().subscribe((res: any) => {
+              this.fetchData({ pageSize: this.page.pageSize, pageIndex: 1 });
+            })
+        }
 
-      });
+      },
+        (error: any) => {
+          this.dialog.open(ActionResultComponent, {
+            width: 'auto',
+            height: 'auto',
+            disableClose: true,
+            data: {
+              msg: error.error.message,
+              success: false,
+              button: 'Got it',
+            },
+          })
+        });
   }
+
 
   fetchData(event: TableOutput) {
     this.loading = true;
@@ -78,11 +116,20 @@ export class MerchantComponent implements OnInit {
         this.dataSource = res.env.admin;
         this.page.pageSize = event.pageSize;
         this.dataLength = res.total;
+
       },
-      (err: any) => {
-        console.log(err.message);
-        this.loading = false;
-      }
-    );
+      (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
   }
 }

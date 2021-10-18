@@ -2,91 +2,60 @@
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list style="padding-top: 0">
       <mat-toolbar style="background: #26184ab8">
-        <img
-          src="../../../assets/images/iCertify-logo.png"
-          class="img"
-          alt=""
-        />
+        <img src="../../../assets/images/iCertify-logo.png" class="img" alt="" />
         <div *ngIf="isExpanded" class="text">
           <h3>iCertify, Inc.</h3>
           <p>THE DIGITAL NOTARY</p>
         </div>
       </mat-toolbar>
       <ng-container *ngFor="let item of adminNav">
-        <mat-list-item
-          style="height: 2.8rem"
-          [routerLink]="item.route"
-          (click)="changeRoute(item)"
-          routerLinkActive="router-active-link"
-        >
-          <mat-icon
-            class="light"
-            fontSet="material-icons-outlined"
-            style="font-size: 21px; margin-right: 0.3rem"
-            mat-list-icon
-            >{{ item.icon }}</mat-icon
-          ><span *ngIf="isExpanded" class="light">{{ item.label }}</span>
+        <mat-list-item style="height: 2.8rem" [routerLink]="item.route" (click)="changeRoute(item)"
+          routerLinkActive="router-active-link">
+          <mat-icon class="light" fontSet="material-icons-outlined" style="font-size: 21px; margin-right: 0.3rem"
+            mat-list-icon>{{ item.icon }}</mat-icon><span *ngIf="isExpanded" class="light">{{ item.label }}</span>
         </mat-list-item>
       </ng-container>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-toolbar style="border-bottom: 0.5px #8f8f8f3f solid">
-    <mat-icon
-      class="chevron-button"
-      (click)="isExpanded = !isExpanded"
-      [ngClass]="{ rotated: isExpanded }"
-      matTooltip="Expand sidebar"
-      matTooltipPosition="right"
-      >chevron_right</mat-icon
-    >
+    <mat-icon class="chevron-button" (click)="isExpanded = !isExpanded" [ngClass]="{ rotated: isExpanded }"
+      matTooltip="Expand sidebar" matTooltipPosition="right">chevron_right</mat-icon>
     <div class="flex-stretch"></div>
-    <!-- *ngIf="me" -->
-    <ngx-avatar
-      name="{{ me ? me.firstName + ' ' + me.lastName : '' }}"
-      value="def"
-      bgColor="#26184a"
-      fgColor="#fff"
-      size="40"
-      [round]="true"
-      class="my-avatar"
-      [matMenuTriggerFor]="menu"
-    ></ngx-avatar>
+    <ngx-avatar *ngIf="me" name="{{ me ? me.firstName + ' ' + me.lastName : '' }}" value="def" bgColor="#26184a"
+      fgColor="#fff" size="40" [round]="true" class="my-avatar" [matMenuTriggerFor]="menu"></ngx-avatar>
 
-    <mat-menu style="padding-top: 0" #menu="matMenu">
-      <mat-card
-        mat-ele
-        style="
+    <mat-menu style="padding-top: 0; padding-bottom: 0px" #menu="matMenu">
+      <mat-card mat-ele style="
           background: rgb(255, 255, 255);
           border: none;
           box-shadow: none;
           padding-top: 0px;
-        "
-      >
+          padding-bottom: 0px;
+        ">
         <div class="flex-wrapper">
-          <ngx-avatar
-            src="{{ me ? '' : './../../../assets/images/guest.png' }}"
-            value="noPic"
-            bgColor="#26184a"
-            fgColor="#fff"
-            size="80"
-            [round]="true"
-          ></ngx-avatar>
+          <ngx-avatar src="{{ me ? '' : './../../../assets/images/guest.png' }}" value="noPic" bgColor="#26184a"
+            fgColor="#fff" size="80" [round]="true"></ngx-avatar>
         </div>
-        <div class="flex-wrapper">
-          <mat-card-header>
-            <mat-card-title>
-              {{ me ? me.firstName + " " + me.lastName : " test aydtasdd" }}
-            </mat-card-title>
-          </mat-card-header>
-        </div>
+        <mat-card-header>
+          <mat-card-title>
+            {{ me ? me.firstName + " " + me.lastName : " test aydtasdd" }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ me ? me.email : "" }}
+          </mat-card-subtitle>
+        </mat-card-header>
       </mat-card>
+
+      <button mat-menu-item (click)='logout()'>
+        <span>Logout</span>
+      </button>
     </mat-menu>
   </mat-toolbar>
   <mat-toolbar class="mat-elevation-z2" style="height: 3rem; border-bottom: 0">
     <small style="font-size: 13px; letter-spacing: 0.1rem">{{
       routeLabel
-    }}</small>
+      }}</small>
     <div class="flex-stretch"></div>
   </mat-toolbar>
   <div class="container-fluid">

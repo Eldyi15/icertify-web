@@ -9,6 +9,7 @@ import {
 } from '@angular/router';
 import { MERCHANT_NAV } from 'src/app/config/NAVIGATIONS';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
 
 @Component({
   selector: 'app-merchant-portal',
@@ -67,12 +68,20 @@ export class MerchantPortalComponent implements OnInit {
           if (this.page) this.routeLabel = this.page.label;
         }
       },
-      (err) => {
-        console.log(err);
-
+      (error: any) => {
         this.loading = false;
-      }
-    );
+        this.dialog.open(ActionResultComponent, {
+
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        })
+      });
   }
 
   changeRoute(nav: any) {

@@ -39,9 +39,9 @@ export class RegisterComponent implements OnInit {
     private util: UtilService,
     private router: Router,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   toggleShowPassword(): void {
     this.showPassword = !this.showPassword;
   }

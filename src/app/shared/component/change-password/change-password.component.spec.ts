@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +18,7 @@ describe('ChangePasswordComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChangePasswordComponent],
-      imports: [MaterialModule, ReactiveFormsModule, HttpClientTestingModule, BrowserAnimationsModule],
+      imports: [MaterialModule, ReactiveFormsModule, HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule],
       providers: [{ provide: MatDialogRef, useValue: {} }]
     })
       .compileComponents();
