@@ -101,6 +101,10 @@ $icertify-theme: mat-light-theme(
   }
 }
 
+.dialog-responsive-light {
+  width: 30%;
+}
+
 .dialog-change {
   width: 30%;
   mat-dialog-container {
@@ -120,5 +124,11 @@ $icertify-theme: mat-light-theme(
 @media only screen and (max-width: 760px) {
   .dialog-change {
     min-width: 100vw;
+  }
+  .dialog-responsive-light {
+    min-width: 95vw;
+  }
+  .dialog-responsive {
+    min-width: 95vw;
   }
 }

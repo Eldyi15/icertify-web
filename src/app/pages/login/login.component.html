@@ -26,6 +26,7 @@
             </mat-icon>
           </mat-form-field>
         </form>
+        <p (click)="forgotPassword()">Forgot password?</p>
         <button
           [disabled]="!credential.valid || isLoggingIn"
           mat-flat-button

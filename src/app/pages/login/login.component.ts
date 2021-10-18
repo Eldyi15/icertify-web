@@ -1,3 +1,5 @@
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from './../../services/api/api.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,10 +25,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private api: ApiService,
     private sb: MatSnackBar,
     private router: Router,
-    private dbx: DropboxService
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -65,5 +66,17 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.router.navigate(['/register']);
+  }
+
+  forgotPassword() {
+    this.dialog
+      .open(ForgotPasswordComponent, {
+        panelClass: 'dialog-responsive-light',
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
 }

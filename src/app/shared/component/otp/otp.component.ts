@@ -1,6 +1,8 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { OtpService } from 'src/app/services/otp/otp.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-otp',
@@ -46,10 +48,71 @@ export class OtpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<OtpComponent>
+    public dialogRef: MatDialogRef<OtpComponent>,
+    private otpService: OtpService,
+    private sb: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+    this.otpForm();
+  }
+
+  otpForm() {
+    const otpTemp: any = {};
+    this.otpFields.forEach((el) => {
+      let validators: any;
+      if (el.required) {
+        validators = [Validators.required];
+      }
+      otpTemp[el.fcname] = new FormControl('', validators);
+    });
+    this.otpVal = this.fb.group(otpTemp);
+  }
+
+  submit() {
+    this.otp = '';
+    this.verifying = true;
+    this.otpFields.forEach((el) => {
+      this.otp += this.otpVal.getRawValue()[el.fcname].toString();
+    });
+
+    console.log(this.otp);
+
+    this.otpService.validate(this.otp).subscribe(
+      (res) => {
+        console.log(res);
+        if (!this.data.from_fp) localStorage.removeItem('OTP_TOKEN');
+        this.verifying = false;
+        this.dialogRef.close(true);
+      },
+      (err) => {
+        this.verifying = false;
+        console.log(err);
+        this.sb.open('OTP is incorrect. Access denied!', 'Got it!', {
+          panelClass: ['failed'],
+        });
+      }
+    );
+  }
+
+  startTimer() {
+    this.isTimerOff = false;
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(this.interval);
+        this.isTimerOff = true;
+        this.timeLeft = 300;
+      }
+    }, 1000);
+  }
+
+  resend() {
+    this.startTimer();
+    this.submit();
+  }
 
   otpController(event: any, next: any, prev: any) {
     // console.log(next, prev);
