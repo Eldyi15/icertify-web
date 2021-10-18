@@ -30,13 +30,18 @@ fdescribe('UpdateViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should be passing a data', () => {
+  it('should be passing a data to form data', () => {
     let mockData = { mockdata: "Sample" };
     component.data = mockData
     component.formListener(component.data)
-    console.log(component.formData, component.data)
     expect(component.formData === mockData).toBeTruthy()
   });
 
-
+  it('should be passing a data to image data', () => {
+    let mockData = { image: "Sample.png" };
+    component.data = mockData
+    component.imageEmitter(component.data)
+    console.log(component.imageData)
+    expect(component.imageData === mockData).toBeTrue()
+  })
 });

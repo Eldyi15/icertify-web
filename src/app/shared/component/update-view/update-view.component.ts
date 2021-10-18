@@ -38,7 +38,6 @@ export class UpdateViewComponent implements OnInit {
     this.formData = event;
   }
   imageEmitter(event: any) {
-    console.log(event);
     this.imageData = event.obj;
     this.imageFormValid = event.formValid
   }
