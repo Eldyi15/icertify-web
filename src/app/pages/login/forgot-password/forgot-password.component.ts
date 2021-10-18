@@ -122,7 +122,6 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPassword() {
     this.saving = true;
     let data = {
-      mobileNumber: this.mobileNumber,
       ...this.credentialPassword.getRawValue(),
     };
     console.log(data);
