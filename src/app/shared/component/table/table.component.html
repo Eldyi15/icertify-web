@@ -1,43 +1,56 @@
-<!-- <div class="p-grid upper-wrapper" *ngIf="title || filterButtons"> -->
 <div class="p-col">
   <h1 class="title">{{ title }}</h1>
 </div>
-<!-- <div class="p-col-9 btn-flex">
-    <button
-      mat-raised-button
-      *ngFor="let filterButton of filterButtons"
-      [disabled]="loading"
-      [color]="filterButton.selected && 'primary'"
-      (click)="filterButtonClick(filterButtons, filterButton)"
-    >
-      {{ filterButton.name }}
-    </button>
-  </div>
-</div> -->
 <div class="search-bar" *ngIf="show">
-  <ngx-skeleton-loader *ngIf="loading" count="1" animation="progress-dark" [theme]="{
+  <ngx-skeleton-loader
+    *ngIf="loading"
+    count="1"
+    animation="progress-dark"
+    [theme]="{
       height: '35px',
       'background-color': '#efefef',
       border: '1px solid # 	',
       'animation-duration': '1s'
-    }"></ngx-skeleton-loader>
-  <input *ngIf="!loading" class="full-width search-input" placeholder="Search..." [(ngModel)]="keyword"
-    (keyup.enter)="triggerSearch()" />
+    }"
+  ></ngx-skeleton-loader>
+  <input
+    *ngIf="!loading"
+    class="full-width search-input"
+    placeholder="Search..."
+    [(ngModel)]="keyword"
+    (keyup.enter)="triggerSearch()"
+  />
 </div>
 <div class="mat-elevation-z1 table-container">
   <div class="btn-container">
     <!-- Refresh Table -->
-    <button class="refresh-btn" color="primary" mat-icon-button matTooltip="Refresh Table"
-      (click)="dataSource = []; triggerRefresh()">
+    <button
+      class="refresh-btn"
+      color="primary"
+      mat-icon-button
+      matTooltip="Refresh Table"
+      (click)="dataSource = []; triggerRefresh()"
+    >
       <mat-icon>refresh</mat-icon>
     </button>
-    <button class="refresh-btn" color="primary" mat-icon-button matTooltip="Transform Table" style="float: right"
-      (click)="openColumnSelector()">
+    <button
+      class="refresh-btn"
+      color="primary"
+      mat-icon-button
+      matTooltip="Transform Table"
+      style="float: right"
+      (click)="openColumnSelector()"
+    >
       <mat-icon>transform</mat-icon>
     </button>
   </div>
   <div>
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="sortData($event)"
+    >
       <ng-container *ngFor="let col of columns">
         <ng-container matColumnDef="{{ col.path }}">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -46,11 +59,11 @@
           <td mat-cell *matCellDef="let element">
             <span *ngIf="col.type == 'special'">
               {{
-              util.deepFind(element, col.path) ||
-              util.deepFind(
-              element,
-              col.alternativePath ? col.alternativePath : ""
-              )
+                util.deepFind(element, col.path) ||
+                  util.deepFind(
+                    element,
+                    col.alternativePath ? col.alternativePath : ""
+                  )
               }}
             </span>
             <span *ngIf="col.type == 'text'">
@@ -58,9 +71,9 @@
             </span>
             <span *ngIf="col.type == 'array'">
               {{
-              util.deepFind(element, col.path)
-              ? util.deepFind(element, col.path)
-              : "None"
+                util.deepFind(element, col.path)
+                  ? util.deepFind(element, col.path)
+                  : "None"
               }}
             </span>
             <span *ngIf="col.type == 'date'">
@@ -71,22 +84,31 @@
             </span>
             <span *ngIf="col.type == 'percentage'">
               {{
-              util.deepFind(element, col.path)
-              ? (util.deepFind(element, col.path) | number: "1.1-2":"en-US")
-              : "0"
+                util.deepFind(element, col.path)
+                  ? (util.deepFind(element, col.path) | number: "1.1-2":"en-US")
+                  : "0"
               }}
             </span>
           </td>
         </ng-container>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" (click)="onRowClick(row,i )">
-      </tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+        (click)="onRowClick(row, i)"
+      ></tr>
     </table>
     <!-- Pagination -->
-    <mat-paginator *ngIf="dataSource.length && !loading" [length]="dataLength" [pageSize]="pagination.pageSize"
-      [pageIndex]="pagination.currentPage - 1" [pageSizeOptions]="[5, 10, 15, 100]" (page)="onClickPagination($event)"
-      showFirstLastButtons></mat-paginator>
+    <mat-paginator
+      *ngIf="dataSource.length && !loading"
+      [length]="dataLength"
+      [pageSize]="pagination.pageSize"
+      [pageIndex]="pagination.currentPage - 1"
+      [pageSizeOptions]="[5, 10, 15, 100]"
+      (page)="onClickPagination($event)"
+      showFirstLastButtons
+    ></mat-paginator>
   </div>
   <div *ngIf="!dataSource.length && !loading" class="empty">
     <p>No data yet.</p>
@@ -94,11 +116,15 @@
   <div *ngIf="loading" class="loading">
     <!-- <app-loading></app-loading> -->
 
-    <ngx-skeleton-loader count="8" animation="progress-dark" [theme]="{
+    <ngx-skeleton-loader
+      count="8"
+      animation="progress-dark"
+      [theme]="{
         height: '35px',
         'background-color': '#efefef',
         border: '1px solid # 	',
         'animation-duration': '1s'
-      }"></ngx-skeleton-loader>
+      }"
+    ></ngx-skeleton-loader>
   </div>
 </div>

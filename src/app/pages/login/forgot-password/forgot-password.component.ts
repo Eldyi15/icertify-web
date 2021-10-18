@@ -28,10 +28,10 @@ export class ForgotPasswordComponent implements OnInit {
   credentialPassword = this.fb.group(
     {
       newPassword: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required]),
+      passwordConfirm: new FormControl('', [Validators.required]),
     },
     {
-      validator: this.matchPassword('newPassword', 'confirmPassword'),
+      validator: this.matchPassword('newPassword', 'passwordConfirm'),
     }
   );
   constructor(
@@ -49,10 +49,10 @@ export class ForgotPasswordComponent implements OnInit {
     return this.credentialPassword.controls;
   }
 
-  matchPassword(newPassword: string, confirmPassword: string) {
+  matchPassword(newPassword: string, passwordConfirm: string) {
     return (fb: FormGroup) => {
       const newPasswordControl = fb.controls[newPassword];
-      const confirmPasswordControl = fb.controls[confirmPassword];
+      const confirmPasswordControl = fb.controls[passwordConfirm];
 
       if (!newPasswordControl || !confirmPasswordControl) {
         return null;
@@ -123,8 +123,10 @@ export class ForgotPasswordComponent implements OnInit {
     this.saving = true;
     let data = {
       mobileNumber: this.mobileNumber,
+      ...this.credentialPassword.getRawValue(),
     };
-    this.auth.changePassword(data).subscribe(
+    console.log(data);
+    this.auth.userForgotPassword(data).subscribe(
       (res: any) => {
         console.log(res);
         this.saving = false;
@@ -139,6 +141,7 @@ export class ForgotPasswordComponent implements OnInit {
               success: true,
             },
           });
+          this.dialogRef.close();
         }
       },
       (err) => {
