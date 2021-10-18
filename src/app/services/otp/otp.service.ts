@@ -15,6 +15,7 @@ export class OtpService {
     const otpToken = localStorage.getItem('OTP_TOKEN');
     const headers = new HttpHeaders({
       o_auth: otpToken || '',
+      rp_auth: otpToken || '',
     });
     console.log(otpToken);
 

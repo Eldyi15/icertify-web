@@ -1,12 +1,15 @@
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiService } from './../../services/api/api.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DropboxService } from 'src/app/services/dropbox/dropbox.service';
+import {
+  NavigationStart,
+  NavigationEnd,
+  Event as NavigationEvent,
+  Router,
+} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,13 +34,20 @@ export class LoginComponent implements OnInit {
     private sb: MatSnackBar,
     private router: Router,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.router.events.subscribe((event: NavigationEvent) => {
+      if (event instanceof NavigationStart) {
+        console.log(event);
+      } else if (event instanceof NavigationEnd) {
+        console.log(event);
+      }
+    });
+  }
 
   ngOnInit(): void {}
 
   login() {
     this.isLoggingIn = true;
-    // let rawCredentials = this.credential.getRawValue();
     this.auth
       .login(this.credential.value.email, this.credential.value.password)
       .subscribe(
