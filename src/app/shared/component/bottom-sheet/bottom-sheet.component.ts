@@ -12,6 +12,7 @@ export class BottomSheetComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any, public bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>
   ) { }
 
+
   ngOnInit(): void {
     if (this.data.data.status === "Suspended") {
       this.data.bottomSheetConf.forEach((element: any) => {

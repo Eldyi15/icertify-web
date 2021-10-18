@@ -1,6 +1,8 @@
+import { MaterialModule } from './../../material.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UploadComponent } from './upload.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('UploadComponent', () => {
   let component: UploadComponent;
@@ -8,9 +10,11 @@ describe('UploadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UploadComponent ]
+      declarations: [UploadComponent],
+      imports: [MaterialModule],
+      providers: [{ provide: MatDialogRef, useValue: {} }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

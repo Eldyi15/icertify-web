@@ -39,7 +39,7 @@ describe('RegisterComponent', () => {
       email: 'mreeves@gmail.com',
       password: '123qweasdzxc123',
       passwordConfirm: '123qweasdzxc153',
-      mobileNumber: '09123456789'
+      mobileNumber: '9123456789'
     });
 
     component.register();
@@ -57,7 +57,7 @@ describe('RegisterComponent', () => {
       email: 'mreeves@gmail.com',
       password: '123qweasdzxc123',
       passwordConfirm: '123qweasdzxc123',
-      mobileNumber: '09123456789'
+      mobileNumber: '9123456789'
     });
 
     component.register();
@@ -73,6 +73,7 @@ describe('RegisterComponent', () => {
     expect(email.hasError('email')).toBeFalse();
   });
 
+
   it('won\'t enable register button if one of the field is empty or more', fakeAsync(() => {
     component.registerForm.setValue({
       firstName: 'Michael',
@@ -80,7 +81,7 @@ describe('RegisterComponent', () => {
       email: 'mreeves@gmail.com',
       password: '123qweasdzxc123',
       passwordConfirm: '123qweasdzxc123',
-      mobileNumber: '09123876345'
+      mobileNumber: '9123876345'
     });
     spyOn(authService, 'register').and.returnValue(
       of({

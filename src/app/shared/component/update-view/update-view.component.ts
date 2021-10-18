@@ -55,7 +55,12 @@ export class UpdateViewComponent implements OnInit {
       .afterClosed()
       .subscribe((res: any) => {
         let type = ''
-        if (this.data.data.type === 'User') { type = 'user' } else { type = 'admin' }
+        if (this.data.data.type === 'User') {
+          type = 'user'
+        }
+        else {
+          type = 'admin'
+        }
         this.loading = true
         if (this.data.action === "Activate") {
           this.toUpdateData.status = "Active"
