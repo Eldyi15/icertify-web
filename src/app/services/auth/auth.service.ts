@@ -56,4 +56,11 @@ export class AuthService {
       this.getHeaders()
     );
   }
+
+  forgotPassword(mobileNumber: any) {
+    return this.http.post(this.url + '/auth/forgot-Password', mobileNumber);
+  }
+  userForgotPassword(body: any) {
+    return this.http.post(this.url + '/user/changePassword', body);
+  }
 }

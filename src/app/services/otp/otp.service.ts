@@ -12,35 +12,38 @@ export class OtpService {
   constructor(private http: HttpClient) {}
 
   private getHeaders() {
-    const otpToken = localStorage.getItem('insert token for OTP here');
+    const otpToken = localStorage.getItem('OTP_TOKEN');
     const headers = new HttpHeaders({
       o_auth: otpToken || '',
     });
+    console.log(otpToken);
 
-    return headers;
+    return { headers };
   }
 
   send(mobileNumber: string, email?: string, customText?: string) {
     return this.http.post(
-      this.url + 'auth/otp/send',
+      this.url + '/auth/otp/send',
       {
         mobileNumber,
         email,
         customText,
       },
-      this.getOptions()
+      this.getHeaders()
     );
   }
 
-  validate(otp: string, token?: string) {
+  validate(otp: any) {
     return this.http.post(
-      this.url + 'auth/otp/validate',
+      this.url + '/auth/otp/validate',
       { otp },
-      this.getOptions()
+      this.getHeaders()
     );
   }
 
   getOptions() {
+    let otp = localStorage.getItem('OTP_TOKEN');
+    console.log(otp);
     return {
       withCredentials: true,
       ...this.getHeaders,

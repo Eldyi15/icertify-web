@@ -9,15 +9,17 @@ h1,
 p {
   color: #fff;
 }
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: #fff;
+:host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #fff !important;
 }
-::ng-deep
+
+:host
+  ::ng-deep
   .mat-form-field-appearance-outline.mat-focused
   .mat-form-field-outline-thick {
   color: #fff !important;
 }
-::ng-deep .mat-form-field-label {
+:host ::ng-deep .mat-form-field-label {
   color: #fff !important;
 }
 .close-btn {

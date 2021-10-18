@@ -15,7 +15,10 @@ export class AdminLoginComponent implements OnInit {
   isLoggingIn: boolean = false;
 
   credential = this.fb.group({
-    email: new FormControl('testsuper1@gmail.com', [Validators.required]),
+    email: new FormControl('testsuper1@gmail.com', [
+      Validators.required,
+      Validators.email,
+    ]),
     password: new FormControl('123qweasdzxc123', [Validators.required]),
   });
   constructor(

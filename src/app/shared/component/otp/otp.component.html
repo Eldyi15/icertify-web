@@ -74,6 +74,7 @@
     mat-raised-button
     style="background: black; color: #fff"
     [disabled]="!otpVal.valid || verifying"
+    (click)="submit()"
   >
     {{ verifying ? "Verifying..." : "Submit" }}
   </button>
@@ -82,6 +83,7 @@
     style="color: #fff"
     mat-stroked-button
     [disabled]="!isTimerOff"
+    (click)="resend()"
   >
     Resend {{ !isTimerOff ? "(" + timeLeft + ")" : "" }}
   </button>
