@@ -5,7 +5,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OtpComponent } from './otp.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-describe('OtpComponent', () => {
+xdescribe('OtpComponent', () => {
   let component: OtpComponent;
   let fixture: ComponentFixture<OtpComponent>;
 

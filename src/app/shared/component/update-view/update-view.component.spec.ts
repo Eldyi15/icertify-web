@@ -7,7 +7,7 @@ import { UpdateViewComponent } from './update-view.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
-describe('UpdateViewComponent', () => {
+fdescribe('UpdateViewComponent', () => {
   let component: UpdateViewComponent;
   let fixture: ComponentFixture<UpdateViewComponent>;
 
@@ -29,4 +29,14 @@ describe('UpdateViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be passing a data', () => {
+    let mockData = { mockdata: "Sample" };
+    component.data = mockData
+    component.formListener(component.data)
+    console.log(component.formData, component.data)
+    expect(component.formData === mockData).toBeTruthy()
+  });
+
+
 });

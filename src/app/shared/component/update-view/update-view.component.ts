@@ -34,7 +34,7 @@ export class UpdateViewComponent implements OnInit {
   }
   formListener(event: any) {
     event.mobileNumber = `${event.mobileNumber}`;
-    console.log(event);
+    // console.log(event);
     this.formData = event;
   }
   imageEmitter(event: any) {
