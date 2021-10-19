@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
   gridCss: Array<ColumnSizes> = ['sm', 'md', 'lg', 'xl'];
   css: any = {};
 
-  constructor(public util: UtilService, private fb: FormBuilder) {}
+  constructor(public util: UtilService, public fb: FormBuilder) { }
 
   ngOnInit(): void {
     console.log(this.formFields);
@@ -140,8 +140,8 @@ export class FormComponent implements OnInit {
           disabled: field.isDisabled
             ? field.isDisabled
             : this.action === 'Update'
-            ? false
-            : true,
+              ? false
+              : true,
         },
         {
           updateOn: 'blur',

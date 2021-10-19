@@ -47,15 +47,15 @@ export class TableComponent implements OnInit {
     public util: UtilService,
     private dialog: MatDialog,
 
-    private _bottomSheet: MatBottomSheet
+    public _bottomSheet: MatBottomSheet
   ) {}
 
   ngOnInit(): void {
     // console.log(this.pagination);
-
+    console.log(JSON.stringify(this.columns));
     this.duplicateColumns = JSON.parse(JSON.stringify(this.columns));
     this.displayedColumns = [];
-
+    console.log(this.duplicateColumns);
     this.updateBreakpoint();
   }
 
@@ -191,6 +191,7 @@ export class TableComponent implements OnInit {
         }
       });
   }
+
   onRowClick(data: any, index: number) {
     console.log(data, index, this.bottomSheetConf);
     this._bottomSheet
@@ -208,14 +209,11 @@ export class TableComponent implements OnInit {
         if (res) {
           console.log(data);
           switch (res) {
-            case 'View':
             case 'Update':
               this.dialog
                 .open(UpdateViewComponent, {
                   width: '70%',
-                  height: 'auto',
                   data: { data, action: res },
-                  disableClose: true,
                 })
                 .afterClosed()
                 .subscribe((res: any) => {
@@ -238,37 +236,45 @@ export class TableComponent implements OnInit {
                 })
                 .afterClosed()
                 .subscribe((res) => {
+                  let updatedData = JSON.parse(JSON.stringify(data));
+                  let newStatus;
                   if (res) {
                     if (action === 'Delete') {
-                      data.status = 'Deleted';
+                      newStatus = 'Deleted';
                     }
                     if (action === 'Suspend') {
-                      data.status = 'Suspended';
+                      newStatus = 'Suspended';
                     }
                     if (action === 'Activate') {
-                      data.status = 'Active';
+                      newStatus = 'Active';
                     }
+                    console.log('beforesub', data);
+                    updatedData.status = newStatus;
                     this.api
-                      .updateUser(data, 'admin')
+                      .updateUser(updatedData, 'admin')
                       .subscribe((response: any) => {
                         console.log(response);
+                        this.dialog
+                          .open(ActionResultComponent, {
+                            width: 'auto',
+                            height: 'auto',
+                            disableClose: true,
+                            data: {
+                              msg: [action + ' Merchant successful!'],
+                              success: true,
+                              button: 'Got it',
+                            },
+                          })
+                          .afterClosed()
+                          .subscribe(() => {
+                            var toEmit: TableOutput = {
+                              pageIndex: 0,
+                              pageSize: 10,
+                              // sort: 'desc',
+                            };
+                            this.pageChange.emit(toEmit);
+                          });
                         console.log(res);
-                        this.dialog.open(ActionResultComponent, {
-                          width: 'auto',
-                          height: 'auto',
-                          disableClose: true,
-                          data: {
-                            msg: [action + ' Merchant successful!'],
-                            success: true,
-                            button: 'Got it',
-                          },
-                        });
-                        var toEmit: TableOutput = {
-                          pageIndex: 0,
-                          pageSize: 10,
-                          // sort: 'desc',
-                        };
-                        this.pageChange.emit(toEmit);
                       });
                   }
                 });

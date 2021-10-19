@@ -7,9 +7,9 @@ import { ForgotPasswordComponent } from './forgot-password.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { of, Observable, throwError } from 'rxjs';
 
-fdescribe('ForgotPasswordComponent', () => {
+describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
   let fixture: ComponentFixture<ForgotPasswordComponent>;
   let authService: AuthService
@@ -19,7 +19,7 @@ fdescribe('ForgotPasswordComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ForgotPasswordComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule, MaterialModule, FormsModule, BrowserAnimationsModule],
-      providers: [{ provide: MatDialogRef, useValue: {} }]
+      providers: [{ provide: MatDialogRef, useValue: { close: () => { } } }]
     })
       .compileComponents();
   });
@@ -54,5 +54,34 @@ fdescribe('ForgotPasswordComponent', () => {
     expect(component.dialog).toBeDefined()
     expect(component.page).toBe(2)
   });
+  it('should be able to call forgotPassword subscription and close the forgot Password dialog if successful', () => {
+    let resp = spyOn(component.dialog, 'open')
+      .and
+      .returnValue({
+        afterClosed: () => of(true)
+      } as MatDialogRef<typeof component>);
+    spyOn(authService, 'userForgotPassword').and.callThrough().and.returnValue(of({}))
+    spyOn(component.dialogRef, 'close').and.returnValue()
+    component.forgotPassword()
+    expect(component.dialog).toBeDefined()
+    expect(component.dialogRef.close).toHaveBeenCalled()
+  })
+  // it('should be able to call forgotPassword subscription and throws an error if theres an error with subscriptions', () => {
+  //   spyOn(component.dialog, 'open')
+  //     .and
+  //     .returnValue({
+  //       afterClosed: () => of(true)
+  //     } as MatDialogRef<typeof component>);
+  //   let resp = spyOn(authService, 'userForgotPassword').and.callThrough().and.returnValue(throwError({
+  //     error: {
+  //       status: 404,
+  //       message: 'KARMA TEST THROW ERROR'
+  //     }
+  //   }))
+  //   component.forgotPassword()
+  //   // expect(resp).()
+  //   console.log(resp, "HERE")
+  //   expect(resp).toBeDefined()
+  // })
 
 })

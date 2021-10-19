@@ -15,6 +15,7 @@ import { ActionResultComponent } from '../../dialogs/action-result/action-result
   styleUrls: ['./update-view.component.scss'],
 })
 export class UpdateViewComponent implements OnInit {
+  isSaving = false;
   formFields = FormFields;
   action = this.data.action;
   toUpdateData: any;
@@ -27,18 +28,19 @@ export class UpdateViewComponent implements OnInit {
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<UpdateViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.data);
-  }
+  };
+
   formListener(event: any) {
     event.mobileNumber = `${event.mobileNumber}`;
-    console.log(event);
+    // console.log(event);
     this.formData = event;
-  }
+  };
+
   imageEmitter(event: any) {
-    console.log(event);
     this.imageData = event.obj;
     this.imageFormValid = event.formValid;
   }

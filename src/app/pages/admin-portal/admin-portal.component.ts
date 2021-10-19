@@ -13,6 +13,7 @@ import { User } from 'src/app/models/user.interface';
 import { ADMIN_NAVS } from 'src/app/config/NAVIGATIONS';
 import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
 import { SA_MENU, SA_MENU_COLORS } from './enum';
+import { AreYouSureComponent } from 'src/app/shared/dialogs/are-you-sure/are-you-sure.component';
 
 @Component({
   selector: 'app-admin-portal',
@@ -83,10 +84,24 @@ export class AdminPortalComponent implements OnInit {
 
   logout() {
     this.auth.logout().subscribe((res) => {
-      console.log(res);
-      localStorage.removeItem('SESSION_CSURF_TOKEN');
-      localStorage.removeItem('SESSION_AUTH');
-      this.router.navigate(['/admin-login']);
+      this.dialog
+        .open(AreYouSureComponent, {
+          height: 'auto',
+          width: 'auto',
+          disableClose: true,
+          data: {
+            msg: 'you want to logout?',
+          },
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) {
+            console.log(res);
+            localStorage.removeItem('SESSION_CSURF_TOKEN');
+            localStorage.removeItem('SESSION_AUTH');
+            this.router.navigate(['/admin-login']);
+          }
+        });
     });
   }
 

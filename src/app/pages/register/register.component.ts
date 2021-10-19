@@ -39,9 +39,9 @@ export class RegisterComponent implements OnInit {
     private util: UtilService,
     private router: Router,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   toggleShowPassword(): void {
     this.showPassword = !this.showPassword;
   }
@@ -110,11 +110,15 @@ export class RegisterComponent implements OnInit {
         },
         (error) => {
           this.loading = false;
-
-          this.sb.open('Please input correct value', 'Okay', {
-            duration: 3000,
-            panelClass: ['failed'],
-          });
+          console.log(error);
+          this.sb.open(
+            error.error.message ? error.error.message : 'Something went wrong!',
+            'Okay',
+            {
+              duration: 3000,
+              panelClass: ['failed'],
+            }
+          );
         }
       );
     }
