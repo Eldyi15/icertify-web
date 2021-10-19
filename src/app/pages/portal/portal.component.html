@@ -1,4 +1,8 @@
-<div *ngIf="!loading" class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div
+  *ngIf="!loading"
+  class="example-container"
+  [class.example-is-mobile]="mobileQuery.matches"
+>
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
@@ -6,7 +10,14 @@
     <!-- <h1 class="example-app-name">Responsive App</h1> -->
     <div class="flex-stretch"></div>
 
-    <ngx-avatar *ngIf="me" name="{{ me ? me.firstName + ' ' + me.lastName : '' }}" value="def" bgColor="#fff"
+    <app-profile-menu
+      *ngIf="me"
+      [me]="me"
+      [menuItems]="portalMenu"
+      (onClick)="menuClick($event)"
+    ></app-profile-menu>
+
+    <!-- <ngx-avatar *ngIf="me" name="{{ me ? me.firstName + ' ' + me.lastName : '' }}" value="def" bgColor="#fff"
       fgColor="#26184a" size="40" [round]="true" class="my-avatar" [matMenuTriggerFor]="menu"></ngx-avatar>
 
     <mat-menu style="padding-top: 0; padding-bottom: 0px" #menu="matMenu">
@@ -42,18 +53,31 @@
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
       </button>
-    </mat-menu>
+    </mat-menu> -->
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [style]="mobileQuery.matches ? 'width: 75%' : 'width:16%'"
-      [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
-      style="border: none">
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [style]="mobileQuery.matches ? 'width: 75%' : 'width:16%'"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      style="border: none"
+    >
       <mat-nav-list>
         <ng-container *ngFor="let nav of userNav">
           <mat-list-item [routerLink]="nav.route" style="height: 2.8rem">
-            <mat-icon class="light" fontSet="material-icons-outlined" style="font-size: 21px; margin-right: 0.3rem"
-              mat-list-icon>{{ nav.icon }}</mat-icon><span>{{ nav.label }}</span>
+            <mat-icon
+              class="light"
+              fontSet="material-icons-outlined"
+              style="font-size: 21px; margin-right: 0.3rem"
+              mat-list-icon
+              >{{ nav.icon }}</mat-icon
+            ><span>{{ nav.label }}</span>
           </mat-list-item>
         </ng-container>
       </mat-nav-list>

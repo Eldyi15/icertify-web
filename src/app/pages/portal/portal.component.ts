@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from './../../models/user.interface';
 import { USER_NAV } from './../../config/NAVIGATIONS';
+import { PORTAL_MENU } from './enum';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ChangePasswordComponent } from 'src/app/shared/component/change-password/change-password.component';
@@ -13,6 +14,7 @@ import {
   Event as NavigationEvent,
 } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { ProfileItem } from 'src/app/models/profilemenu.interface';
 
 @Component({
   selector: 'app-portal',
@@ -21,6 +23,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class PortalComponent implements OnInit {
   userNav = USER_NAV;
+  portalMenu: Array<ProfileItem> = PORTAL_MENU;
   me!: User;
   loading: boolean = false;
   page: any;
@@ -59,8 +62,8 @@ export class PortalComponent implements OnInit {
         this.userNav.forEach((i: any) => {
           temp.push(i);
         });
-        if (res.env.user.type === "User") {
-          if (res.env.user.status === "Pending") {
+        if (res.env.user.type === 'User') {
+          if (res.env.user.status === 'Pending') {
             this.dialog
               .open(ActionResultComponent, {
                 disableClose: true,
@@ -78,7 +81,7 @@ export class PortalComponent implements OnInit {
                   width: '70%',
                   disableClose: true,
                   data: { data: this.me, action: 'Activate' },
-                })
+                });
               });
           }
         }
@@ -122,5 +125,17 @@ export class PortalComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  menuClick(event: any) {
+    switch (event) {
+      case 'logout':
+        this.logout();
+        break;
+      case 'changepassword':
+        this.changePassword();
+        break;
+      default:
+    }
   }
 }

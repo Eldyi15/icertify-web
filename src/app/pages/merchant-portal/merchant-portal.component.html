@@ -41,7 +41,15 @@
       >chevron_right</mat-icon
     >
     <div class="flex-stretch"></div>
+    <app-profile-menu
+      *ngIf="me"
+      [me]="me"
+      [avatarColors]="menuColors"
+      [menuItems]="merchantMenu"
+      (onClick)="menuClick($event)"
+    ></app-profile-menu>
   </mat-toolbar>
+
   <mat-toolbar style="height: 3rem; border-bottom: 0">
     <small style="font-size: 13px; letter-spacing: 0.1rem">{{
       routeLabel
