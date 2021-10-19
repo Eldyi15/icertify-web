@@ -28,7 +28,10 @@ export class ChangePasswordComponent implements OnInit {
   toMatch = false;
   passwordForm = this.fb.group(
     {
-      newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      newPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
       passwordConfirm: new FormControl('', [Validators.required]),
     },
     {
@@ -43,10 +46,33 @@ export class ChangePasswordComponent implements OnInit {
     private sb: MatSnackBar,
     private dialog: MatDialog,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     console.log(this.passwordForm);
+    this.dialogRef.backdropClick().subscribe(() => {
+      this.cancelChangePassCheck();
+    });
+  }
+
+  cancelChangePassCheck() {
+    if (this.passwordForm.dirty) {
+      this.dialog
+        .open(AreYouSureComponent, {
+          width: 'auto',
+          height: 'auto',
+          data: {
+            header: 'Before you proceed...',
+            msg: `want to cancel, data you entered might not be saved.`,
+          },
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) this.dialogRef.close();
+        });
+    } else {
+      this.dialogRef.close();
+    }
   }
 
   get registerFormControl() {
@@ -66,16 +92,13 @@ export class ChangePasswordComponent implements OnInit {
         confirmPasswordControl.errors &&
         !confirmPasswordControl.errors.passwordMismatch
       ) {
-
         return null;
       }
 
       if (newPasswordControl.value !== confirmPasswordControl.value) {
-
         confirmPasswordControl.setErrors({ passwordMismatch: true });
-
       } else {
-        this.toMatch = true
+        this.toMatch = true;
         confirmPasswordControl.setErrors(null);
       }
       return null;

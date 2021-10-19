@@ -11,6 +11,7 @@ import { MERCHANT_NAV } from 'src/app/config/NAVIGATIONS';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
 import { MERCHANT_MENU, MERCHANT_MENU_COLORS } from './enum';
+import { AreYouSureComponent } from 'src/app/shared/dialogs/are-you-sure/are-you-sure.component';
 
 @Component({
   selector: 'app-merchant-portal',
@@ -95,16 +96,30 @@ export class MerchantPortalComponent implements OnInit {
   }
   logout() {
     this.auth.logout().subscribe((res) => {
+      this.dialog
+        .open(AreYouSureComponent, {
+          height: 'auto',
+          width: 'auto',
+          disableClose: true,
+          data: {
+            msg: 'you want to logout?',
+          },
+        })
+        .afterClosed()
+        .subscribe((res: any) => {
+          if (res) {
+            localStorage.removeItem('SESSION_CSURF_TOKEN');
+            localStorage.removeItem('SESSION_AUTH');
+            this.router.navigate(['/login']);
+          }
+        });
       console.log(res);
-      localStorage.removeItem('SESSION_CSURF_TOKEN');
-      localStorage.removeItem('SESSION_AUTH');
-      this.router.navigate(['/login']);
     });
   }
   changePassword() {
     this.dialog.open(ChangePasswordComponent, {
       panelClass: 'dialog-change',
-      disableClose: false,
+      disableClose: true,
     });
   }
 

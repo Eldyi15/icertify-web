@@ -15,6 +15,7 @@ import {
 } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ProfileItem } from 'src/app/models/profilemenu.interface';
+import { AreYouSureComponent } from 'src/app/shared/dialogs/are-you-sure/are-you-sure.component';
 
 @Component({
   selector: 'app-portal',
@@ -115,16 +116,30 @@ export class PortalComponent implements OnInit {
 
   logout() {
     this.auth.logout().subscribe((res) => {
-      console.log(res);
-      localStorage.removeItem('SESSION_CSURF_TOKEN');
-      localStorage.removeItem('SESSION_AUTH');
-      this.router.navigate(['/login']);
+      this.dialog
+        .open(AreYouSureComponent, {
+          height: 'auto',
+          width: 'auto',
+          disableClose: true,
+          data: {
+            msg: 'you want to logout?',
+          },
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) {
+            console.log(res);
+            localStorage.removeItem('SESSION_CSURF_TOKEN');
+            localStorage.removeItem('SESSION_AUTH');
+            this.router.navigate(['/admin-login']);
+          }
+        });
     });
   }
   changePassword() {
     this.dialog.open(ChangePasswordComponent, {
       panelClass: 'dialog-change',
-      disableClose: false,
+      disableClose: true,
     });
   }
 
