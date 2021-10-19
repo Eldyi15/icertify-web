@@ -41,9 +41,9 @@ export class ForgotPasswordComponent implements OnInit {
     private auth: AuthService,
     private otp: OtpService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   get registerFormControl() {
     return this.credentialPassword.controls;
@@ -161,7 +161,7 @@ export class ForgotPasswordComponent implements OnInit {
     );
   }
 
-  pwCheck() {}
+  pwCheck() { }
 
   numberInputOnly(event: any) {
     return this.util.formNumberInputOnly(event);
