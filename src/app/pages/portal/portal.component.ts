@@ -72,7 +72,7 @@ export class PortalComponent implements OnInit {
                 width: 'auto',
                 height: 'auto',
                 data: {
-                  msg: 'Account is still pending!',
+                  msg: 'Account is still pending!, continue to activate account?',
                   button: 'Activate',
                   pending: 'true',
                 },
