@@ -12,6 +12,7 @@ import {
 import { User } from 'src/app/models/user.interface';
 import { ADMIN_NAVS } from 'src/app/config/NAVIGATIONS';
 import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
+import { SA_MENU, SA_MENU_COLORS } from './enum';
 
 @Component({
   selector: 'app-admin-portal',
@@ -21,6 +22,8 @@ import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/acti
 export class AdminPortalComponent implements OnInit {
   isExpanded: boolean = true;
   adminNav = ADMIN_NAVS;
+  saMenuColors = SA_MENU_COLORS;
+  superAdminMenu = SA_MENU;
   me!: User;
   navs: any;
   loading: boolean = false;
@@ -65,7 +68,6 @@ export class AdminPortalComponent implements OnInit {
       },
       (error: any) => {
         this.dialog.open(ActionResultComponent, {
-
           width: 'auto',
           height: 'auto',
           disableClose: true,
@@ -74,8 +76,9 @@ export class AdminPortalComponent implements OnInit {
             success: false,
             button: 'Got it',
           },
-        })
-      });
+        });
+      }
+    );
   }
 
   logout() {
@@ -90,5 +93,14 @@ export class AdminPortalComponent implements OnInit {
   changeRoute(nav: any) {
     this.changeLabel.emit(nav);
     this.routeLabel = nav.label;
+  }
+
+  menuClick(event: any) {
+    switch (event) {
+      case 'logout':
+        this.logout();
+        break;
+      default:
+    }
   }
 }

@@ -43,21 +43,28 @@ export const MERCHANT_COLUMNS: Array<Column> = [
 export const MAT_BOTTOM_SHEET_CONF = [
   {
     label: 'Update',
-    show: true
+    show: true,
+    icon: 'edit',
+    color: 'blue'
   },
   {
     label: 'Suspend',
-    show: true
+    show: true,
+    icon: 'block',
+    color: 'orange'
 
   },
   {
     label: 'Activate',
-    show: true
-
+    show: true,
+    icon: 'done',
+    color: 'green'
   },
   {
     label: 'Delete',
-    show: true
+    show: true,
+    icon: 'delete',
+    color: 'red'
 
   },
 ]

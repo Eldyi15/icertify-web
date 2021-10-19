@@ -7,7 +7,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 
 import { PortalComponent } from './portal.component';
 
-fdescribe('PortalComponent', () => {
+describe('PortalComponent', () => {
   let component: PortalComponent;
   let fixture: ComponentFixture<PortalComponent>;
 

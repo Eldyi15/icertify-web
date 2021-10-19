@@ -15,10 +15,10 @@
       (click)="dataSource = []; triggerRefresh()">
       <mat-icon>refresh</mat-icon>
     </button>
-    <button class="refresh-btn" color="primary" mat-icon-button matTooltip="Transform Table" style="float: right"
+    <span style="float: right;cursor:pointer;" class="spanbtn mt-2 mr-4 mat-elevation-z1 px-3 border-round"
       (click)="openColumnSelector()">
-      <mat-icon>transform</mat-icon>
-    </button>
+      Filter Columns
+    </span>
   </div>
   <div>
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
