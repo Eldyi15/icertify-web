@@ -1,7 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { MaterialModule } from './../../material.module';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
@@ -35,26 +35,13 @@ describe('ChangePasswordComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('won\'t enable save password button if one of the field is empty or more', fakeAsync(() => {
+  it('won\'t enable save password button if one of the field is empty or more', (() => {
     component.passwordForm.setValue({
-
       newPassword: '123qweasdzxc123',
       passwordConfirm: '123qweasdzxc123',
     });
-    spyOn(authService, 'register').and.returnValue(
-      of({
-        res: {
-          env: {
-            status: 'success',
-          },
-        },
-      })
-    );
-    component.save();
-    tick(200);
-    fixture.detectChanges();
-    expect(component.passwordForm.valid).toBeTrue()
-    expect(component.isSaving).toBeTrue();
+    component.pwCheck();
+    expect(component.pwError).toBeTrue();
   }));
 
   it('should not register if the new password and password confirm are not same', () => {
@@ -62,11 +49,7 @@ describe('ChangePasswordComponent', () => {
       newPassword: '123qweasdzxc123',
       passwordConfirm: '123qweasdzxc123',
     });
-
-    component.save();
-
-    expect(component.passwordForm.getRawValue().newPassword).toBe(
-      component.passwordForm.getRawValue().passwordConfirm
-    );
+    component.matchPassword(component.passwordForm.value.newPassword, component.passwordForm.value.passwordConfirm);
+    expect(component.toMatch).toBeTrue();
   });
 });

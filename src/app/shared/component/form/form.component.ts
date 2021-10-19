@@ -20,8 +20,8 @@ export class FormComponent implements OnInit {
   @Output() formListener = new EventEmitter<any>();
   @Output() onCancel = new EventEmitter<any>();
   @Output() onClick = new EventEmitter<any>();
-  @Input() action?: string
-  @Input() object?: any
+  @Input() action?: string;
+  @Input() object?: any;
 
   // replacers =
   form = this.fb.group({});
@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
   constructor(public util: UtilService, public fb: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log(this.formFields)
+    console.log(this.formFields);
     this.initForm();
   }
 
@@ -137,8 +137,11 @@ export class FormComponent implements OnInit {
       temp.field = new FormControl(
         {
           value: this.object ? this.object[field.fcName] : defaultValue,
-          disabled: field.isDisabled ? field.isDisabled : this.action === "Update" ? false : true,
-
+          disabled: field.isDisabled
+            ? field.isDisabled
+            : this.action === 'Update'
+              ? false
+              : true,
         },
         {
           updateOn: 'blur',
@@ -153,14 +156,12 @@ export class FormComponent implements OnInit {
     }
     this.gridCss.forEach((colSize: ColumnSizes) => {
       if (!temp.css[field.fcName]) {
-        temp.css[field.fcName] = ['p-col-12'];
+        temp.css[field.fcName] = ['col-12'];
       }
-      temp.css[field.fcName].push(
-        'p-' + colSize + '-' + field.colspan[colSize]
-      );
+      temp.css[field.fcName].push(colSize + ':col-' + field.colspan[colSize]);
     });
     temp.css = temp.css[field.fcName].join(' ');
-
+    console.log(temp);
     return temp;
   }
   setArrayFields(fieldName: any, fields: Array<Field>) {

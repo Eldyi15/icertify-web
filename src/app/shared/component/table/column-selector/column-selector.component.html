@@ -7,18 +7,8 @@
 </div>
 <mat-divider></mat-divider>
 <div mat-dialog-content style="text-align: center">
-  <button
-    mat-raised-button
-    *ngFor="let column of columns; let i = index"
-    [color]="column.selected && 'primary'"
-    class="column-btn"
-    (click)="filterColumn(i)"
-  >
+  <button mat-raised-button *ngFor="let column of columns; let i = index" [color]="column.selected && 'primary'"
+    class="column-btn" (click)="filterColumn(i)" (click)="onApply()">
     {{ column.title }}
   </button>
-</div>
-<mat-divider></mat-divider>
-<div mat-dialog-actions>
-  <!-- <button mat-raised-button color="warn" (click)="onClose()">close</button> -->
-  <button mat-raised-button (click)="onApply()" class="btn">Apply</button>
 </div>

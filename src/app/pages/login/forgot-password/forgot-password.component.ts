@@ -19,6 +19,7 @@ import {
   styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
+  toMatch = false;
   mobileNumber: string = '';
   sending: boolean = false;
   saving: boolean = false;
@@ -69,6 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
         confirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         confirmPasswordControl.setErrors(null);
+        this.toMatch = true
       }
       return null;
     };
@@ -84,6 +86,8 @@ export class ForgotPasswordComponent implements OnInit {
         console.log(res);
         this.sending = false;
         localStorage.setItem('OTP_TOKEN', res.token);
+        localStorage.setItem('RP_TOKEN', res.token);
+
         if (res) {
           this.dialog
             .open(OtpComponent, {
@@ -127,6 +131,7 @@ export class ForgotPasswordComponent implements OnInit {
     console.log(data);
     this.auth.userForgotPassword(data).subscribe(
       (res: any) => {
+        localStorage.removeItem('RP_TOKEN');
         console.log(res);
         this.saving = false;
         if (res) {
@@ -143,7 +148,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.dialogRef.close();
         }
       },
-      (err) => {
+      (err: any) => {
         console.log(err);
         this.saving = false;
         this.dialog.open(ActionResultComponent, {

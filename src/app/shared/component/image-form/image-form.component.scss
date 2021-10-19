@@ -1,12 +1,36 @@
-img{
-max-width: 18rem;
-cursor: pointer;
-height: 18rem;
+// img:hover {
+//   transform: scale(1.1);
+// }
+.imgUnclickable {
+  pointer-events: none;
+  cursor: none;
 }
-img:hover{
-    transform: scale(1.1);
+h4 {
+  margin-top: 0;
 }
-.imgUnclickable{
-    pointer-events: none;
-    cursor: none;
+.img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  height: 18rem;
+  padding: 0.7rem;
+  border: 2px solid rgb(206, 206, 206);
+  border-radius: 0.25rem;
+  position: relative;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  button {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    opacity: 0.9;
+  }
+
+  button:hover {
+    transform: translateY(-5px);
+  }
 }

@@ -21,33 +21,30 @@
       >
         <h2 style="margin-top: 0; font-weight: 500">Create an account</h2>
 
-        <div class="register-row">
-          <mat-form-field appearance="fill" style="color: #2b547e; width: 49%">
+        <div class="grid">
+          <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >First Name
               <small>*</small>
             </mat-label>
             <input matInput type="text" formControlName="firstName" />
           </mat-form-field>
-          <div style="width: 0.5rem"></div>
-          <mat-form-field appearance="fill" style="color: #2b547e; width: 50%">
+          <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >Last Name
               <small>*</small>
             </mat-label>
             <input matInput type="text" formControlName="lastName" />
           </mat-form-field>
-        </div>
-        <mat-form-field appearance="fill" style="color: #2b547e; width: 100%">
-          <mat-label
-            >Email
-            <small>*</small>
-          </mat-label>
-          <input matInput type="text" formControlName="email" />
-        </mat-form-field>
+          <mat-form-field class="col-12" appearance="fill">
+            <mat-label
+              >Email
+              <small>*</small>
+            </mat-label>
+            <input matInput type="text" formControlName="email" />
+          </mat-form-field>
 
-        <div class="register-row">
-          <mat-form-field appearance="fill" style="color: #2b547e; width: 49%">
+          <mat-form-field class="col-6" appearance="fill">
             <mat-label
               >Password
               <small>*</small>
@@ -58,8 +55,7 @@
               formControlName="password"
             />
           </mat-form-field>
-          <div style="width: 0.5rem"></div>
-          <mat-form-field appearance="fill" style="color: #2b547e; width: 50%">
+          <mat-form-field class="col-6" appearance="fill">
             <mat-label
               >Confirm Password
               <small>*</small>
@@ -70,30 +66,26 @@
               formControlName="passwordConfirm"
             />
           </mat-form-field>
+          <mat-checkbox class="col-12" (change)="toggleShowPassword()"
+            >Show Password</mat-checkbox
+          >
+          <div style="margin-bottom: 1rem"></div>
+          <mat-form-field class="col-12" appearance="fill" floatLabel="always">
+            <mat-label
+              >Mobile Number
+              <small>*</small>
+            </mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="mobileNumber"
+              (keypress)="numberInputOnly($event)"
+              [minLength]="10"
+              [maxLength]="10"
+            />
+            <span matPrefix>+63</span>
+          </mat-form-field>
         </div>
-        <mat-checkbox (change)="toggleShowPassword()"
-          >Show Password</mat-checkbox
-        >
-        <div style="margin-bottom: 1rem"></div>
-        <mat-form-field
-          appearance="fill"
-          style="color: #2b547e; width: 100%"
-          floatLabel="always"
-        >
-          <mat-label
-            >Mobile Number
-            <small>*</small>
-          </mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="mobileNumber"
-            (keypress)="numberInputOnly($event)"
-            [minLength]="10"
-            [maxLength]="10"
-          />
-          <span matPrefix>+63</span>
-        </mat-form-field>
       </form>
       <div class="btn-container">
         <button

@@ -89,15 +89,19 @@ $icertify-theme: mat-light-theme(
   bottom: 20px;
   right: 20px;
 }
-.mat-list-item:hover {
-  cursor: pointer;
-  background-color: #8460df;
-  color: #ffff;
-}
+
 .dialog-responsive {
   width: 35%;
   mat-dialog-container {
     background-color: #26184a;
+  }
+}
+
+.dialog-darken {
+  width: "auto";
+  mat-dialog-container {
+    background-color: #26184a;
+    color: #fff;
   }
 }
 
@@ -133,6 +137,32 @@ $icertify-theme: mat-light-theme(
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7b678089;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9b9b9b;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 @media only screen and (max-width: 760px) {
   .dialog-change {

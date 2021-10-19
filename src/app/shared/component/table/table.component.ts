@@ -47,15 +47,15 @@ export class TableComponent implements OnInit {
     public util: UtilService,
     private dialog: MatDialog,
 
-    private _bottomSheet: MatBottomSheet
+    public _bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit(): void {
     // console.log(this.pagination);
-
+    console.log(JSON.stringify(this.columns))
     this.duplicateColumns = JSON.parse(JSON.stringify(this.columns));
     this.displayedColumns = [];
-
+    console.log(this.duplicateColumns)
     this.updateBreakpoint();
   }
 
@@ -191,6 +191,7 @@ export class TableComponent implements OnInit {
         }
       });
   }
+
   onRowClick(data: any, index: number) {
     console.log(data, index, this.bottomSheetConf);
     this._bottomSheet
@@ -209,7 +210,6 @@ export class TableComponent implements OnInit {
 
           console.log(data);
           switch (res) {
-            case 'View':
             case 'Update':
               this.dialog.open(UpdateViewComponent, {
                 width: '70%',

@@ -1,0 +1,19 @@
+import { MaterialModule } from './../../../shared/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { UserDetailsRoutingModule } from './user-details-routing.module';
+import { UserDetailsComponent } from './user-details.component';
+
+@NgModule({
+  declarations: [UserDetailsComponent],
+  imports: [
+    CommonModule,
+    UserDetailsRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MaterialModule,
+  ],
+})
+export class UserDetailsModule {}

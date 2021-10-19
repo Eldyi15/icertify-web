@@ -1,22 +1,61 @@
-<div class="grid" *ngIf="!loading">
-    <div class="col-4">
-        <app-form [formFields]="formFields" (formListener)="formListener($event)" [action]="action"
-            [object]="data.data">
-        </app-form>
+<h4 mat-dialog-title>{{ data.data.firstName + " " + data.data.lastName }}</h4>
+<mat-divider></mat-divider>
+<div style="padding: 0.5rem"></div>
+<div mat-dialog-content>
+  <div class="grid">
+    <div class="col-12">
+      <div *ngIf="loading">
+        <div
+          class="
+            h-25rem
+            flex
+            align-items-center
+            justify-content-center
+            flex-column
+          "
+        >
+          <mat-spinner [diameter]="85"></mat-spinner>
+          <p class="text-center">Saving Data...</p>
+        </div>
+      </div>
     </div>
-    <div class="col-8">
-        <app-image-form (imageEmitter)="imageEmitter($event)" [obj]="data.data" [action]="action"></app-image-form>
+  </div>
+  <div class="grid" *ngIf="!loading">
+    <div class="col-12">
+      <app-form
+        [formFields]="formFields"
+        (formListener)="formListener($event)"
+        [action]="action"
+        [object]="data.data"
+      >
+      </app-form>
     </div>
+    <div class="col-12">
+      <app-image-form
+        (imageEmitter)="imageEmitter($event)"
+        [obj]="data.data"
+        [action]="action"
+      ></app-image-form>
+    </div>
+  </div>
 </div>
-
-<mat-dialog-actions *ngIf="!loading">
-    <button mat-button (click)="onCancel()" *ngIf="action!=='Activate'">Cancel</button>
-    <button mat-button (click)="onSave()" [disabled]='!imageFormValid' color='primary'
-        *ngIf="action==='Update'|| action==='Activate'">{{action==='Update'?'Save':'Activate'}}</button>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="center" *ngIf="!loading">
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="onCancel()"
+    *ngIf="action !== 'Activate'"
+  >
+    Cancel
+  </button>
+  <button
+    mat-raised-button
+    (click)="onSave()"
+    [disabled]="!imageFormValid"
+    color="primary"
+    *ngIf="action === 'Update' || action === 'Activate'"
+  >
+    {{ action === "Update" ? "Save" : "Activate" }}
+  </button>
 </mat-dialog-actions>
-<div style="display: flex;justify-content: center; align-items: center;" *ngIf="loading">
-    <p>
-        <mat-spinner></mat-spinner>
-    </p>
-    <p>Saving Data...</p>
-</div>
