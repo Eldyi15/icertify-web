@@ -9,79 +9,96 @@ import { ImageFields } from './enum';
 @Component({
   selector: 'app-image-form',
   templateUrl: './image-form.component.html',
-  styleUrls: ['./image-form.component.scss']
+  styleUrls: ['./image-form.component.scss'],
 })
 export class ImageFormComponent implements OnInit {
   imageFields = ImageFields;
   @Output() imageEmitter = new EventEmitter<any>();
-  @Input() obj: any
-  @Input() action: string = ''
-  images: any = []
-  me: any = {}
-  imageForm = this.fb.group({})
-  gettingImages: boolean = true
-  constructor(public dialog: MatDialog, public dbx: DropboxService, public auth: AuthService, private fb: FormBuilder) { }
+  @Input() obj: any;
+  @Input() action: string = '';
+  images: any = [];
+  me: any = {};
+  imageForm = this.fb.group({});
+  gettingImages: boolean = true;
+  constructor(
+    public dialog: MatDialog,
+    public dbx: DropboxService,
+    public auth: AuthService,
+    private fb: FormBuilder
+  ) {}
 
   async ngOnInit() {
-
-    const res: any = await this.auth.me().toPromise()
-    this.me = res.env.user
-    console.log(this.me)
-    await this.getImage()
-
+    const res: any = await this.auth.me().toPromise();
+    this.me = res.env.user;
+    console.log(this.me);
+    await this.getImage();
   }
   getImage() {
-    this.gettingImages = true
-    let temp: any = {}
+    this.gettingImages = true;
+    let temp: any = {};
     this.imageFields.forEach((img) => {
       img.fields.forEach(async (f: any) => {
-
         if (this.me.type === 'Superadmin' && f.fcName === 'valid_id') {
-          f.isVisible = false
+          f.isVisible = false;
         }
-
 
         if (this.me.type === 'User' && f.fcName === 'ibp_id') {
-          f.isVisible = false
-
+          f.isVisible = false;
         }
         if (f.isVisible) {
-          temp[f.fcName] = new FormControl(this.obj && this.obj[f.fcName] ? this.obj[f.fcName] : '', [Validators.required])
+          temp[f.fcName] = new FormControl(
+            this.obj && this.obj[f.fcName] ? this.obj[f.fcName] : '',
+            [Validators.required]
+          );
         }
-        this.images.push({ isVisible: f.isVisible, fcName: f.fcName, label: f.label, imgLink: this.obj && this.obj[f.fcName] ? await this.getTempLink(this.obj[f.fcName]['path_display']) : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' })
-
-
-      })
-      console.log(temp)
-      this.imageForm = this.fb.group(temp)
-
-    })
-    this.gettingImages = false
-    this.imageEmitter.emit({ obj: this.imageForm.getRawValue(), formValid: this.imageForm.valid })
+        this.images.push({
+          isVisible: f.isVisible,
+          fcName: f.fcName,
+          label: f.label,
+          imgLink:
+            this.obj && this.obj[f.fcName]
+              ? await this.getTempLink(this.obj[f.fcName]['path_display'])
+              : '',
+        });
+        console.log(this.images);
+      });
+      console.log(temp);
+      this.imageForm = this.fb.group(temp);
+    });
+    this.gettingImages = false;
+    this.imageEmitter.emit({
+      obj: this.imageForm.getRawValue(),
+      formValid: this.imageForm.valid,
+    });
   }
 
   onClick(fcname: string) {
-    this.dialog.open(UploadComponent, { width: "50%", height: 'auto' }).afterClosed().subscribe((res: any) => {
-      if (res) {
-        this.images.forEach(async (img: any) => {
-          if (fcname === img.fcName) {
-            img.imgLink = await this.getTempLink(res.result.path_display)
-            console.log(img.imgLink)
-          }
-        })
-        this.obj[fcname] = res.result
+    this.dialog
+      .open(UploadComponent, { panelClass: 'dialog-darken' })
+      .afterClosed()
+      .subscribe((res: any) => {
+        if (res) {
+          this.images.forEach(async (img: any) => {
+            if (fcname === img.fcName) {
+              img.imgLink = await this.getTempLink(res.result.path_display);
+              console.log(img.imgLink);
+            }
+          });
+          this.obj[fcname] = res.result;
 
-
-        this.imageForm.get(fcname)?.setValue(res.result)
-        console.log(this.imageForm.get(fcname))
-        this.imageEmitter.emit({ obj: this.imageForm.getRawValue(), formValid: this.imageForm.valid })
-      }
-    })
+          this.imageForm.get(fcname)?.setValue(res.result);
+          console.log(this.imageForm.get(fcname));
+          this.imageEmitter.emit({
+            obj: this.imageForm.getRawValue(),
+            formValid: this.imageForm.valid,
+          });
+        }
+      });
   }
   async getTempLink(data: any) {
-    console.log(data)
-    const response = await this.dbx.getTempLink(data).toPromise()
-    console.log(response)
-    return response.result.link
+    console.log(data);
+    const response = await this.dbx.getTempLink(data).toPromise();
+    console.log(response);
+    return response.result.link;
   }
 }

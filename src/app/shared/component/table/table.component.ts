@@ -48,7 +48,7 @@ export class TableComponent implements OnInit {
     private dialog: MatDialog,
 
     private _bottomSheet: MatBottomSheet
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // console.log(this.pagination);
@@ -203,27 +203,31 @@ export class TableComponent implements OnInit {
       })
       .afterDismissed()
       .subscribe((res: any) => {
-        let action = res
+        let action = res;
         console.log(res);
         if (res) {
-
           console.log(data);
           switch (res) {
             case 'View':
             case 'Update':
-              this.dialog.open(UpdateViewComponent, {
-                width: '70%',
-                data: { data, action: res },
-              }).afterClosed().subscribe((res: any) => {
-                if (res) {
-                  var toEmit: TableOutput = {
-                    pageIndex: 0,
-                    pageSize: 10,
-                    // sort: 'desc',
-                  };
-                  this.pageChange.emit(toEmit)
-                }
-              });
+              this.dialog
+                .open(UpdateViewComponent, {
+                  width: '70%',
+                  height: 'auto',
+                  data: { data, action: res },
+                  disableClose: true,
+                })
+                .afterClosed()
+                .subscribe((res: any) => {
+                  if (res) {
+                    var toEmit: TableOutput = {
+                      pageIndex: 0,
+                      pageSize: 10,
+                      // sort: 'desc',
+                    };
+                    this.pageChange.emit(toEmit);
+                  }
+                });
               break;
 
             default:
@@ -234,7 +238,6 @@ export class TableComponent implements OnInit {
                 })
                 .afterClosed()
                 .subscribe((res) => {
-
                   if (res) {
                     if (action === 'Delete') {
                       data.status = 'Deleted';
@@ -245,11 +248,12 @@ export class TableComponent implements OnInit {
                     if (action === 'Activate') {
                       data.status = 'Active';
                     }
-                    this.api.updateUser(data, 'admin').subscribe((response: any) => {
-                      console.log(response);
-                      console.log(res);
-                      this.dialog
-                        .open(ActionResultComponent, {
+                    this.api
+                      .updateUser(data, 'admin')
+                      .subscribe((response: any) => {
+                        console.log(response);
+                        console.log(res);
+                        this.dialog.open(ActionResultComponent, {
                           width: 'auto',
                           height: 'auto',
                           disableClose: true,
@@ -258,15 +262,14 @@ export class TableComponent implements OnInit {
                             success: true,
                             button: 'Got it',
                           },
-                        })
-                      var toEmit: TableOutput = {
-                        pageIndex: 0,
-                        pageSize: 10,
-                        // sort: 'desc',
-                      };
-                      this.pageChange.emit(toEmit)
-                    });
-
+                        });
+                        var toEmit: TableOutput = {
+                          pageIndex: 0,
+                          pageSize: 10,
+                          // sort: 'desc',
+                        };
+                        this.pageChange.emit(toEmit);
+                      });
                   }
                 });
 

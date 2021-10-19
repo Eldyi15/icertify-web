@@ -28,7 +28,7 @@ export class PortalComponent implements OnInit {
   private _mobileQueryListener: () => void;
   constructor(
     private auth: AuthService,
-    private router: Router,
+    public router: Router,
     private dialog: MatDialog,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
@@ -50,6 +50,7 @@ export class PortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.router.url);
     this.auth.me().subscribe(
       (res: any) => {
         console.log(res);
@@ -59,8 +60,8 @@ export class PortalComponent implements OnInit {
         this.userNav.forEach((i: any) => {
           temp.push(i);
         });
-        if (res.env.user.type === "User") {
-          if (res.env.user.status === "Pending") {
+        if (res.env.user.type === 'User') {
+          if (res.env.user.status === 'Pending') {
             this.dialog
               .open(ActionResultComponent, {
                 disableClose: true,
@@ -78,7 +79,7 @@ export class PortalComponent implements OnInit {
                   width: '70%',
                   disableClose: true,
                   data: { data: this.me, action: 'Activate' },
-                })
+                });
               });
           }
         }
@@ -103,6 +104,10 @@ export class PortalComponent implements OnInit {
           });
       }
     );
+  }
+
+  profile() {
+    this.router.navigate(['portal/user-details']);
   }
 
   logout() {

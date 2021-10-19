@@ -13,10 +13,12 @@ export class AuthService {
   setHeaders() {
     let csurf_token = localStorage.getItem('SESSION_CSURF_TOKEN')!;
     let session_token = localStorage.getItem('SESSION_AUTH')!;
+    const otpToken = localStorage.getItem('OTP_TOKEN');
 
     let headers = new HttpHeaders({
       c_auth: csurf_token || '',
       authorization: `Bearer ${session_token}`,
+      rp_auth: otpToken || '',
     });
 
     return { headers };
@@ -61,6 +63,10 @@ export class AuthService {
     return this.http.post(this.url + '/auth/forgot-Password', mobileNumber);
   }
   userForgotPassword(body: any) {
-    return this.http.post(this.url + '/user/changePassword', body);
+    return this.http.post(
+      this.url + '/user/changePassword',
+      body,
+      this.getHeaders()
+    );
   }
 }

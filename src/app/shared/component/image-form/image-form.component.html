@@ -1,12 +1,23 @@
-<div *ngIf="!gettingImages" class="grid">
-    <div *ngFor="let image of images">
-        <div class="col-6">
-            <ng-container *ngIf="image.isVisible">
-                <h4>{{image.label}}</h4>
-                <img [ngClass]="{'imgUnclickable':action==='View'}" (click)="onClick(image.fcName)"
-                    class="mat-elevation-z8" [src]="image.imgLink">
-
-            </ng-container>
+<div *ngIf="!gettingImages">
+  <div class="grid">
+    <ng-container *ngFor="let image of images">
+      <div *ngIf="image.isVisible" class="col-6 mt-1">
+        <h4>{{ image.label }}</h4>
+        <div class="img-container">
+          <p *ngIf="image.imgLink === ''">No Image Uploaded</p>
+          <img
+            [ngClass]="{ imgUnclickable: action === 'View' }"
+            [src]="image.imgLink"
+          /><button
+            mat-fab
+            color="primary"
+            (click)="onClick(image.fcName)"
+            matTooltip="Upload Image"
+          >
+            <mat-icon>upload</mat-icon>
+          </button>
         </div>
-    </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
