@@ -44,11 +44,12 @@
       </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content style="overflow-x: hidden">
       <div *ngIf="router.url !== '/portal/user-details'" class="container">
         <router-outlet></router-outlet>
       </div>
       <router-outlet
+        style="overflow-y: hidden"
         *ngIf="router.url === '/portal/user-details'"
       ></router-outlet>
     </mat-sidenav-content>
