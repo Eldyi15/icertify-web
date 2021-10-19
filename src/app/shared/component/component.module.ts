@@ -17,6 +17,8 @@ import { OtpComponent } from './otp/otp.component';
 import { AreYouSureComponent } from '../dialogs/are-you-sure/are-you-sure.component';
 import { UploadComponent } from './upload/upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     AreYouSureComponent,
     ActionResultComponent,
     UploadComponent,
+    ProfileMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     ReactiveFormsModule,
     FormsModule,
     NgxSkeletonLoaderModule,
+    AvatarModule,
     NgxFileDropModule,
   ],
   exports: [
@@ -53,6 +57,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     ChangePasswordComponent,
     ActionResultComponent,
     ImageFormComponent,
+    ProfileMenuComponent,
     NgxFileDropModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ActionResultComponent } from './action-result.component';
 
-describe('ActionResultComponent', () => {
+fdescribe('ActionResultComponent', () => {
   let component: ActionResultComponent;
   let fixture: ComponentFixture<ActionResultComponent>;
 
@@ -11,7 +11,7 @@ describe('ActionResultComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ActionResultComponent],
       imports: [],
-      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }]
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { msg: 'KARMA TEST MESSAGE', success: true, button: 'OK' } }, { provide: MatDialogRef, useValue: {} }]
     })
       .compileComponents();
   });
@@ -25,4 +25,9 @@ describe('ActionResultComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should read data pass from previous component', () => {
+    // component.data = undefined
+    expect(component.data).not.toBeUndefined()
+  })
 });

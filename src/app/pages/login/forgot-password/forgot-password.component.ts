@@ -41,9 +41,9 @@ export class ForgotPasswordComponent implements OnInit {
     private auth: AuthService,
     private otp: OtpService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   get registerFormControl() {
     return this.credentialPassword.controls;
@@ -84,6 +84,8 @@ export class ForgotPasswordComponent implements OnInit {
         console.log(res);
         this.sending = false;
         localStorage.setItem('OTP_TOKEN', res.token);
+        localStorage.setItem('RP_TOKEN', res.token);
+
         if (res) {
           this.dialog
             .open(OtpComponent, {
@@ -127,6 +129,7 @@ export class ForgotPasswordComponent implements OnInit {
     console.log(data);
     this.auth.userForgotPassword(data).subscribe(
       (res: any) => {
+        localStorage.removeItem('RP_TOKEN');
         console.log(res);
         this.saving = false;
         if (res) {
@@ -143,7 +146,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.dialogRef.close();
         }
       },
-      (err) => {
+      (err: any) => {
         console.log(err);
         this.saving = false;
         this.dialog.open(ActionResultComponent, {
@@ -160,7 +163,7 @@ export class ForgotPasswordComponent implements OnInit {
     );
   }
 
-  pwCheck() {}
+  pwCheck() { }
 
   numberInputOnly(event: any) {
     return this.util.formNumberInputOnly(event);

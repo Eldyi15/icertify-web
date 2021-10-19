@@ -10,6 +10,7 @@ import {
 import { MERCHANT_NAV } from 'src/app/config/NAVIGATIONS';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/action-result.component';
+import { MERCHANT_MENU, MERCHANT_MENU_COLORS } from './enum';
 
 @Component({
   selector: 'app-merchant-portal',
@@ -19,6 +20,9 @@ import { ActionResultComponent } from 'src/app/shared/dialogs/action-result/acti
 export class MerchantPortalComponent implements OnInit {
   isExpanded: boolean = true;
   merchantNav = MERCHANT_NAV;
+  merchantMenu = MERCHANT_MENU;
+  menuColors = MERCHANT_MENU_COLORS;
+  me: any;
   navs: any;
   loading: boolean = false;
   changeLabel = new EventEmitter<boolean>();
@@ -45,6 +49,7 @@ export class MerchantPortalComponent implements OnInit {
     this.loading = true;
     this.auth.me().subscribe(
       (res: any) => {
+        this.me = res.env.user;
         console.log(res);
         this.loading = false;
         if (res && res.env.user.status === 'Pending') {
@@ -71,7 +76,6 @@ export class MerchantPortalComponent implements OnInit {
       (error: any) => {
         this.loading = false;
         this.dialog.open(ActionResultComponent, {
-
           width: 'auto',
           height: 'auto',
           disableClose: true,
@@ -80,12 +84,39 @@ export class MerchantPortalComponent implements OnInit {
             success: false,
             button: 'Got it',
           },
-        })
-      });
+        });
+      }
+    );
   }
 
   changeRoute(nav: any) {
     this.changeLabel.emit(nav);
     this.routeLabel = nav.label;
+  }
+  logout() {
+    this.auth.logout().subscribe((res) => {
+      console.log(res);
+      localStorage.removeItem('SESSION_CSURF_TOKEN');
+      localStorage.removeItem('SESSION_AUTH');
+      this.router.navigate(['/login']);
+    });
+  }
+  changePassword() {
+    this.dialog.open(ChangePasswordComponent, {
+      panelClass: 'dialog-change',
+      disableClose: false,
+    });
+  }
+
+  menuClick(event: any) {
+    switch (event) {
+      case 'logout':
+        this.logout();
+        break;
+      case 'changepassword':
+        this.changePassword();
+        break;
+      default:
+    }
   }
 }

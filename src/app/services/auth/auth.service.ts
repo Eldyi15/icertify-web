@@ -13,12 +13,12 @@ export class AuthService {
   setHeaders() {
     let csurf_token = localStorage.getItem('SESSION_CSURF_TOKEN')!;
     let session_token = localStorage.getItem('SESSION_AUTH')!;
-    const otpToken = localStorage.getItem('OTP_TOKEN');
+    let rp_token = localStorage.getItem('RP_TOKEN');
 
     let headers = new HttpHeaders({
       c_auth: csurf_token || '',
+      rp_auth: rp_token || '',
       authorization: `Bearer ${session_token}`,
-      rp_auth: otpToken || '',
     });
 
     return { headers };
