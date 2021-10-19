@@ -42,12 +42,7 @@ export const MERCHANT_COLUMNS: Array<Column> = [
 
 export const MAT_BOTTOM_SHEET_CONF = [
   {
-    label: 'View',
-    show: true
-  },
-  {
     label: 'Update',
-
     show: true
   },
   {

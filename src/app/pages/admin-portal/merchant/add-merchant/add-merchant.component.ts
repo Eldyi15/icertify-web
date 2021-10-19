@@ -118,4 +118,20 @@ export class AddMerchantComponent implements OnInit {
         })
       });
   }
+  close() {
+    if (!this.merchantForm.pristine) {
+      this.dialog.open(AreYouSureComponent, {
+        data: {
+          msg: 'cancel adding merchant',
+        }
+      }).afterClosed().subscribe((res: any) => {
+        if (res) {
+          this.dialogRef.close()
+        }
+      })
+    } else {
+      this.dialogRef.close()
+    }
+  }
+
 }

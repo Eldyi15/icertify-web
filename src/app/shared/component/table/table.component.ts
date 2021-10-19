@@ -191,6 +191,7 @@ export class TableComponent implements OnInit {
         }
       });
   }
+
   onRowClick(data: any, index: number) {
     console.log(data, index, this.bottomSheetConf);
     this._bottomSheet
@@ -209,7 +210,6 @@ export class TableComponent implements OnInit {
 
           console.log(data);
           switch (res) {
-            case 'View':
             case 'Update':
               this.dialog.open(UpdateViewComponent, {
                 width: '70%',

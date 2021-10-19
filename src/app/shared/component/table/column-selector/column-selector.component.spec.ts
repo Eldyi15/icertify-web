@@ -10,17 +10,55 @@ xdescribe('ColumnSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColumnSelectorComponent ],
-      imports:[MaterialModule],
-      providers:[{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }]
+      declarations: [ColumnSelectorComponent],
+      imports: [MaterialModule],
+      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ColumnSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.columns = [
+      {
+        title: 'First Name',
+        path: 'firstName',
+        breakpoint: 'xs',
+        type: 'text',
+        selected: true,
+      },
+      {
+        title: 'Last Name',
+        path: 'lastName',
+        breakpoint: 'xs',
+        type: 'text',
+        selected: true,
+      },
+      {
+        title: 'Email',
+        path: 'email',
+        breakpoint: 'xs',
+        type: 'text',
+        selected: true,
+      },
+      {
+        title: 'Mobile Number',
+        path: 'mobileNumber',
+        breakpoint: 'xs',
+        type: 'text',
+        selected: true,
+      },
+      {
+        title: 'Status',
+        path: 'status',
+        breakpoint: 'xs',
+        type: 'text',
+        selected: true,
+      },
+    ]
+
   });
 
   it('should create', () => {

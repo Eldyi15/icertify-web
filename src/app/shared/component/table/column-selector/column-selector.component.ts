@@ -13,10 +13,11 @@ export class ColumnSelectorComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ColumnSelectorComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.columns = JSON.parse(JSON.stringify(this.data.columns));
+
   }
 
   onClose() {
