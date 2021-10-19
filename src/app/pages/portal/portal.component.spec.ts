@@ -13,10 +13,10 @@ describe('PortalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PortalComponent ],
-      imports:[HttpClientTestingModule,ReactiveFormsModule,FormsModule,BrowserAnimationsModule,RouterTestingModule,MaterialModule]
+      declarations: [PortalComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, RouterTestingModule, MaterialModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -28,4 +28,10 @@ describe('PortalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should open change password', () => {
+  //   spyOn(component.dialog, 'open').and.callThrough();
+
+
+  // })
 });

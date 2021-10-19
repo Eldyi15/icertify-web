@@ -60,29 +60,5 @@ describe('AddMerchantComponent', () => {
     fixture.detectChanges();
     expect(component.merchantForm.valid).toBeTrue();
   }));
-  it('should call login subscription', fakeAsync(() => {
-    component.merchantForm.setValue({
-      firstName: 'Michael',
-      middleName: 'Verge',
-      lastName: 'Reeves',
-      email: 'mreeves@gmail.com',
-      mobileNumber: '9123456789',
-    });
-
-    spyOn(apiService, 'insertMerchant').and.returnValue(
-      of({
-        res: {
-          env: {
-            status: 'success',
-          },
-        },
-      })
-    );
-    component.onSave();
-    tick(200);
-    fixture.detectChanges();
-    expect(component.isAdded).toBeTrue();
-  }));
-
 
 });

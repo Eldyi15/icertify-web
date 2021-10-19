@@ -31,7 +31,7 @@ export class PortalComponent implements OnInit {
   private _mobileQueryListener: () => void;
   constructor(
     private auth: AuthService,
-    private router: Router,
+    public router: Router,
     private dialog: MatDialog,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
@@ -53,6 +53,7 @@ export class PortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.router.url);
     this.auth.me().subscribe(
       (res: any) => {
         console.log(res);
@@ -106,6 +107,10 @@ export class PortalComponent implements OnInit {
           });
       }
     );
+  }
+
+  profile() {
+    this.router.navigate(['portal/user-details']);
   }
 
   logout() {

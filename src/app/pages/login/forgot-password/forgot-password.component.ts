@@ -19,6 +19,7 @@ import {
   styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
+  toMatch = false;
   mobileNumber: string = '';
   sending: boolean = false;
   saving: boolean = false;
@@ -69,6 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
         confirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         confirmPasswordControl.setErrors(null);
+        this.toMatch = true
       }
       return null;
     };

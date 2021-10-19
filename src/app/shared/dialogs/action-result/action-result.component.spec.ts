@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ActionResultComponent } from './action-result.component';
 
-fdescribe('ActionResultComponent', () => {
+describe('ActionResultComponent', () => {
   let component: ActionResultComponent;
   let fixture: ComponentFixture<ActionResultComponent>;
 

@@ -32,7 +32,7 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should be password mismatch', () => {
+  it('should be password match', () => {
     component.registerForm.setValue({
       firstName: 'Michael',
       lastName: 'Reeves',
@@ -41,31 +41,10 @@ describe('RegisterComponent', () => {
       passwordConfirm: '123qweasdzxc153',
       mobileNumber: '9123456789'
     });
-
     component.register();
-
-    expect(
-      component.registerForm.getRawValue().password ===
-      component.registerForm.getRawValue().passwordConfirm
-    ).toBeFalse;
+    expect(component.isRegistered).toBeFalse()
   });
 
-  it('should be password match', () => {
-    component.registerForm.setValue({
-      firstName: 'Michael',
-      lastName: 'Reeves',
-      email: 'mreeves@gmail.com',
-      password: '123qweasdzxc123',
-      passwordConfirm: '123qweasdzxc123',
-      mobileNumber: '9123456789'
-    });
-
-    component.register();
-
-    expect(component.registerForm.getRawValue().password).toBe(
-      component.registerForm.getRawValue().passwordConfirm
-    );
-  });
 
   it('email field validity', () => {
     const email = component.registerForm.controls.email;

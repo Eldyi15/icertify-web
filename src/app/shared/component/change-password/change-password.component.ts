@@ -25,9 +25,10 @@ export class ChangePasswordComponent implements OnInit {
   isSaving = false;
   saving = false;
   loading = false;
+  toMatch = false;
   passwordForm = this.fb.group(
     {
-      newPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
       passwordConfirm: new FormControl('', [Validators.required]),
     },
     {
@@ -42,7 +43,7 @@ export class ChangePasswordComponent implements OnInit {
     private sb: MatSnackBar,
     private dialog: MatDialog,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.passwordForm);
@@ -65,12 +66,16 @@ export class ChangePasswordComponent implements OnInit {
         confirmPasswordControl.errors &&
         !confirmPasswordControl.errors.passwordMismatch
       ) {
+
         return null;
       }
 
       if (newPasswordControl.value !== confirmPasswordControl.value) {
+
         confirmPasswordControl.setErrors({ passwordMismatch: true });
+
       } else {
+        this.toMatch = true
         confirmPasswordControl.setErrors(null);
       }
       return null;
@@ -80,10 +85,10 @@ export class ChangePasswordComponent implements OnInit {
   pwCheck() {
     let dataCredential = {
       newPassword: this.passwordForm.getRawValue().newPassword,
-      passwordConfirm: this.passwordForm.getRawValue().confirmPassword,
+      passwordConfirm: this.passwordForm.getRawValue().passwordConfirm,
     };
 
-    if (dataCredential.newPassword || dataCredential.passwordConfirm) {
+    if (dataCredential.newPassword && dataCredential.passwordConfirm) {
       this.pwError = true;
     } else {
       this.pwError = false;
@@ -114,7 +119,6 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: this.passwordForm.getRawValue().newPassword,
       passwordConfirm: this.passwordForm.getRawValue().passwordConfirm,
     };
-    console.log(dataCredential);
     this.isSaving = true;
     this.auth.changePassword(dataCredential).subscribe(
       (res: any) => {
