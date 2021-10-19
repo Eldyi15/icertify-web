@@ -70,9 +70,9 @@ export class PortalComponent implements OnInit {
                 width: 'auto',
                 height: 'auto',
                 data: {
-                  msg: 'User is still in pending! Activate account',
+                  msg: 'Account is still pending!',
                   button: 'Activate',
-                  success: false,
+                  pending: 'true',
                 },
               })
               .afterClosed()

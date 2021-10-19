@@ -1,15 +1,33 @@
 <div class="container">
-  <img src="" alt="" />
-  <img [src]="
+  <img
+    *ngIf="data.pending"
+    [src]="'../../../../assets/images/pendinguser.png'"
+    alt=""
+  />
+  <img
+    *ngIf="data.success"
+    [src]="
       data.success
         ? '../../../../assets/images/checked.png'
         : '../../../../assets/images/x-button.png'
-    " alt="" />
+    "
+    alt=""
+  />
   <p>{{ data.msg }}</p>
-  <button *ngIf="!data.success" mat-raised-button color="warn" (click)="dialogRef.close()">
+  <button
+    *ngIf="!data.success"
+    mat-raised-button
+    color="warn"
+    (click)="dialogRef.close()"
+  >
     {{ data.button }}
   </button>
-  <button *ngIf="data.success" mat-raised-button style="color: #32ba7c" (click)="dialogRef.close(true)">
+  <button
+    *ngIf="data.success"
+    mat-raised-button
+    style="color: #32ba7c"
+    (click)="dialogRef.close(true)"
+  >
     {{ data.button }}
   </button>
 </div>

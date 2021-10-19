@@ -101,7 +101,7 @@
     </table>
     <!-- Pagination -->
     <mat-paginator
-      *ngIf="dataSource.length && !loading"
+      *ngIf="!loading && dataSource.length"
       [length]="dataLength"
       [pageSize]="pagination.pageSize"
       [pageIndex]="pagination.currentPage - 1"
