@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
 
   // form initializer
   initForm() {
-    // console.log(this.object)
+    console.log(this.object);
     let temp: any = {};
     let result: any = {};
 

@@ -1,0 +1,32 @@
+<div mat-dialog-title>
+  <h3>Update Details</h3>
+  <button
+    mat-icon-button
+    color="warn"
+    class="close-btn"
+    (click)="dialogRef.close()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <div class="mt-4"></div>
+  <app-form
+    [formFields]="formFields"
+    (formListener)="formListener($event)"
+    [object]="data.data"
+    [action]="'Update'"
+  ></app-form>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions align="center">
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="saving"
+    (click)="onUpdateUser()"
+  >
+    <mat-icon>save</mat-icon>&nbsp;{{ saving ? "Saving..." : "Save" }}
+  </button>
+</div>

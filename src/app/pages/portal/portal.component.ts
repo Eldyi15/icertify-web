@@ -140,6 +140,9 @@ export class PortalComponent implements OnInit {
       case 'changepassword':
         this.changePassword();
         break;
+      case 'profile':
+        this.profile();
+        break;
       default:
     }
   }
