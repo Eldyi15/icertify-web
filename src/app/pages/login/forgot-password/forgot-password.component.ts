@@ -19,6 +19,7 @@ import {
   styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
+  toMatch = false;
   mobileNumber: string = '';
   sending: boolean = false;
   saving: boolean = false;
@@ -41,9 +42,9 @@ export class ForgotPasswordComponent implements OnInit {
     private auth: AuthService,
     private otp: OtpService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   get registerFormControl() {
     return this.credentialPassword.controls;
@@ -69,6 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
         confirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         confirmPasswordControl.setErrors(null);
+        this.toMatch = true
       }
       return null;
     };
@@ -160,7 +162,7 @@ export class ForgotPasswordComponent implements OnInit {
     );
   }
 
-  pwCheck() {}
+  pwCheck() { }
 
   numberInputOnly(event: any) {
     return this.util.formNumberInputOnly(event);

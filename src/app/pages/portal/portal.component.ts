@@ -29,7 +29,7 @@ export class PortalComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {

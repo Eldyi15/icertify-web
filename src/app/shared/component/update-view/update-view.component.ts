@@ -15,6 +15,7 @@ import { ActionResultComponent } from '../../dialogs/action-result/action-result
   styleUrls: ['./update-view.component.scss'],
 })
 export class UpdateViewComponent implements OnInit {
+  isSaving = false;
   formFields = FormFields;
   action = this.data.action;
   toUpdateData: any;
@@ -31,28 +32,34 @@ export class UpdateViewComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
-  }
+  };
+
   formListener(event: any) {
     event.mobileNumber = `${event.mobileNumber}`;
     // console.log(event);
     this.formData = event;
-  }
+  };
+
   imageEmitter(event: any) {
     this.imageData = event.obj;
     this.imageFormValid = event.formValid
-  }
+  };
+
   onCancel() {
     this.dialogRef.close();
-  }
+  };
+
   onSave() {
     let formData = this.formData ? this.formData : this.data.data
     this.toUpdateData = { ...this.imageData, ...formData }
+
     this.dialog
       .open(AreYouSureComponent, {
         data: { header: 'Update Details', msg: this.data && this.data.action ? this.data.action : 'update' },
       })
       .afterClosed()
       .subscribe((res: any) => {
+        this.isSaving = true
         let type = ''
         if (this.data.data.type === 'User') {
           type = 'user'
@@ -66,8 +73,6 @@ export class UpdateViewComponent implements OnInit {
         }
         if (res) {
           this.toUpdateData['_id'] = this.data.data._id;
-          console.log(type)
-          console.log(this.toUpdateData, "Before")
           this.api.updateUser(this.toUpdateData, type).subscribe((res: any) => {
             console.log(res);
             if (res) {
@@ -86,6 +91,7 @@ export class UpdateViewComponent implements OnInit {
                   if (res)
                     this.dialogRef.close(true);
                 })
+              this.isSaving = true
             }
           }, (error: any) => {
             console.log(error)

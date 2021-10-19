@@ -29,4 +29,15 @@ describe('ForgotPasswordComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
+  // it('should not register if the new password and password confirm are not same', () => {
+  //   component.credentialPassword.setValue({
+  //     newPassword: '123qweasdzxc123',
+  //     passwordConfirm: '123qweasdzxc123',
+  //   });
+  //   component.matchPassword(component.credentialPassword.value.newPassword, component.credentialPassword.value.passwordConfirm);
+  //   expect(component.toMatch).toBeTrue();
+  // });
 });

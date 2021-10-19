@@ -69,6 +69,7 @@ export class AddMerchantComponent implements OnInit {
       (res: any) => {
         console.log(res);
         this.isAdded = true;
+        this.dialogRef.close(true)
 
       },
       (error: any) => {

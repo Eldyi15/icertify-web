@@ -47,15 +47,15 @@ export class TableComponent implements OnInit {
     public util: UtilService,
     private dialog: MatDialog,
 
-    private _bottomSheet: MatBottomSheet
+    public _bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit(): void {
     // console.log(this.pagination);
-
+    console.log(JSON.stringify(this.columns))
     this.duplicateColumns = JSON.parse(JSON.stringify(this.columns));
     this.displayedColumns = [];
-
+    console.log(this.duplicateColumns)
     this.updateBreakpoint();
   }
 
