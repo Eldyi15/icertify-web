@@ -83,26 +83,26 @@ export class AdminPortalComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout().subscribe((res) => {
-      this.dialog
-        .open(AreYouSureComponent, {
-          height: 'auto',
-          width: 'auto',
-          disableClose: true,
-          data: {
-            msg: 'you want to logout?',
-          },
-        })
-        .afterClosed()
-        .subscribe((res) => {
-          if (res) {
+    this.dialog
+      .open(AreYouSureComponent, {
+        height: 'auto',
+        width: 'auto',
+        disableClose: true,
+        data: {
+          msg: 'you want to logout?',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.auth.logout().subscribe((res) => {
             console.log(res);
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
             this.router.navigate(['/admin-login']);
-          }
-        });
-    });
+          });
+        }
+      });
   }
 
   changeRoute(nav: any) {
