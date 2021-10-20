@@ -29,6 +29,7 @@ export class MerchantPortalComponent implements OnInit {
   changeLabel = new EventEmitter<boolean>();
   routeLabel: string = '';
   page: any;
+  loggingOut: boolean = false;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -106,9 +107,11 @@ export class MerchantPortalComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res) => {
+        this.loggingOut = true;
         if (res) {
           this.auth.logout().subscribe((res) => {
             console.log(res);
+            this.loggingOut = false;
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
             this.router.navigate(['/admin-login']);

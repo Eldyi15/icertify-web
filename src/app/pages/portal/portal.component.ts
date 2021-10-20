@@ -29,6 +29,7 @@ export class PortalComponent implements OnInit {
   loading: boolean = false;
   page: any;
   mobileQuery!: MediaQueryList;
+  loggingOut: boolean = false;
   private _mobileQueryListener: () => void;
   constructor(
     private auth: AuthService,
@@ -126,9 +127,11 @@ export class PortalComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res) => {
+        this.loggingOut = true;
         if (res) {
           this.auth.logout().subscribe((res) => {
             console.log(res);
+            this.loggingOut = false;
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
             this.router.navigate(['/admin-login']);

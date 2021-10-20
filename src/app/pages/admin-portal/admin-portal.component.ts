@@ -28,6 +28,7 @@ export class AdminPortalComponent implements OnInit {
   me!: User;
   navs: any;
   loading: boolean = false;
+  loggingOut: boolean = false;
   changeLabel = new EventEmitter<boolean>();
   routeLabel: string = '';
   page: any;
@@ -95,10 +96,14 @@ export class AdminPortalComponent implements OnInit {
       .afterClosed()
       .subscribe((res) => {
         if (res) {
+          this.loggingOut = true;
+          console.log(this.loggingOut);
           this.auth.logout().subscribe((res) => {
             console.log(res);
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
+            this.loggingOut = false;
+            console.log(this.loggingOut);
             this.router.navigate(['/admin-login']);
           });
         }

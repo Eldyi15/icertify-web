@@ -1,5 +1,5 @@
 <div
-  *ngIf="!loading"
+  *ngIf="!loading && !loggingOut"
   class="example-container"
   [class.example-is-mobile]="mobileQuery.matches"
 >
@@ -45,14 +45,17 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="overflow-x: hidden">
-      <div *ngIf="router.url !== '/portal/user-details'" class="container">
+      <div
+        *ngIf="router.url !== '/portal/user-details'; else layout"
+        class="container"
+      >
         <router-outlet></router-outlet>
       </div>
-      <router-outlet
-        style="overflow-y: hidden"
-        *ngIf="router.url === '/portal/user-details'"
-      ></router-outlet>
+      <ng-template #layout>
+        <router-outlet style="overflow-y: hidden"></router-outlet
+      ></ng-template>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
 <app-loading *ngIf="loading"></app-loading>
+<app-logout-loader *ngIf="loggingOut"></app-logout-loader>
