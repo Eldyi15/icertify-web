@@ -114,7 +114,7 @@ export class MerchantPortalComponent implements OnInit {
             this.loggingOut = false;
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
-            this.router.navigate(['/admin-login']);
+            this.router.navigate(['/login']);
           });
         }
       });
