@@ -10,13 +10,15 @@
       'animation-duration': '1s'
     }"
   ></ngx-skeleton-loader>
-  <input
-    *ngIf="!loading"
-    class="full-width search-input"
-    placeholder="Search..."
-    [(ngModel)]="keyword"
-    (keyup.enter)="triggerSearch()"
-  />
+  <div *ngIf="!loading" class="input-handler">
+    <input
+      type="search"
+      placeholder="Search..."
+      [(ngModel)]="keyword"
+      (keyup.enter)="triggerSearch()"
+    />
+    <mat-icon>search</mat-icon>
+  </div>
 </div>
 <div class="mat-elevation-z1 table-container">
   <div class="btn-container">

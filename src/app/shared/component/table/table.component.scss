@@ -1,20 +1,60 @@
 @import "https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap";
 @import "../../../../assets/styles/fonts.scss";
 tr:hover {
-  // background: rgb(47, 137, 140);
-  // background: linear-gradient(
-  //   90deg,
-  //   rgba(47, 137, 140, 1) 18%,
-  //   rgba(85, 188, 126, 1) 100%
-  // );
   background: #f4f4f4;
   cursor: pointer;
   transition: 0.1s;
-  // transform: scale(1.01);
+}
 
-  // td {
-  //   color: #fff;
-  // }
+.input-handler {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  border-radius: 50px;
+  border: 3px solid #7c7c7c68;
+  box-sizing: border-box;
+  background: #fff;
+  transition: 1s;
+  position: relative;
+  margin-bottom: 1rem;
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 0;
+    width: 100%;
+    height: 52px;
+    line-height: 75px;
+    outline: 0;
+    display: none;
+    font-size: 16px;
+    border-radius: 25px;
+    padding: 0 20px;
+  }
+  mat-icon {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 52px;
+    height: 52px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 25px;
+    transition: 1s;
+    color: #fff;
+    background: #26184a;
+    padding: 15px;
+  }
+}
+.input-handler:hover,
+.input-handler:focus {
+  width: 400px;
+  cursor: pointer;
+  input {
+    display: block;
+  }
 }
 
 tr:hover > th {
@@ -61,26 +101,26 @@ th {
 .mat-table {
   width: 100%;
 }
-.search-bar {
-  // padding: 1rem;
-  margin-bottom: 2rem;
-  .search-input {
-    background: rgba(255, 255, 255, 0.858);
-    border-radius: 12px;
-    padding: 0.7rem;
-    border: 1px solid #cacacacf;
-    outline: none;
-    width: 100%;
-    margin: auto;
-    font-size: 15px;
-  }
-  .search-input:hover {
-    box-shadow: 1px 1px 8px 0px rgba(50, 50, 50, 0.37);
-  }
-  .search-input:focus {
-    box-shadow: 1px 1px 8px 0px rgba(50, 50, 50, 0.37);
-  }
-}
+// .search-bar {
+//   // padding: 1rem;
+//   margin-bottom: 2rem;
+//   .search-input {
+//     background: rgba(255, 255, 255, 0.858);
+//     border-radius: 12px;
+//     padding: 0.7rem;
+//     border: 1px solid #cacacacf;
+//     outline: none;
+//     width: 100%;
+//     margin: auto;
+//     font-size: 15px;
+//   }
+//   .search-input:hover {
+//     box-shadow: 1px 1px 8px 0px rgba(50, 50, 50, 0.37);
+//   }
+//   .search-input:focus {
+//     box-shadow: 1px 1px 8px 0px rgba(50, 50, 50, 0.37);
+//   }
+// }
 
 td,
 th {
@@ -88,4 +128,3 @@ th {
   word-wrap: break-word;
   max-width: 250px;
 }
-
