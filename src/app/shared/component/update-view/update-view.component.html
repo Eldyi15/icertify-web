@@ -5,15 +5,13 @@
   <div class="grid">
     <div class="col-12">
       <div *ngIf="loading">
-        <div
-          class="
+        <div class="
             h-25rem
             flex
             align-items-center
             justify-content-center
             flex-column
-          "
-        >
+          ">
           <mat-spinner [diameter]="85"></mat-spinner>
           <p class="text-center">Saving Data...</p>
         </div>
@@ -22,40 +20,22 @@
   </div>
   <div class="grid" *ngIf="!loading">
     <div class="col-12">
-      <app-form
-        [formFields]="formFields"
-        (formListener)="formListener($event)"
-        [action]="action"
-        [object]="data.data"
-      >
+      <app-form [formFields]="formFields" (formListener)="formListener($event)" [action]="action" [object]="data.data">
       </app-form>
     </div>
     <div class="col-12">
-      <app-image-form
-        (imageEmitter)="imageEmitter($event)"
-        [obj]="data.data"
-        [action]="action"
-      ></app-image-form>
+      <app-image-form (imageEmitter)="imageEmitter($event)" [obj]="data.data" [action]="action"></app-image-form>
     </div>
   </div>
 </div>
 <mat-divider></mat-divider>
 <mat-dialog-actions align="center" *ngIf="!loading">
-  <button
-    mat-raised-button
-    color="warn"
-    (click)="onCancel()"
-    *ngIf="action !== 'Activate'"
-  >
+  <button mat-raised-button color="warn" (click)="onCancel()" *ngIf="action !== 'Activate'">
     Cancel
   </button>
-  <button
-    mat-raised-button
-    (click)="onSave()"
-    [disabled]="!imageFormValid"
-    color="primary"
-    *ngIf="action === 'Update' || action === 'Activate'"
-  >
+  <button mat-raised-button (click)="onSave()"
+    [disabled]="!formProperties.valid || !formProperties.dirty || !imageFormValid" color="primary"
+    *ngIf="action === 'Update' || action === 'Activate'">
     {{ action === "Update" ? "Save" : "Activate" }}
   </button>
 </mat-dialog-actions>

@@ -28,6 +28,9 @@
             <mat-label>Email</mat-label>
             <input type="email" matInput formControlName="email" />
             <mat-icon matSuffix>mail</mat-icon>
+            <mat-error *ngIf="credential.controls.email.invalid">{{
+              formFieldErrMessage("email")
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Password</mat-label>
@@ -44,6 +47,9 @@
             >
               {{ hide ? "visibility" : "visibility_off" }}
             </mat-icon>
+            <mat-error *ngIf="credential.controls.password.invalid">{{
+              formFieldErrMessage("password")
+            }}</mat-error>
           </mat-form-field>
         </form>
         <button

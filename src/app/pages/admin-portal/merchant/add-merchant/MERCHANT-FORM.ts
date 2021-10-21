@@ -52,6 +52,7 @@ export const addMerchantForm = [
     default: '',
     colspan: 6,
     required: true,
+    mobileNumOnly: true,
     validator: [Validators.minLength(10), Validators.maxLength(10)],
   },
 ];

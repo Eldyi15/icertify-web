@@ -23,6 +23,12 @@ export class UpdateViewComponent implements OnInit {
   formData: any;
   loading: boolean = false;
   imageFormValid: boolean = false;
+  formProperties = {
+    dirty: undefined,
+    touched: undefined,
+    valid: undefined
+  }
+
   constructor(
     public api: ApiService,
     public dialog: MatDialog,
@@ -35,27 +41,36 @@ export class UpdateViewComponent implements OnInit {
   };
 
   formListener(event: any) {
-    event.mobileNumber = `${event.mobileNumber}`;
-    // console.log(event);
-    this.formData = event;
+    let raw = event.raw
+    raw.mobileNumber = `${raw.mobileNumber}`;
+    // console.log(raw);
+    this.formData = raw;
+    this.formProperties = event.properties
   };
 
   imageEmitter(event: any) {
     this.imageData = event.obj;
     this.imageFormValid = event.formValid;
   }
+
   onCancel() {
-    this.dialog
-      .open(AreYouSureComponent, {
-        data: {
-          msg: 'close this dialog',
-        },
-      })
-      .afterClosed()
-      .subscribe((res: any) => {
-        if (res) this.dialogRef.close();
-      });
+    // TODO: 
+    // Add return properties of image form (dirty,touched,valid)
+    if (this.formProperties.dirty || this.formProperties.touched)
+      this.dialog
+        .open(AreYouSureComponent, {
+          data: {
+            msg: 'close this dialog without saving changes',
+          },
+        })
+        .afterClosed()
+        .subscribe((res: any) => {
+          if (res) this.dialogRef.close();
+        });
+    else
+      this.dialogRef.close()
   }
+
   onSave() {
     let formData = this.formData ? this.formData : this.data.data;
     this.toUpdateData = { ...this.imageData, ...formData };

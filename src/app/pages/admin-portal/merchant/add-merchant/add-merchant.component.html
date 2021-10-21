@@ -21,11 +21,11 @@
                   {{ form.label }}
                   <small *ngIf="form.required">*</small>
                 </mat-label>
-                <input matInput [formControlName]="form.fcname" [type]="form.fcname === 'mobileNumber'?'number':'text'"
-                  [minlength]="form.fcname === 'mobileNumber' ? 10 : 1"
-                  [maxlength]="form.fcname === 'mobileNumber' ? 10 : 299" />
+                <input matInput [formControlName]="form.fcname" [type]="'text'"
+                  maxlength={{form.maxLength?form.maxLength:299}} />
                 <span matPrefix style="color: rgb(165, 165, 165)" *ngIf="form.fcname === 'mobileNumber'">+63</span>
-                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''">{{ form.label }} is required.
+                <mat-error *ngIf="merchantForm.controls[form.fcname].invalid">{{ formFieldErrMessage(form.fcname,
+                  form.label) }}
                 </mat-error>
               </mat-form-field>
 
@@ -33,7 +33,8 @@
               <mat-form-field class="full-width" *ngIf="form.type === 'number'" appearance="standard">
                 <mat-label>{{ form.label }}</mat-label>
                 <input type='number' matInput [formControlName]="form.fcname" />
-                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''">{{ form.label }} is required.
+                <mat-error *ngIf="merchantForm.controls[form.fcname].invalid">{{ formFieldErrMessage(form.fcname,
+                  form.label) }}
                 </mat-error>
               </mat-form-field>
             </div>

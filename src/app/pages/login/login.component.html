@@ -9,7 +9,7 @@
             <input type="text" matInput formControlName="email" />
             <mat-icon matSuffix>mail</mat-icon>
             <mat-error *ngIf="credential.controls.email.invalid">{{
-              errorMessageEmail()
+              formFieldErrMessage("email")
             }}</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width" appearance="standard">
@@ -27,6 +27,9 @@
             >
               {{ hide ? "visibility" : "visibility_off" }}
             </mat-icon>
+            <mat-error *ngIf="credential.controls.password.invalid">{{
+              formFieldErrMessage("password")
+            }}</mat-error>
           </mat-form-field>
         </form>
         <p (click)="forgotPassword()">Forgot password?</p>

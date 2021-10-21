@@ -14,9 +14,7 @@
               {{ field.label }}
               <small *ngIf="!field.isOptional">*</small>
             </mat-label>
-            <input matInput [formControlName]="field.fcName" [type]="field.fcName === 'mobileNumber'?'number':'text'"
-              [minlength]="field.fcName === 'mobileNumber' ? 10 : 1"
-              [maxlength]="field.fcName === 'mobileNumber' ? 10 : 299" />
+            <input matInput [formControlName]="field.fcName" [type]="'text'" />
             <span matPrefix style="color: rgb(165, 165, 165)" *ngIf="field.fcName === 'mobileNumber'">+63</span>
           </mat-form-field>
 

@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
   gridCss: Array<ColumnSizes> = ['sm', 'md', 'lg', 'xl'];
   css: any = {};
 
-  constructor(public util: UtilService, public fb: FormBuilder) { }
+  constructor(public util: UtilService, public fb: FormBuilder,) { }
 
   ngOnInit(): void {
     console.log(this.formFields);
@@ -94,8 +94,7 @@ export class FormComponent implements OnInit {
           }
         });
       });
-      pure['valid'] = this.form.valid;
-      this.formListener.emit(pure);
+      this.formListener.emit({ raw: pure, properties: { dirty: this.form.dirty, touched: this.form.touched, valid: this.form.valid } });
       setTimeout(() => {
         // if(this.obj) this.evaluate();
       }, 0);
