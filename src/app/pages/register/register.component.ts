@@ -38,13 +38,8 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private util: UtilService,
     private router: Router,
-<<<<<<< HEAD
-    public dialog: MatDialog
-  ) { }
-=======
     private dialog: MatDialog
   ) {}
->>>>>>> 46fe61d0bf608bdf781961fe57f526250f950c31
 
   ngOnInit(): void {}
   toggleShowPassword(): void {
