@@ -48,14 +48,14 @@ export class TableComponent implements OnInit {
     private dialog: MatDialog,
 
     public _bottomSheet: MatBottomSheet
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // console.log(this.pagination);
-    console.log(JSON.stringify(this.columns))
+    console.log(JSON.stringify(this.columns));
     this.duplicateColumns = JSON.parse(JSON.stringify(this.columns));
     this.displayedColumns = [];
-    console.log(this.duplicateColumns)
+    console.log(this.duplicateColumns);
     this.updateBreakpoint();
   }
 
@@ -204,26 +204,28 @@ export class TableComponent implements OnInit {
       })
       .afterDismissed()
       .subscribe((res: any) => {
-        let action = res
+        let action = res;
         console.log(res);
         if (res) {
-
           console.log(data);
           switch (res) {
             case 'Update':
-              this.dialog.open(UpdateViewComponent, {
-                width: '70%',
-                data: { data, action: res },
-              }).afterClosed().subscribe((res: any) => {
-                if (res) {
-                  var toEmit: TableOutput = {
-                    pageIndex: 0,
-                    pageSize: 10,
-                    // sort: 'desc',
-                  };
-                  this.pageChange.emit(toEmit)
-                }
-              });
+              this.dialog
+                .open(UpdateViewComponent, {
+                  width: '70%',
+                  data: { data, action: res },
+                })
+                .afterClosed()
+                .subscribe((res: any) => {
+                  if (res) {
+                    var toEmit: TableOutput = {
+                      pageIndex: 0,
+                      pageSize: 10,
+                      // sort: 'desc',
+                    };
+                    this.pageChange.emit(toEmit);
+                  }
+                });
               break;
 
             default:
@@ -234,39 +236,46 @@ export class TableComponent implements OnInit {
                 })
                 .afterClosed()
                 .subscribe((res) => {
-
+                  let updatedData = JSON.parse(JSON.stringify(data));
+                  let newStatus;
                   if (res) {
                     if (action === 'Delete') {
-                      data.status = 'Deleted';
+                      newStatus = 'Deleted';
                     }
                     if (action === 'Suspend') {
-                      data.status = 'Suspended';
+                      newStatus = 'Suspended';
                     }
                     if (action === 'Activate') {
-                      data.status = 'Active';
+                      newStatus = 'Active';
                     }
-                    this.api.updateUser(data, 'admin').subscribe((response: any) => {
-                      console.log(response);
-                      console.log(res);
-                      this.dialog
-                        .open(ActionResultComponent, {
-                          width: 'auto',
-                          height: 'auto',
-                          disableClose: true,
-                          data: {
-                            msg: [action + ' Merchant successful!'],
-                            success: true,
-                            button: 'Got it',
-                          },
-                        })
-                      var toEmit: TableOutput = {
-                        pageIndex: 0,
-                        pageSize: 10,
-                        // sort: 'desc',
-                      };
-                      this.pageChange.emit(toEmit)
-                    });
-
+                    console.log('beforesub', data);
+                    updatedData.status = newStatus;
+                    this.api
+                      .updateUser(updatedData, 'admin')
+                      .subscribe((response: any) => {
+                        console.log(response);
+                        this.dialog
+                          .open(ActionResultComponent, {
+                            width: 'auto',
+                            height: 'auto',
+                            disableClose: true,
+                            data: {
+                              msg: [action + ' Merchant successful!'],
+                              success: true,
+                              button: 'Got it',
+                            },
+                          })
+                          .afterClosed()
+                          .subscribe(() => {
+                            var toEmit: TableOutput = {
+                              pageIndex: 0,
+                              pageSize: 10,
+                              // sort: 'desc',
+                            };
+                            this.pageChange.emit(toEmit);
+                          });
+                        console.log(res);
+                      });
                   }
                 });
 

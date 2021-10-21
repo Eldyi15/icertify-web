@@ -11,7 +11,7 @@ type Collection = 'test_collections' | 'test_collections_2';
 })
 export class ApiService {
   // env
-  constructor(@Inject(HttpService) public http: HttpService) { }
+  constructor(@Inject(HttpService) public http: HttpService) {}
 
   // fn
 
@@ -32,6 +32,6 @@ export class ApiService {
     return this.http.start('get', '/user/admin', {}, QueryParams);
   }
   updateUser(body: any, type: string) {
-    return this.http.start('patch', `/user/${type}/${body._id}`, body)
+    return this.http.start('patch', `/user/${type}/${body._id}`, body);
   }
 }
