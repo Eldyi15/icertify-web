@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import { Section } from 'src/app/models/appforms.interface';
 export const userFields: Array<Section> = [
   {
@@ -31,6 +32,7 @@ export const userFields: Array<Section> = [
         colspan: { xs: 12, md: 6, lg: 6, xl: 6, sm: 12 },
         isVisible: true,
         fcName: 'email',
+
       },
       {
         label: 'Mobile Number',

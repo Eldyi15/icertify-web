@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { Column } from 'src/app/models/column.interface';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ColumnSelectorComponent implements OnInit {
   columns: Array<Column> = [];
+  @Output() columnEvent: EventEmitter<any> = new EventEmitter
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -27,9 +28,5 @@ export class ColumnSelectorComponent implements OnInit {
 
   filterColumn(index: number) {
     this.columns[index].selected = !this.columns[index].selected;
-  }
-
-  onApply() {
-    this.dialogRef.close(this.columns);
   }
 }

@@ -191,6 +191,8 @@ export class FormComponent implements OnInit {
     if (!['checkbox'].includes(field.type) && !field.isOptional) {
       validators.push(Validators.required);
     }
+    if (field.isEmail)
+      validators.push(Validators.email)
     // Try set custom validators
 
     return validators;

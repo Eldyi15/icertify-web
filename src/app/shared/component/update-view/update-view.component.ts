@@ -53,7 +53,7 @@ export class UpdateViewComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res: any) => {
-        this.dialogRef.close();
+        if (res) this.dialogRef.close();
       });
   }
   onSave() {
@@ -61,6 +61,7 @@ export class UpdateViewComponent implements OnInit {
     this.toUpdateData = { ...this.imageData, ...formData };
     this.dialog
       .open(AreYouSureComponent, {
+        disableClose: true,
         data: {
           header: 'Update Details',
           msg: this.data && this.data.action ? this.data.action : 'update',
@@ -68,17 +69,19 @@ export class UpdateViewComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res: any) => {
+
         let type = '';
         if (this.data.data.type === 'User') {
           type = 'user';
         } else {
           type = 'admin';
         }
-        this.loading = true;
+
         if (this.data.action === 'Activate') {
           this.toUpdateData.status = 'Active';
         }
         if (res) {
+          this.loading = true;
           this.toUpdateData['_id'] = this.data.data._id;
           console.log(type);
           console.log(this.toUpdateData, 'Before');

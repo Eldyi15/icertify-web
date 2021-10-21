@@ -3,14 +3,14 @@
 //     // background-color: #8460df;
 //     color: #ffff;
 //   }
-.custom-hover-delete:hover mat-icon{
+.custom-hover-delete:hover {
   cursor: pointer;
   color: red;
   opacity: .5;
   border-radius: 10px;
   
 }
-.custom-hover-update:hover mat-icon{
+.custom-hover-update:hover {
   cursor: pointer;
   color: blue;
   opacity: .5;
@@ -18,15 +18,15 @@
   
 }
 
-.custom-hover-suspend:hover mat-icon{
+.custom-hover-suspend:hover {
   cursor: pointer;
-  color: orange;
+  color: rgb(235, 107, 3);
   opacity: .5;
   border-radius: 10px;
   
 }
 
-.custom-hover-activate:hover mat-icon{
+.custom-hover-activate:hover {
   cursor: pointer;
   color: green;
   opacity: .5;

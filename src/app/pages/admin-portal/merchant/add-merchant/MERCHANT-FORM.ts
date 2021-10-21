@@ -40,7 +40,7 @@ export const addMerchantForm = [
     default: '',
     colspan: 6,
     required: true,
-    validator: [],
+    validator: [Validators.email],
   },
   {
     label: 'Mobile Number',

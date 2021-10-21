@@ -39,6 +39,7 @@ export class TableComponent implements OnInit {
   @Input() show: boolean = true;
   @Input() pageTitle: string = '';
   @Input() bottomSheetConf?: Array<any>;
+  @Input() columnEvent?: any
   sort: any;
   curPageIndex: number = 1;
 
@@ -48,7 +49,9 @@ export class TableComponent implements OnInit {
     private dialog: MatDialog,
 
     public _bottomSheet: MatBottomSheet
-  ) {}
+  ) { }
+
+
 
   ngOnInit(): void {
     // console.log(this.pagination);
@@ -175,7 +178,7 @@ export class TableComponent implements OnInit {
   }
 
   openColumnSelector() {
-    this.dialog
+    let diag = this.dialog
       .open(ColumnSelectorComponent, {
         width: '30rem',
         height: 'auto',
@@ -183,14 +186,16 @@ export class TableComponent implements OnInit {
           columns: [...this.columns],
         },
       })
-      .afterClosed()
-      .subscribe((res: Array<Column>) => {
-        if (res) {
-          this.duplicateColumns = res;
-          this.updateBreakpoint();
-        }
-      });
+    diag.componentInstance.columnEvent.subscribe((res: any) => {
+      this.duplicateColumns = res
+      this.updateBreakpoint()
+    })
+    diag.afterClosed().subscribe(() => {
+
+    })
+
   }
+
 
   onRowClick(data: any, index: number) {
     console.log(data, index, this.bottomSheetConf);
@@ -212,6 +217,7 @@ export class TableComponent implements OnInit {
             case 'Update':
               this.dialog
                 .open(UpdateViewComponent, {
+                  disableClose: true,
                   width: '70%',
                   data: { data, action: res },
                 })

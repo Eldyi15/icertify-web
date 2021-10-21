@@ -127,8 +127,8 @@ export class PortalComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res) => {
-        this.loggingOut = true;
         if (res) {
+          this.loggingOut = true;
           this.auth.logout().subscribe((res) => {
             console.log(res);
             this.loggingOut = false;

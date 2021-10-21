@@ -78,6 +78,8 @@ export class AdminPortalComponent implements OnInit {
             success: false,
             button: 'Got it',
           },
+        }).afterClosed().subscribe(() => {
+          this.router.navigate(['/admin-login'])
         });
       }
     );

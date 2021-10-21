@@ -2,7 +2,12 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   NavigationStart,
@@ -45,6 +50,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  errorMessageEmail() {
+    if (this.credential.controls.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+    return this.credential.controls.email.hasError('email')
+      ? 'Not a valid email'
+      : '';
+  }
 
   login() {
     this.isLoggingIn = true;

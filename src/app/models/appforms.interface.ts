@@ -43,6 +43,7 @@ export interface Field {
   dbPath?: string;
   dbCollection?: string;
   arrayFields?: Array<Field>;
+  isEmail?: boolean
 }
 
 export interface Section {

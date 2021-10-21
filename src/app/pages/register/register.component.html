@@ -28,13 +28,20 @@
               <small>*</small>
             </mat-label>
             <input matInput type="text" formControlName="firstName" />
+            <mat-error *ngIf="registerForm.controls.firstName.invalid">{{
+              formFieldErrMessage("firstName")
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >Last Name
               <small>*</small>
             </mat-label>
+
             <input matInput type="text" formControlName="lastName" />
+            <mat-error *ngIf="registerForm.controls.lastName.invalid">{{
+              formFieldErrMessage("lastName")
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field class="col-12" appearance="fill">
             <mat-label
@@ -42,6 +49,9 @@
               <small>*</small>
             </mat-label>
             <input matInput type="text" formControlName="email" />
+            <mat-error *ngIf="registerForm.controls.email.invalid">{{
+              formFieldErrMessage("email")
+            }}</mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6" appearance="fill">
@@ -54,6 +64,9 @@
               [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
             />
+            <mat-error *ngIf="registerForm.controls.password.invalid">{{
+              formFieldErrMessage("password")
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field class="col-6" appearance="fill">
             <mat-label
@@ -65,7 +78,11 @@
               [type]="showPassword ? 'text' : 'password'"
               formControlName="passwordConfirm"
             />
+            <mat-error *ngIf="registerForm.controls.passwordConfirm.invalid">{{
+              formFieldErrMessage("passwordConfirm")
+            }}</mat-error>
           </mat-form-field>
+
           <mat-checkbox class="col-12" (change)="toggleShowPassword()"
             >Show Password</mat-checkbox
           >
@@ -84,6 +101,9 @@
               [maxLength]="10"
             />
             <span matPrefix>+63</span>
+            <mat-error *ngIf="registerForm.controls.mobileNumber.invalid">{{
+              formFieldErrMessage("mobileNumber")
+            }}</mat-error>
           </mat-form-field>
         </div>
       </form>
