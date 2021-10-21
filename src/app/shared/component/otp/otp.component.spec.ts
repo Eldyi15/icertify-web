@@ -7,7 +7,7 @@ import { OtpComponent } from './otp.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-xdescribe('OtpComponent', () => {
+describe('OtpComponent', () => {
   let component: OtpComponent;
   let fixture: ComponentFixture<OtpComponent>;
 
@@ -26,7 +26,16 @@ xdescribe('OtpComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
+  describe("FORM VALIDITY", () => {
+    it('should be invalid if one of the otp input field is empty', () => {
+      component.otpVal.setValue({
+        otp1: "",
+        otp2: '2',
+        otp3: '3',
+        otp4: '4'
+      })
+      expect(component.otpVal.valid).toBeFalse()
+    })
+  })
 });

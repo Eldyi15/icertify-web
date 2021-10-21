@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private util: UtilService,
     private router: Router,
-    private dialog: MatDialog
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void { }

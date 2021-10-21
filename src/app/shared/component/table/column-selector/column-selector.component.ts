@@ -16,6 +16,7 @@ export class ColumnSelectorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // console.log(this.data.columns, "HERERERE")
     this.columns = JSON.parse(JSON.stringify(this.data.columns));
 
   }

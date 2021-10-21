@@ -21,7 +21,7 @@ describe('AddMerchantComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AddMerchantComponent],
       imports: [ReactiveFormsModule, HttpClientTestingModule, MaterialModule, BrowserAnimationsModule],
-      providers: [{ provide: MatDialogRef, useValue: {} }]
+      providers: [{ provide: MatDialogRef, useValue: { close: () => { } } }]
     })
       .compileComponents();
   });

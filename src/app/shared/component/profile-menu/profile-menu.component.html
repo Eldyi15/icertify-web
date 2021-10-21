@@ -1,37 +1,20 @@
-<ngx-avatar
-  *ngIf="me"
-  name="{{ me ? me.firstName + ' ' + me.lastName : '' }}"
-  value="def"
+<ngx-avatar *ngIf="me" name="{{ me ? me.firstName + ' ' + me.lastName : '' }}" value="def"
   bgColor="{{ avatarColors ? avatarColors.bgColor : '#fff' }}"
-  fgColor="{{ avatarColors ? avatarColors.textColor : '#26184a' }} "
-  size="40"
-  [round]="true"
-  class="my-avatar"
-  [matMenuTriggerFor]="menu"
-></ngx-avatar>
+  fgColor="{{ avatarColors ? avatarColors.textColor : '#26184a' }} " size="40" [round]="true" class="my-avatar"
+  [matMenuTriggerFor]="menu"></ngx-avatar>
 
 <mat-menu style="padding-top: 0; padding-bottom: 0px" #menu="matMenu">
-  <mat-card
-    mat-ele
-    style="
+  <mat-card mat-ele style="
       background: rgb(255, 255, 255);
       border: none;
       box-shadow: none;
       padding-top: 0px;
       padding-bottom: 0px;
-    "
-  >
+    ">
     <div class="flex-wrapper-row">
-      <ngx-avatar
-        src="{{
+      <ngx-avatar src="{{
           selfieLink ? selfieLink : './../../../assets/images/guest.png'
-        }}"
-        value="noPic"
-        bgColor="#26184a"
-        fgColor="#fff"
-        size="80"
-        [round]="true"
-      ></ngx-avatar>
+        }}" value="noPic" bgColor="#26184a" fgColor="#fff" size="80" [round]="true"></ngx-avatar>
 
       <mat-card-header>
         <mat-card-title>
@@ -43,11 +26,7 @@
       </mat-card-header>
     </div>
   </mat-card>
-  <button
-    mat-menu-item
-    *ngFor="let item of menuItems"
-    (click)="onClick.emit(item.action)"
-  >
+  <button mat-menu-item *ngFor="let item of menuItems" (click)="onClick.emit(item.action)">
     <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
     <span>{{ item.name }}</span>
   </button>

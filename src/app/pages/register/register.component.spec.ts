@@ -1,3 +1,4 @@
+import { LoginComponent } from './../login/login.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../../shared/material.module';
@@ -7,7 +8,9 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 
 import { RegisterComponent } from './register.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Location } from '@angular/common';
 import { of } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -17,20 +20,26 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule, RouterTestingModule]
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule, RouterTestingModule.withRoutes([
+        {
+          path: 'login',
+          component: LoginComponent
+        }
+      ])],
+      providers: [{ provide: MatDialogRef, useValue: { close: () => { } } }]
     }).compileComponents();
   });
 
   beforeEach(() => {
     authService = TestBed.inject(AuthService);
+
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 
   it('should be password match', () => {
     component.registerForm.setValue({
@@ -77,4 +86,31 @@ describe('RegisterComponent', () => {
     expect(component.registerForm.valid).toBeTrue()
     expect(component.isRegistered).toBeTrue();
   }));
+  it('should show password', () => {
+    component.toggleShowPassword()
+    expect(component.showPassword).toBeTrue()
+  })
+
+  it('should navigate to login page', fakeAsync(() => {
+    let location = TestBed.inject(Location)
+    component.login()
+    tick(200);
+    fixture.detectChanges();
+    expect(location.path()).toBe('/login')
+
+  }))
+  it('should send otp and call register function', fakeAsync(() => {
+    spyOn(component, 'register')
+    spyOn(component.dialog, 'open')
+      .and
+      .returnValue({
+        afterClosed: () => of(true)
+      } as MatDialogRef<typeof component>);
+    component.register()
+
+    tick(200);
+    fixture.detectChanges();
+    expect(component.dialog).toBeDefined()
+    expect(component.register).toHaveBeenCalled()
+  }))
 });

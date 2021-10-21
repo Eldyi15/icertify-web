@@ -10,7 +10,7 @@ export class UtilService {
   // env
   empties = [null, undefined];
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) { }
 
   // fn
   traverseArray(arr: any[], path: string, values: any[] = []): any {
@@ -29,7 +29,7 @@ export class UtilService {
     if (obj && !path) return '';
 
     if (typeof path == 'string') return this.deepFind(obj, path.split('.'));
-    else if (path.length == 0) return this.empties.includes(obj) ? '' : obj;
+    else if (path.length == 0) return this.empties.includes(obj) ? '' : Array.isArray(obj) ? obj.join(', ') : obj;
     else if (Array.isArray(obj)) {
       return this.traverseArray(obj, path.join('.'));
     } else return this.deepFind(obj[path[0]], path.slice(1));

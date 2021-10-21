@@ -1,3 +1,4 @@
+import { MOCK_USER_DATA } from './../../../config/KARMA_TESTING';
 import { ApiService } from './../../../services/api/api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OtpService } from './../../../services/otp/otp.service';
@@ -15,14 +16,19 @@ describe('UpdateViewComponent', () => {
   let component: UpdateViewComponent;
   let fixture: ComponentFixture<UpdateViewComponent>;
   let apiService: ApiService;
-  let dialogSpy: jasmine.Spy;
-  let mySpy
+  let userData = MOCK_USER_DATA
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UpdateViewComponent],
       imports: [HttpClientTestingModule, MaterialModule, BrowserAnimationsModule],
-      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }]
+      providers: [{ provide: MatDialogRef, useValue: {} }, {
+        provide: MAT_DIALOG_DATA, useValue: {
+          data: {
+            userData,
+          }
+        }
+      }]
     })
       .compileComponents();
   });
@@ -31,6 +37,7 @@ describe('UpdateViewComponent', () => {
     apiService = TestBed.inject(ApiService)
     fixture = TestBed.createComponent(UpdateViewComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
@@ -39,7 +46,7 @@ describe('UpdateViewComponent', () => {
   });
 
   it('should be passing a data to form data', () => {
-    let mockData = { mockdata: "Sample" };
+    let mockData = userData;
     component.data = mockData
     component.formListener(component.data)
     expect(component.formData === mockData).toBeTruthy()
