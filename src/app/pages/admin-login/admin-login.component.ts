@@ -31,6 +31,13 @@ export class AdminLoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  formFieldErrMessage(fcName: string) {
+    let formControl = this.credential.controls[fcName];
+    if (formControl.hasError('required')) return 'You must enter a value';
+    if (formControl.hasError('email')) return 'Invalid email';
+
+    return '';
+  }
   login() {
     this.isLoggingIn = true;
     // let rawCredentials = this.credential.getRawValue();

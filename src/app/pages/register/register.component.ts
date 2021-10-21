@@ -7,9 +7,11 @@ import {
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,7 +37,10 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required]),
       passwordConfirm: new FormControl(''),
-      mobileNumber: new FormControl('', [Validators.required]),
+      mobileNumber: new FormControl('', [
+        Validators.required,
+        this.checkMobileNum(),
+      ]),
     },
     {
       validator: this.matchPassword('password', 'passwordConfirm'),
@@ -75,10 +80,14 @@ export class RegisterComponent implements OnInit {
 
   formFieldErrMessage(fcName: string) {
     let formControl = this.registerForm.controls[fcName];
+
     if (formControl.hasError('required')) return 'You must enter a value';
     if (formControl.hasError('email')) return 'Invalid email';
+    if (formControl.hasError('passwordMismatch'))
+      return 'Password confirm mismatch!';
+    if (formControl.hasError('invalidNumber')) return 'Invalid Number';
 
-    return '';
+    return;
   }
 
   matchPassword(password: string, passwordConfirm: string) {
@@ -107,7 +116,16 @@ export class RegisterComponent implements OnInit {
     };
   }
 
-  checkMobileNum() {}
+  checkMobileNum() {
+    return (control: AbstractControl) => {
+      const mNumber = control.value;
+      if (!mNumber.startsWith('9') || mNumber.length !== 10) {
+        return { invalidNumber: true };
+      }
+
+      return null;
+    };
+  }
 
   register() {
     this.loading = true;

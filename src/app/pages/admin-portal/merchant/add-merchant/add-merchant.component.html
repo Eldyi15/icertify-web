@@ -23,8 +23,8 @@
               >
                 <mat-label>{{ form.label }}</mat-label>
                 <input matInput [formControlName]="form.fcname" />
-                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''"
-                  >{{ form.label }} is required.
+                <mat-error *ngIf="merchantForm.controls[form.fcname].invalid"
+                  >{{ formFieldErrMessage(form.fcname, form.label) }}
                 </mat-error>
               </mat-form-field>
               <mat-form-field
@@ -34,8 +34,8 @@
               >
                 <mat-label>{{ form.label }}</mat-label>
                 <input matInput [formControlName]="form.fcname" />
-                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''"
-                  >{{ form.label }} is required.
+                <mat-error *ngIf="merchantForm.controls[form.fcname].invalid"
+                  >{{ formFieldErrMessage(form.fcname, form.label) }}
                 </mat-error>
               </mat-form-field>
             </div>
