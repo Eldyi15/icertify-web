@@ -6,7 +6,12 @@ import {
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterFormUser } from 'src/app/models/register.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -21,15 +26,21 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
   isRegistered = false;
   showPassword: boolean = false;
-  registerForm = this.fb.group({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    // middleName: new FormControl(''),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    passwordConfirm: new FormControl(''),
-    mobileNumber: new FormControl('', [Validators.required]),
-  });
+  toMatch = false;
+  registerForm = this.fb.group(
+    {
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      // middleName: new FormControl(''),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      passwordConfirm: new FormControl(''),
+      mobileNumber: new FormControl('', [Validators.required]),
+    },
+    {
+      validator: this.matchPassword('password', 'passwordConfirm'),
+    }
+  );
 
   mobileNumber = this.registerForm.getRawValue().mobileNumber;
   constructor(
@@ -61,6 +72,42 @@ export class RegisterComponent implements OnInit {
         if (res) this.register();
       });
   }
+
+  formFieldErrMessage(fcName: string) {
+    let formControl = this.registerForm.controls[fcName];
+    if (formControl.hasError('required')) return 'You must enter a value';
+    if (formControl.hasError('email')) return 'Invalid email';
+
+    return '';
+  }
+
+  matchPassword(password: string, passwordConfirm: string) {
+    return (fb: FormGroup) => {
+      const passwordControl = fb.controls[password];
+      const confirmPasswordControl = fb.controls[passwordConfirm];
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors.passwordMismatch
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+      } else {
+        this.toMatch = true;
+        confirmPasswordControl.setErrors(null);
+      }
+      return null;
+    };
+  }
+
+  checkMobileNum() {}
 
   register() {
     this.loading = true;

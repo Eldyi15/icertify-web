@@ -8,6 +8,9 @@
             <mat-label>Email</mat-label>
             <input type="text" matInput formControlName="email" />
             <mat-icon matSuffix>mail</mat-icon>
+            <mat-error *ngIf="credential.controls.email.invalid">{{
+              errorMessageEmail()
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Password</mat-label>
