@@ -45,26 +45,26 @@ export const MAT_BOTTOM_SHEET_CONF = [
     label: 'Update',
     show: true,
     icon: 'edit',
-    color: 'blue'
+    color: 'custom-hover-update'
   },
   {
     label: 'Suspend',
     show: true,
     icon: 'block',
-    color: 'orange'
+    color: 'custom-hover-suspend'
 
   },
   {
     label: 'Activate',
     show: true,
     icon: 'done',
-    color: 'green'
+    color: 'custom-hover-activate'
   },
   {
     label: 'Delete',
     show: true,
     icon: 'delete',
-    color: 'red'
+    color: 'custom-hover-delete'
 
   },
 ]

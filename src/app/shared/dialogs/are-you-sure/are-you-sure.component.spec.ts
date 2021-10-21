@@ -10,7 +10,7 @@ describe('AreYouSureComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AreYouSureComponent],
-      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }]
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { msg: 'msg' } }, { provide: MatDialogRef, useValue: {} }]
     })
       .compileComponents();
   });
@@ -24,4 +24,9 @@ describe('AreYouSureComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should read data pass from previous component', () => {
+    // component.data = undefined
+    expect(component.data).not.toBeUndefined()
+  })
 });

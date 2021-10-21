@@ -130,6 +130,18 @@ export const MOCK_USER_DATA = {
         size: 61875,
         is_downloadable: true,
         content_hash: "44bdfb767b3a35beee88a94c1ffbb36b6fbbfe12e169cbbd054f5f842918cac1"
+    },
+    valid_id: {
+        name: "1.png",
+        path_lower: "/icertify/1.png",
+        path_display: "/ICertify/1.png",
+        id: "id:o1Uw3rTcV8AAAAAAAACceA",
+        client_modified: "2021-10-15T05:27:31Z",
+        server_modified: "2021-10-15T05:27:31Z",
+        rev: "015ce5d73aa977d00000001e7c7a640",
+        size: 61875,
+        is_downloadable: true,
+        content_hash: "44bdfb767b3a35beee88a94c1ffbb36b6fbbfe12e169cbbd054f5f842918cac1"
     }
 }
 

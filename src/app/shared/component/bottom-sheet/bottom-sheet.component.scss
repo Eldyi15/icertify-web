@@ -3,33 +3,37 @@
 //     // background-color: #8460df;
 //     color: #ffff;
 //   }
-.custom-hover-delete:hover{
+.custom-hover-delete:hover mat-icon{
   cursor: pointer;
-  background: red;
+  color: red;
   opacity: .5;
   border-radius: 10px;
-  color: #FFF;
+  
 }
-.custom-hover-update:hover{
+.custom-hover-update:hover mat-icon{
   cursor: pointer;
-  background: blue;
+  color: blue;
   opacity: .5;
   border-radius: 10px;
-  color: #FFF;
-}
-
-.custom-hover-suspend:hover{
-  cursor: pointer;
-  background: orange;
-  opacity: .5;
-  border-radius: 10px;
-  color: #FFF;
+  
 }
 
-.custom-hover-activate:hover{
+.custom-hover-suspend:hover mat-icon{
   cursor: pointer;
-  background: green;
+  color: orange;
   opacity: .5;
   border-radius: 10px;
-  color: #FFF;
+  
+}
+
+.custom-hover-activate:hover mat-icon{
+  cursor: pointer;
+  color: green;
+  opacity: .5;
+  border-radius: 10px;
+}
+
+.spanbtn:hover{
+  background: rgb(132,96,223,0.5);
+  border-radius: 20px;
 }

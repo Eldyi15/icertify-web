@@ -16,26 +16,24 @@
         <div class="grid">
           <ng-container *ngFor="let form of addMerchant">
             <div class="col-{{ form.colspan }}">
-              <mat-form-field
-                class="full-width"
-                *ngIf="form.type === 'text'"
-                appearance="standard"
-              >
-                <mat-label>{{ form.label }}</mat-label>
-                <input matInput [formControlName]="form.fcname" />
-                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''"
-                  >{{ form.label }} is required.
+              <mat-form-field class="full-width" *ngIf="form.type == 'text'">
+                <mat-label>
+                  {{ form.label }}
+                  <small *ngIf="form.required">*</small>
+                </mat-label>
+                <input matInput [formControlName]="form.fcname" [type]="form.fcname === 'mobileNumber'?'number':'text'"
+                  [minlength]="form.fcname === 'mobileNumber' ? 10 : 1"
+                  [maxlength]="form.fcname === 'mobileNumber' ? 10 : 299" />
+                <span matPrefix style="color: rgb(165, 165, 165)" *ngIf="form.fcname === 'mobileNumber'">+63</span>
+                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''">{{ form.label }} is required.
                 </mat-error>
               </mat-form-field>
-              <mat-form-field
-                class="full-width"
-                *ngIf="form.type === 'number'"
-                appearance="standard"
-              >
+
+
+              <mat-form-field class="full-width" *ngIf="form.type === 'number'" appearance="standard">
                 <mat-label>{{ form.label }}</mat-label>
-                <input matInput [formControlName]="form.fcname" />
-                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''"
-                  >{{ form.label }} is required.
+                <input type='number' matInput [formControlName]="form.fcname" />
+                <mat-error *ngIf="merchantForm?.get(form.fcname)?.value === ''">{{ form.label }} is required.
                 </mat-error>
               </mat-form-field>
             </div>
@@ -44,47 +42,24 @@
       </form>
     </div>
     <div class="col-12" *ngIf="step === 2">
-      <app-image-form
-        (imageEmitter)="imageEmitter($event)"
-        [obj]="this.toAddData ? this.toAddData : merchantForm.getRawValue()"
-      ></app-image-form>
+      <app-image-form (imageEmitter)="imageEmitter($event)"
+        [obj]="this.toAddData ? this.toAddData : merchantForm.getRawValue()"></app-image-form>
     </div>
   </div>
 </div>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
-  <button
-    mat-raised-button
-    class="btn"
-    (click)="step = step - 1"
-    [disabled]="!merchantForm.valid || saving"
-    *ngIf="step === 2"
-  >
+  <button mat-raised-button class="btn" (click)="step = step - 1" [disabled]="!merchantForm.valid || saving"
+    *ngIf="step === 2">
     <span>Previous</span>
   </button>
-  <button
-    mat-flat-button
-    color="primary"
-    class="btn"
-    (click)="submit()"
-    [disabled]="!imageFormValid || saving"
-    *ngIf="step === 2"
-  >
+  <button mat-flat-button color="primary" class="btn" (click)="submit()" [disabled]="!imageFormValid || saving"
+    *ngIf="step === 2">
     <span *ngIf="!saving">Add Merchant</span>
 
-    <mat-spinner
-      style="margin-left: 40%"
-      *ngIf="saving"
-      [diameter]="30"
-    ></mat-spinner></button
-  ><button
-    mat-flat-button
-    color="primary"
-    class="btn"
-    (click)="step = step + 1"
-    [disabled]="!merchantForm.valid || saving"
-    *ngIf="step === 1"
-  >
+    <mat-spinner style="margin-left: 40%" *ngIf="saving" [diameter]="30"></mat-spinner>
+  </button><button mat-flat-button color="primary" class="btn" (click)="step = step + 1"
+    [disabled]="!merchantForm.valid || saving" *ngIf="step === 1">
     <span>Next</span>
   </button>
 </div>

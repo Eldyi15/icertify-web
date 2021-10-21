@@ -20,11 +20,11 @@ export class UserDetailsComponent implements OnInit {
   me: any;
   loading: boolean = false;
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private dbx: DropboxService,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private api: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchInitial();

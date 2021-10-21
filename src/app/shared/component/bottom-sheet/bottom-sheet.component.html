@@ -1,10 +1,8 @@
-<mat-list>
+<mat-nav-list>
     <ng-container *ngFor="let conf of data.bottomSheetConf">
-        <mat-list-item *ngIf="conf.show"
-            [ngClass]="{'custom-hover-delete':conf.label === 'Delete', 'custom-hover-activate':conf.label==='Activate', 'custom-hover-suspend':conf.label==='Suspend', 'custom-hover-update':conf.label==='Update'}"
-            (click)=" onDismiss(conf.label)">
-            <mat-icon class="mr-3">{{conf.icon}}</mat-icon> <span>{{conf.label}}</span>
-
+        <mat-list-item class="spanbtn" *ngIf="conf.show" [ngClass]="conf.color" (click)=" onDismiss(conf.label)">
+            <span mat-line>{{conf.label}}</span>
+            <mat-icon class="mr-3">{{conf.icon}}</mat-icon>
         </mat-list-item>
     </ng-container>
-</mat-list>
+</mat-nav-list>

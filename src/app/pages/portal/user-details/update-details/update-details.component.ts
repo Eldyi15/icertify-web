@@ -16,18 +16,18 @@ import { userFields } from '../user-form';
 })
 export class UpdateDetailsComponent implements OnInit {
   formFields = userFields;
-  formData: any;
+  formData: any = {}
   toUpdateData: any;
   saving: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<UpdateDetailsComponent>,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private api: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
+
   }
 
   formListener(event: any) {
@@ -36,6 +36,7 @@ export class UpdateDetailsComponent implements OnInit {
   }
 
   onUpdateUser() {
+    console.log(this.data.data.selfie, "HEERERERER");
     this.formData.selfie = this.data.data.selfie;
     this.formData.valid_id = this.data.data.valid_id;
     this.formData._id = this.data.data._id;

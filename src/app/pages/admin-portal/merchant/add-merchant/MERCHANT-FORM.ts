@@ -20,6 +20,7 @@ export const addMerchantForm = [
     colspan: 4,
     required: false,
     validator: [],
+
   },
   {
     label: 'Last Name',
@@ -43,7 +44,7 @@ export const addMerchantForm = [
   },
   {
     label: 'Mobile Number',
-    type: 'number',
+    type: 'text',
     fcname: 'mobileNumber',
     show: true,
     prefix: '+63',

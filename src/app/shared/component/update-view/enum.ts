@@ -10,6 +10,7 @@ export const FormFields: Array<Section> = [
         colspan: { xs: 12, md: 12, lg: 4, xl: 4, sm: 12 },
         isVisible: true,
         fcName: 'firstName',
+
       },
       {
         label: 'Middle Name',
@@ -17,6 +18,7 @@ export const FormFields: Array<Section> = [
         colspan: { xs: 12, md: 12, lg: 4, xl: 4, sm: 12 },
         isVisible: true,
         fcName: 'middleName',
+        isOptional: true
       },
       {
         label: 'Last Name',

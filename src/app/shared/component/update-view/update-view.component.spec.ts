@@ -10,6 +10,7 @@ import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testin
 import { UpdateViewComponent } from './update-view.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { AnimationDriver } from '@angular/animations/browser';
 
 
 describe('UpdateViewComponent', () => {
@@ -24,9 +25,9 @@ describe('UpdateViewComponent', () => {
       imports: [HttpClientTestingModule, MaterialModule, BrowserAnimationsModule],
       providers: [{ provide: MatDialogRef, useValue: {} }, {
         provide: MAT_DIALOG_DATA, useValue: {
-          data: {
-            userData,
-          }
+          data:
+            userData
+
         }
       }]
     })
@@ -60,6 +61,20 @@ describe('UpdateViewComponent', () => {
     expect(component.imageData === mockData.obj).toBeTrue()
     expect(component.imageFormValid === mockData.formValid).toBeTrue()
   });
+
+  it('should be submitted', () => {
+    spyOn(component.dialog, 'open')
+      .and
+      .returnValue({
+        afterClosed: () => of(true)
+      } as MatDialogRef<typeof component>);
+    spyOn(apiService, 'updateUser').and.callThrough()
+    component.onSave()
+    expect(component.dialog.open).toHaveBeenCalled()
+    expect(apiService.updateUser).toHaveBeenCalled()
+  });
+
+
 
 });
 

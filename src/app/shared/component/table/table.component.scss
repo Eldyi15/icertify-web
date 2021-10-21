@@ -48,14 +48,16 @@ tr:hover {
     padding: 15px;
   }
 }
-.input-handler:hover,
-.input-handler:focus {
+.input-handler:hover ,  
+.input-handler:focus{
   width: 400px;
   cursor: pointer;
   input {
     display: block;
   }
 }
+
+
 
 tr:hover > th {
   background: white;
