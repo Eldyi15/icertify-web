@@ -1,3 +1,5 @@
+<h2>{{data.data.firstName}} {{data.data.lastName}}</h2>
+<mat-divider></mat-divider>
 <mat-nav-list>
     <ng-container *ngFor="let conf of data.bottomSheetConf">
         <mat-list-item class="spanbtn" *ngIf="conf.show" [ngClass]="conf.color" (click)=" onDismiss(conf.label)">
