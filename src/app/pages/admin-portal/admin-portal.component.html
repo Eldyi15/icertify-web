@@ -1,7 +1,4 @@
-<mat-sidenav-container
-  autosize
-  *ngIf="(!loading || !initialLoading) && !loggingOut"
->
+<mat-sidenav-container autosize>
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list style="padding-top: 0">
       <mat-toolbar style="background: #26184ab8">
@@ -59,9 +56,14 @@
     }}</small>
     <div class="flex-stretch"></div>
   </mat-toolbar>
-  <div class="container-fluid">
+  <div
+    *ngIf="(!loading || !initialLoading) && !loggingOut"
+    class="container-fluid"
+  >
     <router-outlet></router-outlet>
   </div>
+  <div style="overflow-x: hidden; overflow-y: hidden">
+    <app-loading *ngIf="loading && !loggingOut"></app-loading>
+  </div>
 </mat-sidenav-container>
-<app-loading *ngIf="loading && !loggingOut"></app-loading>
 <app-logout-loader *ngIf="loggingOut"></app-logout-loader>

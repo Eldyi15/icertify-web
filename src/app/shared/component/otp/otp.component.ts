@@ -56,6 +56,7 @@ export class OtpComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     this.otpForm();
+    this.send();
   }
 
   otpForm() {
@@ -123,5 +124,17 @@ export class OtpComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  send() {
+    this.otpService.send(this.data.mobileNumber).subscribe(
+      (res: any) => {
+        console.log(res);
+        localStorage.setItem('OTP_TOKEN', res.token);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
