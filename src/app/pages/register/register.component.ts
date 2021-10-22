@@ -1,3 +1,5 @@
+import { ActionResultComponent } from './../../shared/dialogs/action-result/action-result.component';
+import { OtpService } from 'src/app/services/otp/otp.service';
 import { OtpComponent } from './../../shared/component/otp/otp.component';
 import {
   MatDialog,
@@ -55,9 +57,9 @@ export class RegisterComponent implements OnInit {
     private util: UtilService,
     private router: Router,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   toggleShowPassword(): void {
     this.showPassword = !this.showPassword;
   }
@@ -168,22 +170,38 @@ export class RegisterComponent implements OnInit {
       this.isRegistered = true;
       this.auth.register(body).subscribe(
         (res: any) => {
-          this.sb.open('Success', 'Okay', {
-            duration: 5000,
-            panelClass: ['success'],
-          });
+          if (res) {
+            //SUCCESS HERE
+            this.dialog
+              .open(ActionResultComponent, {
+                height: 'auto',
+                width: 'auto',
+                data: {
+                  msg: 'Account Registered Successfully',
+                  success: true,
+                  button: 'Got it!',
+                },
+              })
+              .afterClosed()
+              .subscribe((res: any) => {
+                if (res) {
+                  this.router.navigate(['/login']);
+                }
+              });
+          }
         },
         (error) => {
           this.loading = false;
           console.log(error);
-          this.sb.open(
-            error.error.message ? error.error.message : 'Something went wrong!',
-            'Okay',
-            {
-              duration: 3000,
-              panelClass: ['failed'],
-            }
-          );
+          this.dialog.open(ActionResultComponent, {
+            height: 'auto',
+            width: 'auto',
+            data: {
+              msg: error.error.message || 'Server error, Try again!',
+              button: 'Got it!',
+              success: false,
+            },
+          });
         }
       );
     }
