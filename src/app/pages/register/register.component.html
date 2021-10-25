@@ -14,11 +14,7 @@
       <button (click)="login()">Login</button>
     </div>
     <div class="right">
-      <form
-        [formGroup]="registerForm"
-        class="register-container"
-        style="width: 100%"
-      >
+      <form [formGroup]="registerForm" style="width: 100%">
         <h2 style="margin-top: 0; font-weight: 500">Create an account</h2>
 
         <div class="grid">
@@ -54,7 +50,7 @@
             }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field class="col-6" appearance="fill">
+          <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >Password
               <small>*</small>
@@ -68,7 +64,7 @@
               formFieldErrMessage("password")
             }}</mat-error>
           </mat-form-field>
-          <mat-form-field class="col-6" appearance="fill">
+          <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >Confirm Password
               <small>*</small>
