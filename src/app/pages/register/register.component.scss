@@ -78,7 +78,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     .left {
       background: #e9e9e9;
       height: 100%;
@@ -157,4 +157,46 @@
   -webkit-animation: roll-in-blurred-left 0.65s cubic-bezier(0.23, 1, 0.32, 1)
     both;
   animation: roll-in-blurred-left 0.65s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@media only screen and (max-width: 760px) {
+  .container {
+    height: auto;
+    min-width: 100%;
+    padding: 1rem 0rem;
+    .form-container {
+      width: 95%;
+      height: auto;
+      .left {
+        width: 100%;
+        height: auto;
+        border-radius: 0%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 1rem 2rem;
+        .img-container {
+          height: 5rem;
+          width: 5rem;
+        }
+        h3 {
+          font-size: 11.5px;
+        }
+        button {
+          margin-top: 0;
+          height: 2rem;
+          width: 55%;
+        }
+      }
+      .right {
+        width: 100%;
+        height: auto;
+        padding: 1.2rem;
+        h2 {
+          text-align: center;
+          color: #565656;
+          font-size: 19px;
+        }
+      }
+    }
+  }
 }

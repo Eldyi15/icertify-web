@@ -1,5 +1,6 @@
 .container {
   height: calc(100vh - 56px);
+  // width: 100%;
   img {
     max-width: 100%;
     max-height: 100%;
@@ -62,5 +63,20 @@
   }
   button {
     margin-top: 1rem;
+  }
+}
+@media only screen and (max-width: 760px) {
+  .img-wrapper {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+  .name-container {
+    h1 {
+      font-size: 30px;
+      line-height: 1.7rem;
+    }
+    .line {
+      height: 0.5rem;
+    }
   }
 }

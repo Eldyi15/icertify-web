@@ -50,12 +50,17 @@
 
         button {
           border-radius: 0;
-          margin-bottom: 1.5rem;
+          margin-bottom: 2.5rem;
           margin-top: 1.3rem;
           width: 40%;
           height: 3.5rem;
           font-size: 16px;
           letter-spacing: 0.1rem;
+        }
+        .register {
+          text-align: center;
+          margin-top: 0;
+          display: none;
         }
       }
       .desc-wrapper {
@@ -89,6 +94,29 @@
         button:hover {
           background: #fff;
           color: #26184a;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 760px) {
+  .container {
+    .container-fluid {
+      width: 90%;
+      .login-container {
+        .form-wrapper {
+          width: 100%;
+          padding: 1rem 2rem;
+          button {
+            width: 100%;
+            margin-bottom: 0.5rem;
+          }
+          .register {
+            display: block;
+          }
+        }
+        .desc-wrapper {
+          display: none;
         }
       }
     }
