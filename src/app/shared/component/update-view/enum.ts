@@ -45,6 +45,7 @@ export const FormFields: Array<Section> = [
         fcName: 'mobileNumber',
         minLength: 10,
         maxLength: 10,
+        isNumberonly: true
       },
     ],
   },

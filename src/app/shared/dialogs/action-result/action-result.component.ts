@@ -1,7 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Column } from 'src/app/models/column.interface';
 import { TableOutput } from 'src/app/models/tableemit.interface';
+import { AreYouSureComponent } from '../are-you-sure/are-you-sure.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-action-result',
@@ -16,9 +19,34 @@ export class ActionResultComponent implements OnInit {
   @Output() pageChange = new EventEmitter<any>();
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ActionResultComponent>
+    private auth: AuthService,
+    public dialogRef: MatDialogRef<ActionResultComponent>,
+    public router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void { }
-
+  logout() {
+    this.dialog
+      .open(AreYouSureComponent, {
+        height: 'auto',
+        width: 'auto',
+        disableClose: true,
+        data: {
+          msg: 'you want to logout?',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.auth.logout().subscribe((res) => {
+            console.log(res);
+            localStorage.removeItem('SESSION_CSURF_TOKEN');
+            localStorage.removeItem('SESSION_AUTH');
+            this.router.navigate(['/login']);
+            this.dialogRef.close()
+          });
+        }
+      });
+  }
 }

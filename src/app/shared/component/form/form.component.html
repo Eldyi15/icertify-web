@@ -14,7 +14,8 @@
               {{ field.label }}
               <small *ngIf="!field.isOptional">*</small>
             </mat-label>
-            <input matInput [formControlName]="field.fcName" [type]="'text'" />
+            <input matInput [formControlName]="field.fcName" [maxlength]="field.maxLength ? field.maxLength : 299"
+              (keypress)="numberInputOnly($event,field.isNumberonly ? field.isNumberonly : false)" [type]="'text'" />
             <span matPrefix style="color: rgb(165, 165, 165)" *ngIf="field.fcName === 'mobileNumber'">+63</span>
           </mat-form-field>
 
@@ -24,7 +25,7 @@
               {{ field.label }}
               <small *ngIf="!field.isOptional">*</small>
             </mat-label>
-            <input matInput type="text" [formControlName]="field.fcName" (keypress)="numberInputOnly($event)"
+            <input matInput type="text" [formControlName]="field.fcName" (keypress)="numberInputOnly($event,true)"
               [minLength]="field.minLength ? field.minLength : 0" [maxLength]="field.maxLength ? field.maxLength : 0" />
           </mat-formfield>
 
@@ -35,7 +36,7 @@
               <small *ngIf="!field.isOptional">*</small>
             </mat-label>
             <input matInput type="text" [formControlName]="field.fcName" minlength="1" maxlenght="4"
-              (keypress)="numberInputOnly($event)" />
+              (keypress)="numberInputOnly($event,true)" />
             <span matSuffix>%</span>
           </mat-form-field>
 

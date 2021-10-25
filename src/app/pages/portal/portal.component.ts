@@ -55,6 +55,7 @@ export class PortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     console.log(this.router.url);
     this.auth.me().subscribe(
       (res: any) => {
@@ -80,33 +81,32 @@ export class PortalComponent implements OnInit {
               })
               .afterClosed()
               .subscribe((res: any) => {
-                this.dialog.open(UpdateViewComponent, {
-                  width: '70%',
-                  disableClose: true,
-                  data: { data: this.me, action: 'Activate' },
-                });
+                if (res) {
+                  this.dialog.open(UpdateViewComponent, {
+                    width: '70%',
+                    disableClose: true,
+                    data: { data: this.me, action: 'Activate' },
+                  });
+                }
               });
           }
         }
 
         this.page = this.userNav.find((o: any) => o.route === routerSplit);
       },
-      (err) => {
-        console.log(err);
-        this.dialog
-          .open(ActionResultComponent, {
-            width: 'auto',
-            height: 'auto',
-            data: {
-              msg: err.message || 'Server error, Kindly refresh the page!',
-              button: 'Okay',
-              success: false,
-            },
-          })
-          .afterClosed()
-          .subscribe((res: any) => {
-            this.ngOnInit();
-          });
+      (error: any) => {
+        this.dialog.open(ActionResultComponent, {
+          width: 'auto',
+          height: 'auto',
+          disableClose: true,
+          data: {
+            msg: error.error.message,
+            success: false,
+            button: 'Got it',
+          },
+        }).afterClosed().subscribe(() => {
+          this.router.navigate(['/login'])
+        });
       }
     );
   }
