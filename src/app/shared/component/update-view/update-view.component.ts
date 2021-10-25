@@ -23,21 +23,24 @@ export class UpdateViewComponent implements OnInit {
   formData: any;
   loading: boolean = false;
   imageFormValid: boolean = false;
+  imageFormDirty: boolean = false;
   formProperties = {
-    dirty: undefined,
-    touched: undefined,
-    valid: undefined
+    dirty: false,
+    touched: false,
+    valid: false
   }
+  imageForm: any = [];
 
   constructor(
     public api: ApiService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<UpdateViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log('data.data', this.data.data);
   };
 
   formListener(event: any) {
@@ -51,12 +54,13 @@ export class UpdateViewComponent implements OnInit {
   imageEmitter(event: any) {
     this.imageData = event.obj;
     this.imageFormValid = event.formValid;
+    this.imageFormDirty = event.formDirty;
   }
 
   onCancel() {
     // TODO: 
     // Add return properties of image form (dirty,touched,valid)
-    if (this.formProperties.dirty || this.formProperties.touched)
+    if (this.formProperties.dirty || this.formProperties.touched || this.imageFormDirty)
       this.dialog
         .open(AreYouSureComponent, {
           data: {
@@ -65,7 +69,10 @@ export class UpdateViewComponent implements OnInit {
         })
         .afterClosed()
         .subscribe((res: any) => {
-          if (res) this.dialogRef.close();
+          if (res) {
+            this.dialogRef.close();
+          }
+
         });
     else
       this.dialogRef.close()
@@ -124,7 +131,7 @@ export class UpdateViewComponent implements OnInit {
               }
             },
             (error: any) => {
-              console.log(error);
+              this.loading = false;
               this.dialog.open(ActionResultComponent, {
                 width: 'auto',
                 height: 'auto',

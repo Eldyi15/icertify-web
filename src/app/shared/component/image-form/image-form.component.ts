@@ -25,7 +25,7 @@ export class ImageFormComponent implements OnInit {
     public dbx: DropboxService,
     public auth: AuthService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   async ngOnInit() {
     const res: any = await this.auth.me().toPromise();
@@ -69,6 +69,7 @@ export class ImageFormComponent implements OnInit {
     this.imageEmitter.emit({
       obj: this.imageForm.getRawValue(),
       formValid: this.imageForm.valid,
+      formDirty: this.imageForm.dirty
     });
   }
 
@@ -88,9 +89,11 @@ export class ImageFormComponent implements OnInit {
 
           this.imageForm.get(fcname)?.setValue(res.result);
           console.log(this.imageForm.get(fcname));
+          this.imageForm.markAsDirty();
           this.imageEmitter.emit({
             obj: this.imageForm.getRawValue(),
             formValid: this.imageForm.valid,
+            formDirty: this.imageForm.dirty
           });
         }
       });

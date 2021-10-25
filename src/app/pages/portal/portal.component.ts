@@ -84,8 +84,12 @@ export class PortalComponent implements OnInit {
                 if (res) {
                   this.dialog.open(UpdateViewComponent, {
                     width: '70%',
-                    disableClose: true,
                     data: { data: this.me, action: 'Activate' },
+                  }).afterClosed().subscribe((res) => {
+                    if (!res) {
+                      this.ngOnInit();
+                    }
+
                   });
                 }
               });
@@ -129,6 +133,7 @@ export class PortalComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.loggingOut = true;
+          this.loading = true;
           this.auth.logout().subscribe((res) => {
             console.log(res);
             this.loggingOut = false;

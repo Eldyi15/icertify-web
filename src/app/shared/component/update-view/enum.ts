@@ -19,7 +19,6 @@ export const FormFields: Array<Section> = [
         isVisible: true,
         fcName: 'middleName',
         isOptional: true
-
       },
       {
         label: 'Last Name',
