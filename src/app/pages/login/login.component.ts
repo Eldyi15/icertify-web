@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     ]),
     password: new FormControl('123qweasdzxc123', [Validators.required]),
   });
+  loadingInitial: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +50,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadingInitial = true;
+    setTimeout(() => {
+      this.loadingInitial = false;
+    }, 1500);
+  }
 
   formFieldErrMessage(fcName: string) {
     let formControl = this.credential.controls[fcName];

@@ -48,6 +48,7 @@ export class RegisterComponent implements OnInit {
       validator: this.matchPassword('password', 'passwordConfirm'),
     }
   );
+  loadingInitial: boolean = false;
 
   mobileNumber = this.registerForm.getRawValue().mobileNumber;
   constructor(
@@ -59,7 +60,12 @@ export class RegisterComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadingInitial = true;
+    setTimeout(() => {
+      this.loadingInitial = false;
+    }, 1500);
+  }
   toggleShowPassword(): void {
     this.showPassword = !this.showPassword;
   }

@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!loadingInitial" class="container">
   <div class="container-fluid">
     <div class="login-container">
       <div class="form-wrapper">
@@ -72,3 +72,4 @@
     </div>
   </div>
 </div>
+<app-loading *ngIf="loadingInitial"></app-loading>

@@ -1,3 +1,4 @@
+import { ComponentModule } from './../../shared/component/component.module';
 import { MaterialModule } from './../../shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,6 +16,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentModule,
   ],
 })
 export class LoginModule {}
