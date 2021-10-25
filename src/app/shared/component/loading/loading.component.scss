@@ -1,8 +1,6 @@
 // Colors variables
-$primary: #26184a; // blue
-$success: #c0c0c0; // green
-$danger: #26184a; // red
-$warning: #c0c0c0; // yellow
+$primary: #26184a;
+$accent: #c0c0c0;
 
 // Container and shapes dimentions
 $containerDimentions: 30px;
@@ -45,16 +43,16 @@ $amount: 18px;
     }
     &.shape-2 {
       right: 0;
-      background-color: $success;
+      background-color: $accent;
     }
     &.shape-3 {
       bottom: 0;
-      background-color: $warning;
+      background-color: $accent;
     }
     &.shape-4 {
       bottom: 0;
       right: 0;
-      background-color: $danger;
+      background-color: $primary;
     }
   }
   @for $i from 1 through 4 {
