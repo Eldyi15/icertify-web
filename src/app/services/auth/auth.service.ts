@@ -8,7 +8,7 @@ import { URL } from 'src/app/config/url';
 })
 export class AuthService {
   url = URL;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   setHeaders() {
     let csurf_token = localStorage.getItem('SESSION_CSURF_TOKEN')!;
@@ -20,6 +20,7 @@ export class AuthService {
       rp_auth: rp_token || '',
       authorization: `Bearer ${session_token}`,
     });
+    console.log(headers)
 
     return { headers };
   }
@@ -54,6 +55,13 @@ export class AuthService {
   changePassword(body: any) {
     return this.http.post(
       this.url + '/user/updatePassword',
+      body,
+      this.getHeaders()
+    );
+  }
+  changePasswordV2(body: any) {
+    return this.http.post(
+      this.url + '/user/updatePasswordV2',
       body,
       this.getHeaders()
     );

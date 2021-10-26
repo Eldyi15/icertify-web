@@ -28,11 +28,16 @@ export class ChangePasswordComponent implements OnInit {
   toMatch = false;
   passwordForm = this.fb.group(
     {
+      currentPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
       newPassword: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
       passwordConfirm: new FormControl('', [Validators.required]),
+
     },
     {
       validator: this.matchPassword('newPassword', 'passwordConfirm'),
@@ -46,7 +51,7 @@ export class ChangePasswordComponent implements OnInit {
     private sb: MatSnackBar,
     private dialog: MatDialog,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.passwordForm);
@@ -108,7 +113,7 @@ export class ChangePasswordComponent implements OnInit {
   pwCheck() {
     let dataCredential = {
       newPassword: this.passwordForm.getRawValue().newPassword,
-      passwordConfirm: this.passwordForm.getRawValue().passwordConfirm,
+      passwordConfirm: this.passwordForm.getRawValue().passwordConfirm, curPassword: this.passwordForm.getRawValue().currentPassword
     };
 
     if (dataCredential.newPassword && dataCredential.passwordConfirm) {
@@ -141,9 +146,10 @@ export class ChangePasswordComponent implements OnInit {
     let dataCredential = {
       newPassword: this.passwordForm.getRawValue().newPassword,
       passwordConfirm: this.passwordForm.getRawValue().passwordConfirm,
+      curPassword: this.passwordForm.getRawValue().currentPassword
     };
     this.isSaving = true;
-    this.auth.changePassword(dataCredential).subscribe(
+    this.auth.changePasswordV2(dataCredential).subscribe(
       (res: any) => {
         this.dialog
           .open(ActionResultComponent, {
@@ -177,7 +183,7 @@ export class ChangePasswordComponent implements OnInit {
           height: 'auto',
           disableClose: true,
           data: {
-            msg: err.message || 'Server Error, Please try again',
+            msg: err.error.message || 'Server Error, Please try again',
             success: false,
             button: 'Close',
           },
