@@ -46,7 +46,7 @@ export class AdminPortalComponent implements OnInit {
       } else if (event instanceof NavigationEnd) {
         setTimeout(() => {
           this.loading = false;
-        }, 500);
+        }, 2000);
       }
     });
   }
@@ -99,13 +99,11 @@ export class AdminPortalComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.loggingOut = true;
-          console.log(this.loggingOut);
+          this.loading = true;
           this.auth.logout().subscribe((res) => {
-            console.log(res);
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
             this.loggingOut = false;
-            console.log(this.loggingOut);
             this.router.navigate(['/admin-login']);
           });
         }

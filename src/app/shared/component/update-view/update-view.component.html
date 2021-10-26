@@ -24,13 +24,14 @@
       </app-form>
     </div>
     <div class="col-12">
-      <app-image-form (imageEmitter)="imageEmitter($event)" [obj]="data.data" [action]="action"></app-image-form>
+      <app-image-form (imageEmitter)="imageEmitter($event)" [obj]="data.data" [action]="action">
+      </app-image-form>
     </div>
   </div>
 </div>
 <mat-divider></mat-divider>
 <mat-dialog-actions align="center" *ngIf="!loading">
-  <button mat-raised-button color="warn" (click)="onCancel()" *ngIf="action !== 'Activate'">
+  <button mat-raised-button color="warn" (click)="onCancel()">
     Cancel
   </button>
   <button mat-raised-button (click)="onSave()"
@@ -38,8 +39,8 @@
     *ngIf="action === 'Update'">
     {{ action === "Update" ? "Save" : "Activate" }}
   </button>
-  <button mat-raised-button (click)="onSave()" [disabled]="!formProperties.valid || !imageFormValid" color="primary"
-    *ngIf=" action === 'Activate'">
+  <button mat-raised-button (click)="onSave()" *ngIf=" action === 'Activate'" color="primary"
+    [disabled]="!formProperties.valid && !formProperties.dirty && !imageFormDirty || !imageFormValid">
     {{ action === "Update" ? "Save" : "Activate" }}
   </button>
 </mat-dialog-actions>

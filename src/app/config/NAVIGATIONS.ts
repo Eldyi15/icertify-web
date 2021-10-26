@@ -16,6 +16,12 @@ export const MERCHANT_NAV = [
     label: 'dashboard',
     icon: 'dashboard',
     route: 'merchant-dashboard',
+    visible: true,
+  },
+  {
+    label: 'Profile',
+    route: 'merchant-profile',
+    visible: false,
   },
 ];
 

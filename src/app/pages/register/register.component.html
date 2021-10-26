@@ -1,4 +1,5 @@
-<div class="container">
+<app-loading *ngIf="loadingInitial"></app-loading>
+<div *ngIf="!loadingInitial" class="container">
   <div class="circle"></div>
   <div class="big-shape"></div>
   <div class="square-div"></div>
@@ -14,11 +15,7 @@
       <button (click)="login()">Login</button>
     </div>
     <div class="right">
-      <form
-        [formGroup]="registerForm"
-        class="register-container"
-        style="width: 100%"
-      >
+      <form [formGroup]="registerForm" style="width: 100%">
         <h2 style="margin-top: 0; font-weight: 500">Create an account</h2>
 
         <div class="grid">
@@ -54,7 +51,7 @@
             }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field class="col-6" appearance="fill">
+          <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >Password
               <small>*</small>
@@ -68,7 +65,7 @@
               formFieldErrMessage("password")
             }}</mat-error>
           </mat-form-field>
-          <mat-form-field class="col-6" appearance="fill">
+          <mat-form-field class="col-12 sm:col-6" appearance="fill">
             <mat-label
               >Confirm Password
               <small>*</small>
@@ -112,7 +109,7 @@
           mat-flat-button
           color="primary"
           class="btn"
-          (click)="register()"
+          (click)="sendOtp()"
           [disabled]="!registerForm.valid || loading"
         >
           Register

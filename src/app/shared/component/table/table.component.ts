@@ -182,16 +182,15 @@ export class TableComponent implements OnInit {
       .open(ColumnSelectorComponent, {
         width: '30rem',
         height: 'auto',
+        autoFocus: false,
         data: {
           columns: [...this.columns],
         },
       })
-    diag.componentInstance.columnEvent.subscribe((res: any) => {
+    diag.componentInstance.columnEvent.subscribe((res) => {
+      console.log(res)
       this.duplicateColumns = res
       this.updateBreakpoint()
-    })
-    diag.afterClosed().subscribe(() => {
-
     })
 
   }

@@ -116,7 +116,6 @@ export class MerchantComponent implements OnInit {
         this.dataSource = res.env.admin;
         this.page.pageSize = event.pageSize;
         this.dataLength = res.total;
-
       },
       (error: any) => {
         this.dialog.open(ActionResultComponent, {

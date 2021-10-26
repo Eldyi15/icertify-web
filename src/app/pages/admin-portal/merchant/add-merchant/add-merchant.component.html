@@ -22,7 +22,8 @@
                   <small *ngIf="form.required">*</small>
                 </mat-label>
                 <input matInput [formControlName]="form.fcname" [type]="'text'"
-                  maxlength={{form.maxLength?form.maxLength:299}} />
+                  maxlength={{form.maxLength?form.maxLength:299}}
+                  (keypress)="numberInputOnly($event,form.mobileNumOnly ? form.mobileNumOnly : false)" />
                 <span matPrefix style="color: rgb(165, 165, 165)" *ngIf="form.fcname === 'mobileNumber'">+63</span>
                 <mat-error *ngIf="merchantForm.controls[form.fcname].invalid">{{ formFieldErrMessage(form.fcname,
                   form.label) }}

@@ -32,7 +32,7 @@ export class MerchantPortalComponent implements OnInit {
   loggingOut: boolean = false;
   constructor(
     private auth: AuthService,
-    private router: Router,
+    public router: Router,
     private dialog: MatDialog
   ) {
     this.loading = true;
@@ -125,11 +125,17 @@ export class MerchantPortalComponent implements OnInit {
       disableClose: true,
     });
   }
+  profile() {
+    this.router.navigate(['/merchant-portal/merchant-profile']);
+  }
 
   menuClick(event: any) {
     switch (event) {
       case 'logout':
         this.logout();
+        break;
+      case 'profile':
+        this.profile();
         break;
       case 'changepassword':
         this.changePassword();

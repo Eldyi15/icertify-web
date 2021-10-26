@@ -165,7 +165,8 @@ export class AddMerchantComponent implements OnInit {
     }
   }
 
-  numberInputOnly(event: any) {
-    return this.util.formNumberInputOnly(event);
+  numberInputOnly(event: any, mobileNumOnly: boolean) {
+    if (mobileNumOnly)
+      return this.util.formNumberInputOnly(event);
   }
 }

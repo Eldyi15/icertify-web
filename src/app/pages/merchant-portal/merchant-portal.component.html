@@ -14,6 +14,7 @@
       </mat-toolbar>
       <ng-container *ngFor="let item of merchantNav">
         <mat-list-item
+          *ngIf="item.visible"
           style="height: 2.8rem"
           [routerLink]="item.route"
           (click)="changeRoute(item)"
@@ -50,10 +51,12 @@
     ></app-profile-menu>
   </mat-toolbar>
 
-  <mat-toolbar style="height: 3rem; border-bottom: 0">
-    <small style="font-size: 13px; letter-spacing: 0.1rem">{{
-      routeLabel
-    }}</small>
+  <mat-toolbar style="height: 3rem; border-bottom: 3px solid #26184ab8">
+    <small
+      *ngIf="router.url !== '/merchant-portal/merchant-profile'"
+      style="font-size: 13px; letter-spacing: 0.1rem"
+      >{{ routeLabel }}</small
+    >
     <div class="flex-stretch"></div>
   </mat-toolbar>
   <div class="container-fluid">

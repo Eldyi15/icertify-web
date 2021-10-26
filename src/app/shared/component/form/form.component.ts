@@ -215,7 +215,8 @@ export class FormComponent implements OnInit {
     this.form.controls[event].disable();
   }
 
-  numberInputOnly(event: any) {
-    return this.util.formNumberInputOnly(event);
+  numberInputOnly(event: any, isNumberonly: boolean) {
+    if (isNumberonly)
+      return this.util.formNumberInputOnly(event);
   }
 }

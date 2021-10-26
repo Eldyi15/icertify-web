@@ -1,3 +1,8 @@
+<div class="flex justify-content-end flex-wrap card-container green-container">
+  <button mat-mini-fab color="accent" class="matbtn" *ngIf="data.pending" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</div>
 <div class="container">
   <img *ngIf="data.pending" [src]="'../../../../assets/images/pendinguser.png'" alt="" />
   <img *ngIf="data.success" [src]="
@@ -6,10 +11,11 @@
         : '../../../../assets/images/x-button.png'
     " alt="" />
   <p>{{ data.msg }}</p>
-  <button *ngIf="!data.success" mat-raised-button color="warn" (click)="dialogRef.close()">
+  <button *ngIf="!data.success " mat-raised-button color="warn" (click)="dialogRef.close(data.pending)">
     {{ data.button }}
   </button>
   <button *ngIf="data.success" mat-raised-button style="color: #32ba7c" (click)="dialogRef.close(true)">
     {{ data.button }}
   </button>
 </div>
+<app-logout-loader *ngIf='loggingOut'></app-logout-loader>

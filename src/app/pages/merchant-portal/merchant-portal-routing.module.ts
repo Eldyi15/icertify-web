@@ -17,6 +17,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+      {
+        path: 'merchant-profile',
+        loadChildren: () =>
+          import('./merchant-profile/merchant-profile.module').then(
+            (m) => m.MerchantProfileModule
+          ),
+      },
     ],
   },
 ];

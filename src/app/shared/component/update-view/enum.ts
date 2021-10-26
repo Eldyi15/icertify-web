@@ -19,7 +19,6 @@ export const FormFields: Array<Section> = [
         isVisible: true,
         fcName: 'middleName',
         isOptional: true
-
       },
       {
         label: 'Last Name',
@@ -45,6 +44,7 @@ export const FormFields: Array<Section> = [
         fcName: 'mobileNumber',
         minLength: 10,
         maxLength: 10,
+        isNumberonly: true
       },
     ],
   },
