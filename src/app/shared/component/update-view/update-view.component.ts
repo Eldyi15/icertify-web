@@ -42,8 +42,8 @@ export class UpdateViewComponent implements OnInit {
 
   formListener(event: any) {
     let raw = event.raw
-    raw.mobileNumber = `${raw.mobileNumber}`;
-    // console.log(raw);
+    // raw.mobileNumber = `${raw.mobileNumber}`;
+    console.log(event);
     this.formData = raw;
     this.formProperties = event.properties
   };

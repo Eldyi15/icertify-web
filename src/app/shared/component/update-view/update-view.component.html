@@ -35,7 +35,11 @@
   </button>
   <button mat-raised-button (click)="onSave()"
     [disabled]="!formProperties.valid || !formProperties.dirty || !imageFormValid" color="primary"
-    *ngIf="action === 'Update' || action === 'Activate'">
+    *ngIf="action === 'Update'">
+    {{ action === "Update" ? "Save" : "Activate" }}
+  </button>
+  <button mat-raised-button (click)="onSave()" [disabled]="!formProperties.valid || !imageFormValid" color="primary"
+    *ngIf=" action === 'Activate'">
     {{ action === "Update" ? "Save" : "Activate" }}
   </button>
 </mat-dialog-actions>

@@ -59,7 +59,7 @@ export class FormComponent implements OnInit {
 
     // setting up form
     this.form = this.fb.group(temp);
-
+    let pure = {}
     // Getting new Values
     this.form.valueChanges.subscribe((raw) => {
       this.formFields.forEach((sections: Section) => {
@@ -74,7 +74,7 @@ export class FormComponent implements OnInit {
       });
 
       // Setting new values to the Current values
-      let pure = { ...raw };
+      pure = { ...raw };
       this.formFields.forEach((sections: Section) => {
         sections.fields.forEach((curField: Field) => {
           if (
@@ -93,13 +93,15 @@ export class FormComponent implements OnInit {
               );
           }
         });
+        this.formListener.emit({ raw: pure, properties: { dirty: this.form.dirty, touched: this.form.touched, valid: this.form.valid } });
       });
-      this.formListener.emit({ raw: pure, properties: { dirty: this.form.dirty, touched: this.form.touched, valid: this.form.valid } });
+
       setTimeout(() => {
         // if(this.obj) this.evaluate();
       }, 0);
     });
 
+    this.formListener.emit({ raw: pure, properties: { dirty: this.form.dirty, touched: this.form.touched, valid: this.form.valid } });
     setTimeout(() => {
       console.log(this.form.valid);
       this.formInitiated.emit();
@@ -140,7 +142,7 @@ export class FormComponent implements OnInit {
             ? field.isDisabled
             : this.action === 'Update'
               ? false
-              : true,
+              : this.action !== "Update" && field.fcName === 'lastName' ? false : true,
         },
         {
           updateOn: 'blur',
