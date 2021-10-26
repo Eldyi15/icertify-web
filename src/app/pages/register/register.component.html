@@ -1,4 +1,5 @@
-<div class="container">
+<app-loading *ngIf="loadingInitial"></app-loading>
+<div *ngIf="!loadingInitial" class="container">
   <div class="circle"></div>
   <div class="big-shape"></div>
   <div class="square-div"></div>
