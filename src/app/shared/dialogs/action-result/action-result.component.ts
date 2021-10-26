@@ -16,6 +16,7 @@ export class ActionResultComponent implements OnInit {
   duplicateColumns!: Array<Column>;
   sort: any;
   keyword: string = '';
+  loggingOut: boolean = false;
   @Output() pageChange = new EventEmitter<any>();
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -39,8 +40,10 @@ export class ActionResultComponent implements OnInit {
       .afterClosed()
       .subscribe((res) => {
         if (res) {
+          this.loggingOut = true
           this.auth.logout().subscribe((res) => {
             console.log(res);
+            this.loggingOut = false;
             localStorage.removeItem('SESSION_CSURF_TOKEN');
             localStorage.removeItem('SESSION_AUTH');
             this.router.navigate(['/login']);

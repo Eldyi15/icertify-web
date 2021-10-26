@@ -1,14 +1,10 @@
 <div mat-dialog-title>
-  <h3>Select Column to Show</h3>
-
-  <button mat-icon-button color="warn" class="close-btn" (click)="onClose()">
-    <mat-icon>close</mat-icon>
-  </button>
+  <h4>Columns to Display</h4>
 </div>
-<mat-divider></mat-divider>
+
 <div mat-dialog-content style="text-align: center">
   <button mat-raised-button *ngFor="let column of columns; let i = index" [color]="column.selected && 'primary'"
-    class="column-btn" (click)="filterColumn(i); columnEvent.emit(columns)">
+    style="margin-right: 20px; margin-bottom: 20px" (click)="filterColumn(i); columnEvent.emit(columns)">
     {{ column.title }}
   </button>
 </div>
